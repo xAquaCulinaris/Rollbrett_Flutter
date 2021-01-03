@@ -4,14 +4,20 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
+import 'package:rollbrett_rottweil/Class/obstacle.dart';
+import 'package:rollbrett_rottweil/CoursePreview/obstacleListViewItem.dart';
+import 'package:rollbrett_rottweil/CoursePreview/requirementsWidget.dart';
 
-class DetailedView extends StatefulWidget {
+
+class CoursePreview extends StatefulWidget {
   @override
-  _DetailedViewState createState() => _DetailedViewState();
+  _CoursePreviewState createState() => _CoursePreviewState();
 }
 
-class _DetailedViewState extends State<DetailedView>
+class _CoursePreviewState extends State<CoursePreview>
     with WidgetsBindingObserver {
+  List<Obstacle> obstacleInRange = [Obstacle.getHubba(), Obstacle.getRail(), Obstacle.getLedge()];
+
   final StreamController<BluetoothState> streamController = StreamController();
   StreamSubscription<RangingResult> _streamRanging;
   StreamSubscription<BluetoothState> _streamBluetooth;
@@ -30,7 +36,9 @@ class _DetailedViewState extends State<DetailedView>
 
   listeningState() async {
     print('Listening to bluetooth state');
-    _streamBluetooth = flutterBeacon.bluetoothStateChanged().listen((BluetoothState state) async {
+    _streamBluetooth = flutterBeacon
+        .bluetoothStateChanged()
+        .listen((BluetoothState state) async {
       print('BluetoothState = $state');
       streamController.add(state);
 
@@ -50,9 +58,11 @@ class _DetailedViewState extends State<DetailedView>
     final bluetoothState = await flutterBeacon.bluetoothState;
     final bluetoothEnabled = bluetoothState == BluetoothState.stateOn;
     final authorizationStatus = await flutterBeacon.authorizationStatus;
-    final authorizationStatusOk = authorizationStatus == AuthorizationStatus.allowed ||
-        authorizationStatus == AuthorizationStatus.always;
-    final locationServiceEnabled = await flutterBeacon.checkLocationServicesIfEnabled;
+    final authorizationStatusOk =
+        authorizationStatus == AuthorizationStatus.allowed ||
+            authorizationStatus == AuthorizationStatus.always;
+    final locationServiceEnabled =
+        await flutterBeacon.checkLocationServicesIfEnabled;
 
     setState(() {
       this.authorizationStatusOk = authorizationStatusOk;
@@ -69,7 +79,9 @@ class _DetailedViewState extends State<DetailedView>
     }
 
     await checkAllRequirements();
-    if(!authorizationStatusOk || !locationServiceEnabled || !bluetoothEnabled) {
+    if (!authorizationStatusOk ||
+        !locationServiceEnabled ||
+        !bluetoothEnabled) {
       print('RETURNED, authorizationStatusOk=$authorizationStatusOk, '
           'locationServiceEnabled=$locationServiceEnabled, '
           'bluetoothEnabled=$bluetoothEnabled');
@@ -77,22 +89,22 @@ class _DetailedViewState extends State<DetailedView>
     }
     final regions = <Region>[
       Region(
-        identifier: 'Cubeacon'
-       // proximityUUID: 'DE3BD85C-C7EA-4089-B0D8-EE0CAE2E1F0B',
+        identifier: 'Cubeacon',
+        proximityUUID: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
       ),
     ];
 
     if (_streamRanging != null) {
-      if(_streamRanging.isPaused) {
+      if (_streamRanging.isPaused) {
         _streamRanging.resume();
         return;
       }
     }
-    _streamRanging = flutterBeacon.ranging(regions).listen((RangingResult result) {
-      print("test;");
+    _streamRanging =
+        flutterBeacon.ranging(regions).listen((RangingResult result) {
       print(result);
 
-      if(result != null && mounted) {
+      if (result != null && mounted) {
         setState(() {
           _regionBeacons[result.region] = result.beacons;
           _beacons.clear();
@@ -100,11 +112,39 @@ class _DetailedViewState extends State<DetailedView>
             _beacons.addAll(list);
           });
           _beacons.sort(_compareParameters);
+
+          for(Obstacle obstacle in obstacleInRange) {
+            obstacle.inRange = false;
+          }
+
+
+          //Custom part
+          for (int i = 0; i < _beacons.length; i++) {
+            //handrail
+            if (_beacons[i].proximityUUID ==
+                'B9407F30-F5F8-466E-AFF9-25556B57FE6D') {
+              obstacleInRange[0].inRange = true;
+            }
+
+            if (_beacons[i].proximityUUID ==
+                'otherUUID') {
+              obstacleInRange[1].inRange = true;
+            }
+
+            if (_beacons[i].proximityUUID ==
+                'otherUUID') {
+              obstacleInRange[2].inRange = true;
+            }
+          }
+
+          for(Obstacle obstacle in obstacleInRange) {
+            print(obstacle.inRange);
+          }
+          //end of coustum part
         });
       }
     });
   }
-
 
   pauseScanBeacon() async {
     _streamRanging?.pause();
@@ -118,11 +158,11 @@ class _DetailedViewState extends State<DetailedView>
   int _compareParameters(Beacon a, Beacon b) {
     int compare = a.proximityUUID.compareTo(b.proximityUUID);
 
-    if(compare == 0) {
+    if (compare == 0) {
       compare = a.major.compareTo(b.major);
     }
 
-    if(compare == 0) {
+    if (compare == 0) {
       compare = a.minor.compareTo(b.minor);
     }
     return compare;
@@ -131,23 +171,22 @@ class _DetailedViewState extends State<DetailedView>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     print('AppLifecycleState = $state');
-    if(state == AppLifecycleState.resumed) {
-      if(_streamBluetooth != null && _streamBluetooth.isPaused) {
+    if (state == AppLifecycleState.resumed) {
+      if (_streamBluetooth != null && _streamBluetooth.isPaused) {
         _streamBluetooth.resume();
       }
 
       await checkAllRequirements();
-      if(authorizationStatusOk && locationServiceEnabled && bluetoothEnabled) {
+      if (authorizationStatusOk && locationServiceEnabled && bluetoothEnabled) {
         await initScanBeacon();
       } else {
         await pauseScanBeacon();
         await checkAllRequirements();
       }
-    } else if(state == AppLifecycleState.paused) {
+    } else if (state == AppLifecycleState.paused) {
       _streamBluetooth?.pause();
     }
   }
-
 
   @override
   void dispose() {
@@ -159,7 +198,6 @@ class _DetailedViewState extends State<DetailedView>
 
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -225,33 +263,12 @@ class _DetailedViewState extends State<DetailedView>
             ),
           ],
         ),
-        body: _beacons == null || _beacons.isEmpty
-            ? Center(child: CircularProgressIndicator())
-            : ListView(
-                children: ListTile.divideTiles(
-                    context: context,
-                    tiles: _beacons.map((beacon) {
-                      return ListTile(
-                        title: Text(beacon.proximityUUID),
-                        subtitle: new Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Flexible(
-                                child: Text(
-                                    'Major: ${beacon.major}\nMinor: ${beacon.minor}',
-                                    style: TextStyle(fontSize: 13.0)),
-                                flex: 1,
-                                fit: FlexFit.tight),
-                            Flexible(
-                                child: Text(
-                                    'Accuarcy: ${beacon.accuracy}m\nRSSI: ${beacon.rssi}',
-                                    style: TextStyle(fontSize: 13.0)),
-                                flex: 2,
-                                fit: FlexFit.tight),
-                          ],
-                        ),
-                      );
-                    })).toList(),
+        body: !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
+            ? RequirementsWidget(authorizationStatusOk, locationServiceEnabled, bluetoothEnabled)
+            : ListView.builder(
+                itemCount: obstacleInRange.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    ObstacleListViewItem(obstacleInRange, index),
               ),
       ),
     );

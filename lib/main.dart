@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/coursePreview.dart';
-import 'package:rollbrett_rottweil/instagramClone.dart';
-import 'package:rollbrett_rottweil/skateDices.dart';
+import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
+import 'package:rollbrett_rottweil/Instagram/instagramClone.dart';
+import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 void main() {
   runApp(_TabBar());
