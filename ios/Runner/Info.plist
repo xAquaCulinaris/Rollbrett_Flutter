@@ -17,6 +17,13 @@
     <key>NSBluetoothAlwaysUsageDescription</key>
     <string>Reason why app needs bluetooth</string>
 
+    <key>NSAppTransportSecurity</key>
+    <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    </dict>
+
+
 
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

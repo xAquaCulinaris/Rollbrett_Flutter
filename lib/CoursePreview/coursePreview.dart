@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:rollbrett_rottweil/Class/obstacle.dart';
 import 'package:rollbrett_rottweil/CoursePreview/obstacleListViewItem.dart';
 import 'package:rollbrett_rottweil/CoursePreview/requirementsWidget.dart';
 
-
 class CoursePreview extends StatefulWidget {
   @override
   _CoursePreviewState createState() => _CoursePreviewState();
@@ -16,7 +14,7 @@ class CoursePreview extends StatefulWidget {
 
 class _CoursePreviewState extends State<CoursePreview>
     with WidgetsBindingObserver {
-  List<Obstacle> obstacleInRange = [Obstacle.getHubba(), Obstacle.getRail(), Obstacle.getLedge()];
+  List<Obstacle> obstacleInRange = Obstacle.getObstacles();
 
   final StreamController<BluetoothState> streamController = StreamController();
   StreamSubscription<RangingResult> _streamRanging;
@@ -113,31 +111,28 @@ class _CoursePreviewState extends State<CoursePreview>
           });
           _beacons.sort(_compareParameters);
 
-          for(Obstacle obstacle in obstacleInRange) {
+          for (Obstacle obstacle in obstacleInRange) {
             obstacle.inRange = false;
           }
-
 
           //Custom part
           for (int i = 0; i < _beacons.length; i++) {
             //handrail
             if (_beacons[i].proximityUUID ==
                 'B9407F30-F5F8-466E-AFF9-25556B57FE6D') {
-              obstacleInRange[0].inRange = true;
-            }
-
-            if (_beacons[i].proximityUUID ==
-                'otherUUID') {
               obstacleInRange[1].inRange = true;
             }
 
-            if (_beacons[i].proximityUUID ==
-                'otherUUID') {
+            if (_beacons[i].proximityUUID == 'otherUUID') {
+              obstacleInRange[0].inRange = true;
+            }
+
+            if (_beacons[i].proximityUUID == 'otherUUID') {
               obstacleInRange[2].inRange = true;
             }
           }
 
-          for(Obstacle obstacle in obstacleInRange) {
+          for (Obstacle obstacle in obstacleInRange) {
             print(obstacle.inRange);
           }
           //end of coustum part
@@ -201,76 +196,17 @@ class _CoursePreviewState extends State<CoursePreview>
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Flutter Beacon Test"),
-          actions: <Widget>[
-            if (!authorizationStatusOk)
-              IconButton(
-                  icon: Icon(Icons.portable_wifi_off),
-                  color: Colors.red,
-                  onPressed: () async {
-                    await flutterBeacon.requestAuthorization;
-                  }),
-            if (!locationServiceEnabled)
-              IconButton(
-                  icon: Icon(Icons.location_off),
-                  color: Colors.red,
-                  onPressed: () async {
-                    if (Platform.isAndroid) {
-                      await flutterBeacon.openLocationSettings;
-                    } else if (Platform.isIOS) {}
-                  }),
-            StreamBuilder<BluetoothState>(
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final state = snapshot.data;
-
-                  if (state == BluetoothState.stateOn) {
-                    return IconButton(
-                      icon: Icon(Icons.bluetooth_connected),
-                      onPressed: () {},
-                      color: Colors.lightBlueAccent,
-                    );
-                  }
-                  if (state == BluetoothState.stateOff) {
-                    return IconButton(
-                      icon: Icon(Icons.bluetooth),
-                      onPressed: () async {
-                        if (Platform.isAndroid) {
-                          try {
-                            await flutterBeacon.openBluetoothSettings;
-                          } on PlatformException catch (e) {
-                            print(e);
-                          }
-                        } else if (Platform.isIOS) {}
-                      },
-                      color: Colors.red,
-                    );
-                  }
-                  return IconButton(
-                    icon: Icon(Icons.bluetooth_disabled),
-                    onPressed: () {},
-                    color: Colors.grey,
-                  );
-                }
-
-                return SizedBox.shrink();
-              },
-              stream: streamController.stream,
-              initialData: BluetoothState.stateUnknown,
-            ),
-          ],
-        ),
-        body: !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
-            ? RequirementsWidget(authorizationStatusOk, locationServiceEnabled, bluetoothEnabled)
-            : ListView.builder(
-                itemCount: obstacleInRange.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    ObstacleListViewItem(obstacleInRange, index),
-              ),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text("Title Course preview")),
+      body:
+          !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
+              ? RequirementsWidget(streamController, authorizationStatusOk,
+                  locationServiceEnabled, bluetoothEnabled)
+              : ListView.builder(
+                  itemCount: obstacleInRange.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      ObstacleListViewItem(obstacleInRange, index),
+                ),
     );
   }
 }

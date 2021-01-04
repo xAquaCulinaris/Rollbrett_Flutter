@@ -1,38 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
-import 'package:rollbrett_rottweil/Instagram/instagramClone.dart';
+import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 void main() {
-  runApp(_TabBar());
+  runApp(MaterialApp(
+    home: _TabBar(),
+  ));
 }
 
 class _TabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.alt_route)),
-                Tab(icon: Icon(Icons.search)),
-                Tab(icon: Icon(Icons.camera)),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Rollbrett Rottweil"),
+          bottom: null, //maybe implement instagramm tabbar
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(width: 20),
+                Expanded(
+                  child: RaisedButton(
+                    child: Text("Course preview"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CoursePreview()));
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: RaisedButton(
+                    child: Text("Skate Dices"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SkateDices()));
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
               ],
             ),
-            title: Text('Rollbrett Rottweil'),
-          ),
-          body: TabBarView(
-            children: [
-              CoursePreview(),
-              SkateDices(),
-              InstagramClone(),
-            ],
-          ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(width: 20),
+                Expanded(
+                  child: RaisedButton(
+                    child: Text("Own the Spot"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => InstagramTabBar()));
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: RaisedButton(
+                    child: Text("Comming soon!"),
+                    onPressed: () {},
+                  ),
+                ),
+                SizedBox(width: 20),
+              ],
+            )
+          ],
         ),
-      ),
     );
   }
 }
