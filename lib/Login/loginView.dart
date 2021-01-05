@@ -1,5 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:rollbrett_rottweil/Login/registerView.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
+import 'package:rollbrett_rottweil/main.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,34 +14,17 @@ class _LoginPageState extends State<LoginPage> {
   String email;
   String password;
 
-
   void _loginButtonPressed() {
-    print("Login pressed");
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
   }
 
   void _registerButtonPressed() {
-    print("Register pressed");
-  }
-
-
-  Widget _getLogo() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 70),
-          child: Text(
-            "Rollbrett Rottweil",
-            style: TextStyle(
-                fontSize: MediaQuery
-                    .of(context)
-                    .size
-                    .height / 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-          ),
-        )
-      ],
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterView()),
     );
   }
 
@@ -50,14 +37,8 @@ class _LoginPageState extends State<LoginPage> {
               Radius.circular(20),
             ),
             child: Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.5,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.8,
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width * 0.8,
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
@@ -71,18 +52,15 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         "Login",
                         style: TextStyle(
-                            fontSize: MediaQuery
-                                .of(context)
-                                .size
-                                .height / 30),
+                            fontSize: MediaQuery.of(context).size.height / 30),
                       ),
                     ],
                   ),
                   _getEmail(),
                   _getPassword(),
                   _getForgetPassword(),
-                  _getButton("Login", _loginButtonPressed),
-                  _getButton("Sign Up", _registerButtonPressed),
+                  RoundedButton("Login", _loginButtonPressed, 40, 20),
+                  RoundedButton("Sign Up", _registerButtonPressed ,40, 20),
                 ],
               ),
             ))
@@ -122,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
             password = value;
           });
         },
-        decoration:InputDecoration(
+        decoration: InputDecoration(
           prefixIcon: Icon(
             Icons.lock,
             color: Colors.grey,
@@ -131,7 +109,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-
   }
 
   Widget _getForgetPassword() {
@@ -139,45 +116,7 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FlatButton(
-          onPressed: () {},
-          child:Text('Forget Password?')
-        ),
-      ],
-    );
-  }
-
-  Widget _getButton(String text, Function func) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 1.4 * (MediaQuery
-              .of(context)
-              .size
-              .height / 20),
-          width: 5 * (MediaQuery
-              .of(context)
-              .size
-              .width / 10),
-          margin: EdgeInsets.only(bottom: 20),
-          child: RaisedButton(
-            elevation: 5.0,
-            color: Colors.grey,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            onPressed: func,
-            child: Text(text,
-                style: TextStyle(
-                    color: Colors.white,
-                    letterSpacing: 1.5,
-                    fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .height / 40)),
-          ),
-        )
+        FlatButton(onPressed: () {}, child: Text('Forget Password?')),
       ],
     );
   }
@@ -191,14 +130,8 @@ class _LoginPageState extends State<LoginPage> {
         body: Stack(
           children: [
             Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.7,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              height: MediaQuery.of(context).size.height * 0.7,
+              width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey,
@@ -212,11 +145,13 @@ class _LoginPageState extends State<LoginPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _getLogo(),
+                LogoText(),
                 _getContainer(),
               ],
             )
           ],
-        ),),);
+        ),
+      ),
+    );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/testingView.dart';
 
 import 'detailedObstacleView.dart';
 import '../Class/obstacle.dart';

@@ -2,17 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
 import 'package:rollbrett_rottweil/Login/loginView.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 void main() {
   bool loggedIn = false;
 
   runApp(MaterialApp(
-    home: loggedIn ? _HomeScreen() : LoginPage(),
+    home: loggedIn ? HomeScreen() : LoginPage(),
   ));
 }
 
-class _HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
+
+  void coursePreviewButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CoursePreview()),
+    );
+  }
+
+  void skateDicesButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SkateDices()),
+    );
+  }
+
+  void ownTheSpotButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => InstagramTabBar()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,29 +52,9 @@ class _HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: 20),
-                Expanded(
-                  child: RaisedButton(
-                    child: Text("Course preview"),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CoursePreview()));
-                    },
-                  ),
-                ),
+                RoundedButton("Course Preview", () => coursePreviewButton(context), 53, 24),
                 SizedBox(width: 20),
-                Expanded(
-                  child: RaisedButton(
-                    child: Text("Skate Dices"),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SkateDices()));
-                    },
-                  ),
-                ),
+                RoundedButton("Skate Dices", () => skateDicesButton(context), 53, 24),
                 SizedBox(width: 20),
               ],
             ),
@@ -60,24 +63,9 @@ class _HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: 20),
-                Expanded(
-                  child: RaisedButton(
-                    child: Text("Own the Spot"),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => InstagramTabBar()));
-                    },
-                  ),
-                ),
+                RoundedButton("Own the Spot", () => ownTheSpotButton(context), 53, 24),
                 SizedBox(width: 20),
-                Expanded(
-                  child: RaisedButton(
-                    child: Text("Comming soon!"),
-                    onPressed: () {},
-                  ),
-                ),
+                RoundedButton("Credits", () {}, 53, 24),
                 SizedBox(width: 20),
               ],
             )
