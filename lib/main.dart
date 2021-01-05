@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
+import 'package:rollbrett_rottweil/Login/loginView.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 void main() {
+  bool loggedIn = false;
+
   runApp(MaterialApp(
-    home: _TabBar(),
+    home: loggedIn ? _HomeScreen() : LoginPage(),
   ));
 }
 
-class _TabBar extends StatelessWidget {
+class _HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
