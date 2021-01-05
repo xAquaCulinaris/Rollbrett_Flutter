@@ -6,6 +6,10 @@ class InstagramTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.grey,
+        accentColor: Colors.grey[700],
+      ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(

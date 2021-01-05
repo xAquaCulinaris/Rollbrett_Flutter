@@ -3,20 +3,17 @@ import 'package:flutter/material.dart';
 import 'detailedObstacleView.dart';
 import '../Class/obstacle.dart';
 
-
 class ObstacleListViewItem extends StatefulWidget {
   final List<Obstacle> obstacleList;
   final int index;
-  ObstacleListViewItem(this.obstacleList, this.index);
 
+  ObstacleListViewItem(this.obstacleList, this.index);
 
   @override
   _ObstacleListViewItemState createState() => _ObstacleListViewItemState();
 }
 
 class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
-
-
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -46,20 +43,33 @@ class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
                 alignment: Alignment.centerRight,
                 child: Column(
                   children: <Widget>[
-                    Text("Difficulty: " + widget.obstacleList[widget.index].difficulty),
-                    Text("Height: " + widget.obstacleList[widget.index].height.toString()),
-                    Text("Width: " + widget.obstacleList[widget.index].width.toString()),
+                    Text("Difficulty: " +
+                        widget.obstacleList[widget.index].difficulty),
+                    Text("Height: " +
+                        widget.obstacleList[widget.index].height.toString()),
+                    Text("Width: " +
+                        widget.obstacleList[widget.index].width.toString()),
                     ElevatedButton(
-                        onPressed: widget.obstacleList[widget.index].inRange ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailedObstacleView(widget.obstacleList[widget.index]),
-                            ),
-                          );
-                        } : null, // null is the else part to deactivate the button
-                        child: widget.obstacleList[widget.index].inRange ? Text("Details") : Text("Out of Range")),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey,
+                        onPrimary: Colors.white,
+                      ),
+                      onPressed: widget.obstacleList[widget.index].inRange
+                          ? () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailedObstacleView(
+                                      widget.obstacleList[widget.index]),
+                                ),
+                              );
+                            }
+                          : null,
+                      // null is the else part to deactivate the button
+                      child: widget.obstacleList[widget.index].inRange
+                          ? Text("Details")
+                          : Text("Out of Range"),
+                    ),
                   ],
                 ),
               )

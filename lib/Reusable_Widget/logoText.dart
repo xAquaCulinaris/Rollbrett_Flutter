@@ -7,7 +7,7 @@ class LogoText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 70),
+          padding: const EdgeInsets.symmetric(vertical: 40),
           child: Text(
             "Rollbrett Rottweil",
             style: TextStyle(

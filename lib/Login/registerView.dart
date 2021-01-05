@@ -45,7 +45,7 @@ class _RegisterViewState extends State<RegisterView> {
               height: MediaQuery
                   .of(context)
                   .size
-                  .height * 0.5,
+                  .height * 0.7,
               width: MediaQuery
                   .of(context)
                   .size

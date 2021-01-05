@@ -9,6 +9,10 @@ void main() {
   bool loggedIn = false;
 
   runApp(MaterialApp(
+    theme: ThemeData(
+      primaryColor: Colors.grey,
+      accentColor: Colors.grey[900],
+    ),
     home: loggedIn ? HomeScreen() : LoginPage(),
   ));
 }
