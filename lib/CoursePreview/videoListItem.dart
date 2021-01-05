@@ -24,7 +24,8 @@ class _VideoListItemState extends State<VideoListItem> {
       videoPlayerController: widget.videoPlayerController,
       aspectRatio: 16 / 9,
       autoInitialize: true,
-      looping: widget.looping,
+      autoPlay: false,
+      looping: false,
       errorBuilder: (context, errorMessage) {
         return Center(
             child: Text(errorMessage, style: TextStyle(color: Colors.white)));
