@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 
 class RegisterView extends StatefulWidget {
@@ -8,18 +10,34 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  String email;
-  String username;
-  String password;
-  String passwordRepetition;
+  String email = "";
+  String username = "";
+  String password = "";
+  String passwordRepetition = "";
 
   bool _usernameAlreadyExits(String username) {
     return false;
   }
 
+  void setEmail(String text) {
+    email = text;
+  }
+
+
+  void setPassword(String text) {
+    password = text;
+  }
+
+  void setPasswordRep(String text) {
+    passwordRepetition = text;
+  }
 
   void _registerButtonPressed() {
-    if (email.isEmpty || username.isEmpty || password.isEmpty || passwordRepetition.isEmpty) {
+    print(email);
+    print(passwordRepetition);
+    print(password);
+
+    if (email == "" || username == "" || password == "" || passwordRepetition == "") {
       print("All fields need to be filled out");
     }
 
@@ -70,10 +88,10 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ],
                   ),
-                  _getEmail(),
+                  EmailField(email, setEmail),
                   _getUsername(),
-                  _getPassword(),
-                  _getPasswordRepetition(),
+                  PasswordField(setPassword, 'Password'),
+                  PasswordField(setPasswordRep, 'Password Repetition'),
                   RoundedButton("Register", _registerButtonPressed ,40, 20),
                 ],
               ),
@@ -103,71 +121,6 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-
-  Widget _getEmail() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        onChanged: (value) {
-          setState(() {
-            email = value;
-          });
-        },
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            Icons.email,
-            color: Colors.grey,
-          ),
-          labelText: 'E-mail',
-        ),
-      ),
-    );
-  }
-
-  Widget _getPassword() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        onChanged: (value) {
-          setState(() {
-            password = value;
-          });
-        },
-        decoration:InputDecoration(
-          prefixIcon: Icon(
-            Icons.lock,
-            color: Colors.grey,
-          ),
-          labelText: 'Password',
-        ),
-      ),
-    );
-  }
-
-  Widget _getPasswordRepetition() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        onChanged: (value) {
-          setState(() {
-            passwordRepetition = value;
-          });
-        },
-        decoration:InputDecoration(
-          prefixIcon: Icon(
-            Icons.lock,
-            color: Colors.grey,
-          ),
-          labelText: 'Password Repetition',
-        ),
-      ),
-    );
-  }
 
 
   @override

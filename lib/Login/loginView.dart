@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:rollbrett_rottweil/Login/registerView.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/main.dart';
@@ -14,7 +15,14 @@ class _LoginPageState extends State<LoginPage> {
   String email;
   String password;
 
+
+  void setEmail(String text) {
+    email = text;
+  }
+
   void _loginButtonPressed() {
+    print(email);
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -56,7 +64,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  _getEmail(),
+                  //_getEmail(),
+                  EmailField(email, setEmail),
                   _getPassword(),
                   _getForgetPassword(),
                   RoundedButton("Login", _loginButtonPressed, 40, 20),
