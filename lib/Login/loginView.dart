@@ -21,11 +21,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginButtonPressed() {
-    print(email);
-
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
+        (Route<dynamic> route) => false,
     );
   }
 

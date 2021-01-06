@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
 import 'package:rollbrett_rottweil/Class/skateDiceTricks.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
+import 'package:rollbrett_rottweil/SkateDice/skateDiceText.dart';
+import 'package:shake/shake.dart';
 
 class SkateDices extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class SkateDices extends StatefulWidget {
 }
 
 class _SkateDicesState extends State<SkateDices> {
+  ShakeDetector detector;
+
   List<SkateDiceObstacles> obstacleList = SkateDiceObstacles.getObstacles();
   List<SkateDiceTricks> obstacleTricks = SkateDiceTricks.getTricks();
   List<String> direction = ["Frontside", "Backside"];
@@ -25,6 +29,13 @@ class _SkateDicesState extends State<SkateDices> {
   String text2 = "";
   String text3 = "";
   String text4 = "";
+
+
+  String enumToString(String text) {
+    return text.split('.').last;
+  }
+
+
 
   void _rollDices() {
     Random random = new Random();
@@ -41,9 +52,9 @@ class _SkateDicesState extends State<SkateDices> {
     if (obstacleList[randomObstacle].obstacleType == ObstacleType.Flat ||
         obstacleList[randomObstacle].obstacleType == ObstacleType.ManualPad) {
       setState(() {
-        text1 = stance[randomStance].toString();
+        text1 = enumToString(stance[randomStance].toString());
         text2 = trickListfiltered[randomTrick].name;
-        text3 = obstacleList[randomObstacle].obstacleType.toString();
+        text3 = enumToString(obstacleList[randomObstacle].obstacleType.toString());
         text4 = "";
       });
     }
@@ -63,13 +74,28 @@ class _SkateDicesState extends State<SkateDices> {
       }
 
       setState(() {
-        text1 = stance[randomStance].toString();
+        text1 = enumToString(stance[randomStance].toString());
         text2 = direction;
         text3 = trickListfiltered[randomTrick].name;
-        text4 = obstacleList[randomObstacle].name.toString();
+        text4 = enumToString(obstacleList[randomObstacle].name.toString());
       });
     }
   }
+
+  @override
+  void initState() {
+    super.initState();
+    detector = ShakeDetector.autoStart(onPhoneShake: () {
+      _rollDices();
+    });
+  }
+
+  @override
+  void dispose() {
+    detector.stopListening();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,17 +112,17 @@ class _SkateDicesState extends State<SkateDices> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(text1),
-                    SizedBox(width: 20),
-                    Text(text2),
+                   SkateDiceText(text1),
+                    SizedBox(width: 10),
+                    SkateDiceText(text2),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(text3),
-                    SizedBox(width: 20),
-                    Text(text4),
+                    SkateDiceText(text3),
+                    SizedBox(width: 10),
+                    SkateDiceText(text4),
                   ],
                 ),
                 SizedBox(width: 100),
