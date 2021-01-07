@@ -3,6 +3,7 @@ import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
 import 'package:rollbrett_rottweil/Login/loginView.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
+import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 void main() {
@@ -40,6 +41,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  void creditsButton(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SkateDiceAddPlayer()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(width: 20),
                 RoundedButton("Own the Spot", () => ownTheSpotButton(context), 53, 24),
                 SizedBox(width: 20),
-                RoundedButton("Credits", () {}, 53, 24),
+                RoundedButton("Credits", () => creditsButton(context), 53, 24),
                 SizedBox(width: 20),
               ],
             )

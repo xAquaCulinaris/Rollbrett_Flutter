@@ -88,7 +88,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ],
                   ),
-                  EmailField(email, setEmail),
+                  EmailField(email, setEmail, "E-mail", Icons.email),
                   _getUsername(),
                   PasswordField(setPassword, 'Password'),
                   PasswordField(setPasswordRep, 'Password Repetition'),

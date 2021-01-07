@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class EmailField extends StatefulWidget {
   String text;
   Function function;
+  String labelText;
+  IconData icon;
 
-  EmailField(this.text, this.function);
 
+  EmailField(this.text, this.function, this.labelText, this.icon);
 
   @override
   _EmailFieldState createState() => _EmailFieldState();
@@ -27,10 +29,10 @@ class _EmailFieldState extends State<EmailField> {
         },
         decoration: InputDecoration(
           prefixIcon: Icon(
-            Icons.email,
+            widget.icon,
             color: Colors.grey,
           ),
-          labelText: 'E-mail',
+          labelText: widget.labelText,
         ),
       ),
     );

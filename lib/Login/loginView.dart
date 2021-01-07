@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Login/registerView.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/main.dart';
 
@@ -18,6 +19,10 @@ class _LoginPageState extends State<LoginPage> {
 
   void setEmail(String text) {
     email = text;
+  }
+
+  void setPassword(String text) {
+    password = text;
   }
 
   void _loginButtonPressed() {
@@ -64,8 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   //_getEmail(),
-                  EmailField(email, setEmail),
-                  _getPassword(),
+                  EmailField(email, setEmail, "E-Mail", Icons.email),
+                  PasswordField(setPassword, 'Password'),
                   _getForgetPassword(),
                   RoundedButton("Login", _loginButtonPressed, 40, 20),
                   RoundedButton("Sign Up", _registerButtonPressed ,40, 20),
@@ -76,26 +81,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _getEmail() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        onChanged: (value) {
-          setState(() {
-            email = value;
-          });
-        },
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            Icons.email,
-            color: Colors.grey,
-          ),
-          labelText: 'E-mail',
-        ),
-      ),
-    );
-  }
 
   Widget _getPassword() {
     return Padding(
