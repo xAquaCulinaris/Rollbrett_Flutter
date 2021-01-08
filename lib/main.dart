@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
   void skateDicesButton(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SkateDices()),
+      MaterialPageRoute(builder: (context) => SkateDiceAddPlayer()),
     );
   }
 

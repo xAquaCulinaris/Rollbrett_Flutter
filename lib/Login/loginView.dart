@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   //_getEmail(),
-                  EmailField(email, setEmail, "E-Mail", Icons.email),
+                  EmailField(text: email, function: setEmail, labelText: "E-Mail", icon: Icons.email),
                   PasswordField(setPassword, 'Password'),
                   _getForgetPassword(),
                   RoundedButton("Login", _loginButtonPressed, 40, 20),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
+import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 class SkateDiceAddPlayer extends StatefulWidget {
   @override
@@ -12,6 +13,14 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
   List<SkateDicePlayer> players = [];
 
   String name;
+
+
+  void _startGame() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SkateDices(players)),
+    );
+  }
 
   void setPlayerName(String name) {
     this.name = name;
@@ -58,7 +67,7 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
               Row(
                 children: [
                   Expanded(
-                    child: EmailField(name, setPlayerName, "Add Player", Icons.person_add),
+                    child: EmailField(text: name, function: setPlayerName, labelText: "Add Player", icon: Icons.person_add, keyLayout: TextInputType.text),
                   ),
                   IconButton(
                       icon: Icon(Icons.add_circle_outline),
@@ -74,6 +83,9 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
                   return Text("Player " + (index+1).toString() + ": " +  players[index].name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),);
                 },
               ) : Text("No players added"),
+
+              FloatingActionButton(onPressed: () {_startGame();}),
+
             ],
           ),
         ),

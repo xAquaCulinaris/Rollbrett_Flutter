@@ -5,9 +5,10 @@ class EmailField extends StatefulWidget {
   Function function;
   String labelText;
   IconData icon;
+  TextInputType keyLayout;
 
 
-  EmailField(this.text, this.function, this.labelText, this.icon);
+  EmailField({this.text, this.function, this.labelText, this.icon, this.keyLayout});
 
   @override
   _EmailFieldState createState() => _EmailFieldState();
@@ -20,7 +21,7 @@ class _EmailFieldState extends State<EmailField> {
     return Padding(
       padding: EdgeInsets.all(8),
       child: TextFormField(
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: widget.keyLayout == null ? TextInputType.emailAddress : widget.keyLayout,
         onChanged: (value) {
           setState(() {
             widget.text = value;
