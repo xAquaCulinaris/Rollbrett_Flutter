@@ -61,22 +61,21 @@ class _SkateDicesState extends State<SkateDices> {
         text4 = "";
       });
     } else {
-      String direction = "";
+      String directionString = "";
       if (obstacleList[randomObstacle].direction != Direction.None) {
         if (obstacleList[randomObstacle].direction == Direction.Frontside) {
-          direction = "Frontside";
+          directionString = "Frontside";
         }
         if (obstacleList[randomObstacle].direction == Direction.Backside) {
-          direction = "Backside";
+          directionString = "Backside";
         } else {
-          //direction = direction[random.nextInt(2)];
-          direction = "FS";
+          directionString = direction[random.nextInt(direction.length)];
         }
       }
 
       setState(() {
         text1 = enumToString(stance[randomStance].toString());
-        text2 = direction;
+        text2 = directionString;
         text3 = trickListfiltered[randomTrick].name;
         text4 = enumToString(obstacleList[randomObstacle].name.toString());
       });

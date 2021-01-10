@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
+import 'package:rollbrett_rottweil/SkateDice/skateDiceConfig.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 class SkateDiceAddPlayer extends StatefulWidget {
@@ -15,10 +16,10 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
   String name;
 
 
-  void _startGame() {
+  void _nextPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SkateDices(players)),
+      MaterialPageRoute(builder: (context) => SkateDiceConfig(players)),
     );
   }
 
@@ -84,7 +85,7 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
                 },
               ) : Text("No players added"),
 
-              FloatingActionButton(onPressed: () {_startGame();}),
+              FloatingActionButton(onPressed: () {_nextPage();}),
 
             ],
           ),
