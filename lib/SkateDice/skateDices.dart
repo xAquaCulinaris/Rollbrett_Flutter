@@ -51,8 +51,7 @@ class _SkateDicesState extends State<SkateDices> {
     int randomTrick = random.nextInt(trickListfiltered.length);
     int randomStance = random.nextInt(stance.length);
 
-    if (obstacleList[randomObstacle].obstacleType == ObstacleType.Flat ||
-        obstacleList[randomObstacle].obstacleType == ObstacleType.ManualPad) {
+    if (obstacleList[randomObstacle].obstacleType == ObstacleType.Flat) {
       setState(() {
         text1 = enumToString(stance[randomStance].toString());
         text2 = trickListfiltered[randomTrick].name;
