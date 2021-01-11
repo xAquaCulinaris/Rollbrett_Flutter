@@ -11,8 +11,10 @@ import 'package:shake/shake.dart';
 
 class SkateDices extends StatefulWidget {
   List<SkateDicePlayer> players;
+  List<SkateDiceObstacles> obstacleList;
+  List<SkateDiceTricks> obstacleTricks;
 
-  SkateDices(this.players);
+  SkateDices(this.players, this.obstacleList, this.obstacleTricks);
 
   @override
   _SkateDicesState createState() => _SkateDicesState();
@@ -21,15 +23,20 @@ class SkateDices extends StatefulWidget {
 class _SkateDicesState extends State<SkateDices> {
   ShakeDetector detector;
 
-  List<SkateDiceObstacles> obstacleList = SkateDiceObstacles.getObstacles();
-  List<SkateDiceTricks> obstacleTricks = SkateDiceTricks.getTricks();
+
+  //List<SkateDiceObstacles> obstacleList = SkateDiceObstacles.getObstacles();
+ // List<SkateDiceTricks> obstacleTricks = SkateDiceTricks.getTricks();
+
+
   List<String> direction = ["Frontside", "Backside"];
+
   List<Stance> stance = [
     Stance.Regular,
     Stance.Switch,
     Stance.Fakie,
     Stance.Nollie
   ];
+
 
   String text1 = "";
   String text2 = "";
@@ -41,31 +48,35 @@ class _SkateDicesState extends State<SkateDices> {
   }
 
   void _rollDices() {
+
+
     Random random = new Random();
 
-    int randomObstacle = random.nextInt(obstacleList.length);
-    List<SkateDiceTricks> trickListfiltered = obstacleTricks
+    int randomObstacle = random.nextInt(widget.obstacleList.length);
+
+    //filter type of tricks that are possible
+    List<SkateDiceTricks> trickListfiltered = widget.obstacleTricks
         .where((element) =>
-            element.obstacleType == obstacleList[randomObstacle].obstacleType)
+            element.obstacleType == widget.obstacleList[randomObstacle].obstacleType)
         .toList();
     int randomTrick = random.nextInt(trickListfiltered.length);
     int randomStance = random.nextInt(stance.length);
 
-    if (obstacleList[randomObstacle].obstacleType == ObstacleType.Flat) {
+    if (widget.obstacleList[randomObstacle].obstacleType == ObstacleType.Flat) {
       setState(() {
         text1 = enumToString(stance[randomStance].toString());
         text2 = trickListfiltered[randomTrick].name;
         text3 =
-            enumToString(obstacleList[randomObstacle].obstacleType.toString());
+            enumToString(widget.obstacleList[randomObstacle].obstacleType.toString());
         text4 = "";
       });
     } else {
       String directionString = "";
-      if (obstacleList[randomObstacle].direction != Direction.None) {
-        if (obstacleList[randomObstacle].direction == Direction.Frontside) {
+      if (widget.obstacleList[randomObstacle].direction != Direction.None) {
+        if (widget.obstacleList[randomObstacle].direction == Direction.Frontside) {
           directionString = "Frontside";
         }
-        if (obstacleList[randomObstacle].direction == Direction.Backside) {
+        if (widget.obstacleList[randomObstacle].direction == Direction.Backside) {
           directionString = "Backside";
         } else {
           directionString = direction[random.nextInt(direction.length)];
@@ -76,7 +87,7 @@ class _SkateDicesState extends State<SkateDices> {
         text1 = enumToString(stance[randomStance].toString());
         text2 = directionString;
         text3 = trickListfiltered[randomTrick].name;
-        text4 = enumToString(obstacleList[randomObstacle].name.toString());
+        text4 = enumToString(widget.obstacleList[randomObstacle].name.toString());
       });
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
 import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
+import 'package:rollbrett_rottweil/Class/skateDiceTricks.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceExpandableCheckBox.dart';
 
@@ -19,8 +20,6 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
 
   var obstacleMap = <Map>[];
 
-
-  // List<bool> expandedStates = List.filled(ObstacleType.values.length, false);
 
   @override
   void initState() {
@@ -59,6 +58,10 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.grey,
+        accentColor: Colors.grey[900],
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Skate Dice Configuration"),
@@ -73,7 +76,17 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
                 //_dropDownList(obstacleTypes[index], index),
                 SkateDiceExpandableCheckBox(obstacleMap, index)
             ),
-            FloatingActionButton(onPressed: _startGame),
+
+
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Padding(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: FloatingActionButton(onPressed: _startGame, child: Icon(Icons.navigate_next, size: 50,),),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -82,9 +95,48 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
 
 
   void _startGame() {
+    List<SkateDiceObstacles> obstacleList = [];
+    List<SkateDiceTricks> obstacleTricks = [];
+
+    List<SkateDiceTricks> allTricks = SkateDiceTricks.getTricks();
+    List<SkateDiceObstacles> allObstacle = SkateDiceObstacles.getObstacles();
+
+    for (int x = 0; x < obstacleMap.length; x++) {
+      //need to look if at least one children ist checked
+      if(obstacleMap[x]['isChecked'] == true) {
+        print("read childs");
+
+
+        //loop trough all tricks and add them
+        for (int z = 0; z < allTricks.length; z++) {
+          var test1 = obstacleMap[x]['obstacleType'];
+          var test2 = allTricks[z].obstacleType.toString();
+
+          if (test1 == test2) {
+            obstacleTricks.add(allTricks[z]);
+          }
+        }
+
+        //loop through all obstacles and add them if 'isChecked' is true
+        for (int y = 0; y < obstacleMap[x]['itemCount']; y++) {
+          if(obstacleMap[x]['obstacles'][y]['isChecked']) {
+            print("obstacle ist checked");
+            for(SkateDiceObstacles toAdd in allObstacle) {
+              if(toAdd.name == obstacleMap[x]['obstacles'][y]['obstacleName']) {
+                print("obstacle equals");
+                obstacleList.add(toAdd);
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SkateDices(widget.players)),
+      MaterialPageRoute(builder: (context) => SkateDices(widget.players, obstacleList, obstacleTricks)),
     );
   }
 }

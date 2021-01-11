@@ -86,3 +86,19 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+/*
+[
+{obstacleType: ObstacleType.Rail, isExpanded: true, isChecked: true, obstacles: [
+  {obstacleName: Flat Rail, isChecked: true}],
+itemCount: 1},
+
+{obstacleType: ObstacleType.Ledge, isExpanded: true, isChecked: true, obstacles: [
+  {obstacleName: Hubba, isChecked: true},
+  {obstacleName: Manual Pad Ledge, isChecked: true}],
+itemCount: 2},
+
+{obstacleType: ObstacleType.Flat, isExpanded: true, isChecked: true, obstacles: [
+  {obstacleName: Flatground, isChecked: true}],
+itemCount: 1}]*/
+

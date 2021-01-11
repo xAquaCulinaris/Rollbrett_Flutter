@@ -29,6 +29,8 @@ class _SkateDiceExpandableCheckBoxState extends State<SkateDiceExpandableCheckBo
                   });
                 }),
             Text(widget.map[widget.index]['obstacleType'].toString())
+
+            //TODO: replace text with checkbox
           ],
         ),
        widget.map[widget.index]['isExpanded'] ?
