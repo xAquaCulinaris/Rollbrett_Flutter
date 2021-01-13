@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customAppBar.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceConfig.dart';
-import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 
 class SkateDiceAddPlayer extends StatefulWidget {
   @override
@@ -50,15 +50,9 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-      primaryColor: Colors.grey,
-      accentColor: Colors.grey[900],
-    ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Skate Dice add Players"),
-        ),
+    return Scaffold(
+        appBar: CustomAppBar('Skate Dice Add Players'),
+
         body: Padding(
           padding: EdgeInsets.all(40),
           child: //Text("asd"),
@@ -89,7 +83,6 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
 
             ],
           ),
-        ),
       ),
     );
   }

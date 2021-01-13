@@ -5,7 +5,8 @@ import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
-import 'package:rollbrett_rottweil/main.dart';
+import 'package:rollbrett_rottweil/route_generator.dart';
+import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,7 +16,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String email;
   String password;
-
 
   void setEmail(String text) {
     email = text;
@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
-        (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
   }
 
@@ -69,18 +69,21 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   //_getEmail(),
-                  EmailField(text: email, function: setEmail, labelText: "E-Mail", icon: Icons.email),
+                  EmailField(
+                      text: email,
+                      function: setEmail,
+                      labelText: "E-Mail",
+                      icon: Icons.email),
                   PasswordField(setPassword, 'Password'),
                   _getForgetPassword(),
                   RoundedButton("Login", _loginButtonPressed, 40, 20),
-                  RoundedButton("Sign Up", _registerButtonPressed ,40, 20),
+                  RoundedButton("Sign Up", _registerButtonPressed, 40, 20),
                 ],
               ),
             ))
       ],
     );
   }
-
 
   Widget _getPassword() {
     return Padding(
@@ -114,37 +117,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xfff2f3f7),
-        body: Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: const Radius.circular(70),
-                    bottomRight: const Radius.circular(70),
+    return Scaffold(
+          resizeToAvoidBottomPadding: false,
+          backgroundColor: Color(0xfff2f3f7),
+          body: Stack(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.7,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: const Radius.circular(70),
+                      bottomRight: const Radius.circular(70),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LogoText(),
-                _getContainer(),
-              ],
-            )
-          ],
-        ),
-      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LogoText(),
+                  _getContainer(),
+                ],
+              )
+            ],
+          ),
+
     );
   }
 }

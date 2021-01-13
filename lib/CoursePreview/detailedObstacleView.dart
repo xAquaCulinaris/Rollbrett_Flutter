@@ -10,12 +10,7 @@ class DetailedObstacleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.grey,
-        accentColor: Colors.grey[700],
-      ),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(obstacle.name),
         ),
@@ -31,7 +26,6 @@ class DetailedObstacleView extends StatelessWidget {
             VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/fsFlip_ParkDC.mp4'), looping: true),
           ],
         ),
-      ),
     );
   }
 }

@@ -187,8 +187,9 @@ class _CoursePreviewState extends State<CoursePreview>
   }
 
   @override
-  void dispose() {
+  void deactivate() {
     WidgetsBinding.instance.removeObserver(this);
+    print("deactivated");
     streamController?.close();
     _streamRanging?.cancel();
     _streamBluetooth?.cancel();
@@ -198,26 +199,28 @@ class _CoursePreviewState extends State<CoursePreview>
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    streamController?.close();
+    _streamRanging?.cancel();
+    _streamBluetooth?.cancel();
+    flutterBeacon.close;
+
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.grey,
-        accentColor: Colors.grey[900],
-      ),
-      home: Scaffold(
-        appBar: CustomAppBar("Course Preview"),
-        // AppBar(title: Text("Title Course preview")),
-        body: !bluetoothEnabled ||
-                !locationServiceEnabled ||
-                !authorizationStatusOk
-            ? RequirementsWidget(streamController, authorizationStatusOk,
-                locationServiceEnabled, bluetoothEnabled)
-            : ListView.builder(
-                itemCount: obstacleInRange.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    ObstacleListViewItem(obstacleInRange, index),
-              ),
-      ),
+    return Scaffold(
+      appBar: CustomAppBar("Course Preview"),
+      body:
+          !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
+              ? RequirementsWidget(streamController, authorizationStatusOk,
+                  locationServiceEnabled, bluetoothEnabled)
+              : ListView.builder(
+                  itemCount: obstacleInRange.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      ObstacleListViewItem(obstacleInRange, index),
+                ),
     );
   }
 }

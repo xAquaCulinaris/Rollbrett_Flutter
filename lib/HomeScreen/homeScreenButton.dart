@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MainMenueButton extends StatelessWidget {
+class HomeScreenButton extends StatelessWidget {
   final String text;
   final IconData icon;
   final Function func;
   final BuildContext context;
 
-  MainMenueButton(this.text, this.icon, this.func, this.context);
+  HomeScreenButton(this.text, this.icon, this.func, this.context);
 
   @override
   Widget build(BuildContext context) {

@@ -57,12 +57,7 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.grey,
-        accentColor: Colors.grey[900],
-      ),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Skate Dice Configuration"),
         ),
@@ -89,7 +84,6 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
             ),
           ],
         ),
-      ),
     );
   }
 

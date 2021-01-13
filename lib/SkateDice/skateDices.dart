@@ -24,8 +24,6 @@ class _SkateDicesState extends State<SkateDices> {
   ShakeDetector detector;
 
 
-  //List<SkateDiceObstacles> obstacleList = SkateDiceObstacles.getObstacles();
- // List<SkateDiceTricks> obstacleTricks = SkateDiceTricks.getTricks();
 
 
   List<String> direction = ["Frontside", "Backside"];

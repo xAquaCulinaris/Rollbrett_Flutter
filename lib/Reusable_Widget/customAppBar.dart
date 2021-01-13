@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/main.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
-  final double _prefferedHeig = 100.0;
+  final double _prefferedHeight = 100.0;
 
   final String title;
 
   CustomAppBar(this.title);
 
-
   //TODO: Use Navigator Routes to change view because of beacon shit
   void navigateHomeScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
+    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: _prefferedHeig,
+      height: _prefferedHeight,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -32,14 +28,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
         ),
       ),
       child: Row(
+       // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-              icon: RotatedBox(
-                quarterTurns: 2,
-                child: Icon(Icons.subdirectory_arrow_right, size: 30,),
+              icon: Icon(
+                Icons.home,
+                size: 30,
               ),
               onPressed: () => navigateHomeScreen(context)),
-
           Text(title, style: TextStyle(fontSize: 24)),
         ],
       ),
@@ -47,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(_prefferedHeig);
+  Size get preferredSize => Size.fromHeight(_prefferedHeight);
 
   @override
   Widget get child => throw UnimplementedError();

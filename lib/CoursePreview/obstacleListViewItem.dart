@@ -22,13 +22,8 @@ class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
             child: FlatButton(
           onPressed: widget.obstacleList[widget.index].inRange
               ? () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailedObstacleView(
-                          widget.obstacleList[widget.index]),
-                    ),
-                  );
+                  Navigator.of(context).pushNamed('/detailed_view',
+                      arguments: widget.obstacleList[widget.index]);
                 }
               : null,
           child: Stack(
