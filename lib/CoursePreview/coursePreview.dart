@@ -6,6 +6,9 @@ import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:rollbrett_rottweil/Class/obstacle.dart';
 import 'package:rollbrett_rottweil/CoursePreview/obstacleListViewItem.dart';
 import 'package:rollbrett_rottweil/CoursePreview/requirementsWidget.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customAppBar.dart';
+
+import '../main.dart';
 
 class CoursePreview extends StatefulWidget {
   @override
@@ -196,17 +199,25 @@ class _CoursePreviewState extends State<CoursePreview>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Title Course preview")),
-      body:
-          !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
-              ? RequirementsWidget(streamController, authorizationStatusOk,
-                  locationServiceEnabled, bluetoothEnabled)
-              : ListView.builder(
-                  itemCount: obstacleInRange.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      ObstacleListViewItem(obstacleInRange, index),
-                ),
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.grey,
+        accentColor: Colors.grey[900],
+      ),
+      home: Scaffold(
+        appBar: CustomAppBar("Course Preview"),
+        // AppBar(title: Text("Title Course preview")),
+        body: !bluetoothEnabled ||
+                !locationServiceEnabled ||
+                !authorizationStatusOk
+            ? RequirementsWidget(streamController, authorizationStatusOk,
+                locationServiceEnabled, bluetoothEnabled)
+            : ListView.builder(
+                itemCount: obstacleInRange.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    ObstacleListViewItem(obstacleInRange, index),
+              ),
+      ),
     );
   }
 }

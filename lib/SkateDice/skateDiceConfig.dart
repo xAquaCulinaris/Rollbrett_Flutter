@@ -101,12 +101,12 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
     List<SkateDiceTricks> allTricks = SkateDiceTricks.getTricks();
     List<SkateDiceObstacles> allObstacle = SkateDiceObstacles.getObstacles();
 
+
+
+
     for (int x = 0; x < obstacleMap.length; x++) {
       //need to look if at least one children ist checked
       if(obstacleMap[x]['isChecked'] == true) {
-        print("read childs");
-
-
         //loop trough all tricks and add them
         for (int z = 0; z < allTricks.length; z++) {
           var test1 = obstacleMap[x]['obstacleType'];
@@ -120,10 +120,8 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
         //loop through all obstacles and add them if 'isChecked' is true
         for (int y = 0; y < obstacleMap[x]['itemCount']; y++) {
           if(obstacleMap[x]['obstacles'][y]['isChecked']) {
-            print("obstacle ist checked");
             for(SkateDiceObstacles toAdd in allObstacle) {
               if(toAdd.name == obstacleMap[x]['obstacles'][y]['obstacleName']) {
-                print("obstacle equals");
                 obstacleList.add(toAdd);
               }
             }

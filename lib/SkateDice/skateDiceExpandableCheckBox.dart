@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/SkateDice/SkateDiceCheckBox.dart';
 
 class SkateDiceExpandableCheckBox extends StatefulWidget {
-  List<Map> map;
+  final List<Map> map;
   final int index;
 
   SkateDiceExpandableCheckBox(this.map, this.index);
@@ -28,9 +28,23 @@ class _SkateDiceExpandableCheckBoxState extends State<SkateDiceExpandableCheckBo
                     widget.map[widget.index]['isExpanded'] = !widget.map[widget.index]['isExpanded'];
                   });
                 }),
-            Text(widget.map[widget.index]['obstacleType'].toString())
 
-            //TODO: replace text with checkbox
+
+
+            Expanded(
+              child: CheckboxListTile(
+                  title: Text(widget.map[widget.index]['obstacleType'].toString()),
+                  value: widget.map[widget.index]['isChecked'],
+                  onChanged: (newValue) {
+                    setState(() {
+                      widget.map[widget.index]['isChecked'] = newValue;
+
+                       if (!newValue) {
+                      widget.map[widget.index]['isExpanded'] = false;
+                    }
+                    });
+                  }),
+            )
           ],
         ),
        widget.map[widget.index]['isExpanded'] ?

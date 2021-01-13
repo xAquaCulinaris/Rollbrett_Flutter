@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
 import 'package:rollbrett_rottweil/Login/loginView.dart';
-import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
-import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
+import 'package:rollbrett_rottweil/fonts/rollbrett__flutter_icons.dart';
+import 'package:rollbrett_rottweil/mainMenueButton.dart';
 
 void main() {
   bool loggedIn = false;
@@ -64,20 +64,22 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: 20),
-                RoundedButton("Course Preview", () => coursePreviewButton(context), 53, 24),
+                MainMenueButton("Course Preview", Rollbrett_Flutter.noun_half_pipe_699586, coursePreviewButton, context),
                 SizedBox(width: 20),
-                RoundedButton("Skate Dices", () => skateDicesButton(context), 53, 24),
+                MainMenueButton("Skate Dices", Rollbrett_Flutter.dice, skateDicesButton, context),
                 SizedBox(width: 20),
               ],
             ),
+            SizedBox(height: 20),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: 20),
-                RoundedButton("Own the Spot", () => ownTheSpotButton(context), 53, 24),
+                MainMenueButton("Own the Spot", Rollbrett_Flutter.video_camera, ownTheSpotButton, context),
                 SizedBox(width: 20),
-                RoundedButton("Credits", () => creditsButton(context), 53, 24),
+                MainMenueButton("Credits", Rollbrett_Flutter.skateboard, creditsButton, context),
                 SizedBox(width: 20),
               ],
             )
@@ -86,19 +88,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-[
-{obstacleType: ObstacleType.Rail, isExpanded: true, isChecked: true, obstacles: [
-  {obstacleName: Flat Rail, isChecked: true}],
-itemCount: 1},
-
-{obstacleType: ObstacleType.Ledge, isExpanded: true, isChecked: true, obstacles: [
-  {obstacleName: Hubba, isChecked: true},
-  {obstacleName: Manual Pad Ledge, isChecked: true}],
-itemCount: 2},
-
-{obstacleType: ObstacleType.Flat, isExpanded: true, isChecked: true, obstacles: [
-  {obstacleName: Flatground, isChecked: true}],
-itemCount: 1}]*/
 

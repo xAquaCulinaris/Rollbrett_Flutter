@@ -19,6 +19,18 @@ class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
     return new Container(
       child: Card(
         child: Container(
+            child: FlatButton(
+          onPressed: widget.obstacleList[widget.index].inRange
+              ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailedObstacleView(
+                          widget.obstacleList[widget.index]),
+                    ),
+                  );
+                }
+              : null,
           child: Stack(
             children: [
               Align(
@@ -49,33 +61,12 @@ class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
                         widget.obstacleList[widget.index].height.toString()),
                     Text("Width: " +
                         widget.obstacleList[widget.index].width.toString()),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        onPrimary: Colors.white,
-                      ),
-                      onPressed: widget.obstacleList[widget.index].inRange
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailedObstacleView(
-                                      widget.obstacleList[widget.index]),
-                                ),
-                              );
-                            }
-                          : null,
-                      // null is the else part to deactivate the button
-                      child: widget.obstacleList[widget.index].inRange
-                          ? Text("Details")
-                          : Text("Out of Range"),
-                    ),
                   ],
                 ),
               )
             ],
           ),
-        ),
+        )),
       ),
     );
   }
