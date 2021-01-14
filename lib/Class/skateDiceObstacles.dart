@@ -4,14 +4,15 @@ class SkateDiceObstacles {
   final ObstacleType obstacleType;
   final Difficulty difficulty;
   final Direction direction;
+  final String picture;
 
-  SkateDiceObstacles(this.name, this.obstacleType, this.difficulty, this.direction);
+  SkateDiceObstacles(this.name, this.obstacleType, this.difficulty, this.direction, this.picture);
 
-  static SkateDiceObstacles flatRail = SkateDiceObstacles("Flat Rail", ObstacleType.Rail, Difficulty.Medium, Direction.All);
-  static SkateDiceObstacles hubba = SkateDiceObstacles("Hubba", ObstacleType.Ledge, Difficulty.Medium, Direction.All);
+  static SkateDiceObstacles flatRail = SkateDiceObstacles("Flat Rail", ObstacleType.Rail, Difficulty.Medium, Direction.All, 'assets/rail.jpg');
+  static SkateDiceObstacles hubba = SkateDiceObstacles("Hubba", ObstacleType.Ledge, Difficulty.Medium, Direction.All, 'assets/hubba.jpg');
   //static SkateDiceObstacles manualPad = SkateDiceObstacles("Manual Pad", ObstacleType.ManualPad, Difficulty.Easy, Direction.All);
-  static SkateDiceObstacles manualPadLedge = SkateDiceObstacles("Manual Pad Ledge", ObstacleType.Ledge, Difficulty.Medium, Direction.All);
-  static SkateDiceObstacles flatground = SkateDiceObstacles("Flatground", ObstacleType.Flat, Difficulty.Easy, Direction.None);
+  static SkateDiceObstacles manualPadLedge = SkateDiceObstacles("Manual Pad Ledge", ObstacleType.Ledge, Difficulty.Medium, Direction.All, 'assets/ledge.jpg');
+  static SkateDiceObstacles flatground = SkateDiceObstacles("Flatground", ObstacleType.Flat, Difficulty.Easy, Direction.None, 'assets/stair.jpeg');
 
 
 

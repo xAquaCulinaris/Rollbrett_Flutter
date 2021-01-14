@@ -14,6 +14,7 @@ class SkateDices extends StatefulWidget {
   List<SkateDiceObstacles> obstacleList;
   List<SkateDiceTricks> obstacleTricks;
 
+
   SkateDices(this.players, this.obstacleList, this.obstacleTricks);
 
   @override
@@ -35,18 +36,14 @@ class _SkateDicesState extends State<SkateDices> {
     Stance.Nollie
   ];
 
+  List<Map<String,String>> currentTrick =List<Map<String, String>>();
 
-  String text1 = "";
-  String text2 = "";
-  String text3 = "";
-  String text4 = "";
 
   String enumToString(String text) {
     return text.split('.').last;
   }
 
   void _rollDices() {
-
 
     Random random = new Random();
 
@@ -62,11 +59,10 @@ class _SkateDicesState extends State<SkateDices> {
 
     if (widget.obstacleList[randomObstacle].obstacleType == ObstacleType.Flat) {
       setState(() {
-        text1 = enumToString(stance[randomStance].toString());
-        text2 = trickListfiltered[randomTrick].name;
-        text3 =
-            enumToString(widget.obstacleList[randomObstacle].obstacleType.toString());
-        text4 = "";
+        currentTrick[0] = {'name': enumToString(stance[randomStance].toString()), 'picture': 'null'};
+        currentTrick[1] = {'name': trickListfiltered[randomTrick].name, 'picture': 'null'};
+        currentTrick[2] = {'name': enumToString(widget.obstacleList[randomObstacle].obstacleType.toString()), 'picture': widget.obstacleList[randomObstacle].picture};
+        currentTrick[3] = {'name': '', 'picture': 'null'};
       });
     } else {
       String directionString = "";
@@ -82,10 +78,10 @@ class _SkateDicesState extends State<SkateDices> {
       }
 
       setState(() {
-        text1 = enumToString(stance[randomStance].toString());
-        text2 = directionString;
-        text3 = trickListfiltered[randomTrick].name;
-        text4 = enumToString(widget.obstacleList[randomObstacle].name.toString());
+        currentTrick[0] = {'name': enumToString(stance[randomStance].toString()), 'picture': 'null'};
+        currentTrick[1] = {'name': directionString, 'picture': 'null'};
+        currentTrick[2] = {'name': trickListfiltered[randomTrick].name, 'picture': 'null'};
+        currentTrick[3] = {'name': enumToString(widget.obstacleList[randomObstacle].name.toString()), 'picture': widget.obstacleList[randomObstacle].picture};
       });
     }
   }
@@ -96,6 +92,12 @@ class _SkateDicesState extends State<SkateDices> {
     detector = ShakeDetector.autoStart(onPhoneShake: () {
       _rollDices();
     });
+
+    currentTrick.add({'name': '', 'picture': 'null'});
+    currentTrick.add({'name': '', 'picture': 'null'});
+    currentTrick.add({'name': '', 'picture': 'null'});
+    currentTrick.add({'name': '', 'picture': 'null'});
+
   }
 
   @override
@@ -128,17 +130,21 @@ class _SkateDicesState extends State<SkateDices> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SkateDiceText(text1),
+                  // SkateDiceText(text1),
+                  SkateDiceText(currentTrick[0]),
                   SizedBox(width: 10),
-                  SkateDiceText(text2),
+                  //SkateDiceText(text2),
+                  SkateDiceText(currentTrick[1]),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SkateDiceText(text3),
+                  // SkateDiceText(text3),
+                  SkateDiceText(currentTrick[2]),
                   SizedBox(width: 10),
-                  SkateDiceText(text4),
+                  // SkateDiceText(text4),
+                  SkateDiceText(currentTrick[3]),
                 ],
               ),
               SizedBox(width: 100),

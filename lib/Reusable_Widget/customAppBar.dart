@@ -7,7 +7,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
 
   CustomAppBar(this.title);
 
-  //TODO: Use Navigator Routes to change view because of beacon shit
   void navigateHomeScreen(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
   }
