@@ -5,8 +5,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
-import 'package:rollbrett_rottweil/route_generator.dart';
-import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
+import 'package:rollbrett_rottweil/firebase/firebaseAuth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -17,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   String email;
   String password;
 
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
   void setEmail(String text) {
     email = text;
   }
@@ -25,12 +26,23 @@ class _LoginPageState extends State<LoginPage> {
     password = text;
   }
 
-  void _loginButtonPressed() {
-    Navigator.pushAndRemoveUntil(
+  void _loginButtonPressed() async {
+    dynamic result = await _auth.signInAnon();
+    if (result == null) {
+      print("Error signing in");
+    } else {
+      print("User signed in");
+      print(result.uid);
+    }
+
+
+
+
+    /*Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
       (Route<dynamic> route) => false,
-    );
+    );*/
   }
 
   void _registerButtonPressed() {

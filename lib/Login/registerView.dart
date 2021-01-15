@@ -125,8 +125,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Color(0xfff2f3f7),
         body: Stack(
@@ -152,7 +151,6 @@ class _RegisterViewState extends State<RegisterView> {
               ],
             )
           ],
-        ),
       ),
     );
   }

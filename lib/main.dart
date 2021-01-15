@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Login/loginView.dart';
 import 'package:rollbrett_rottweil/route_generator.dart';
+import 'package:rollbrett_rottweil/wrapper.dart';
 
 import 'HomeScreen/homeScreen.dart';
 
@@ -15,7 +16,7 @@ void main() {
       primaryColor: Colors.grey,
       accentColor: Colors.grey[900],
     ),
-    home: loggedIn ? HomeScreen() : LoginPage(),
+    home: Wrapper(),
   )
   );
 }
