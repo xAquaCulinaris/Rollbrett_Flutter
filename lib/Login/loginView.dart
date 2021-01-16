@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  //TODO: Fix automatic sign in on regsiter
+
   void _registerButtonPressed() {
     widget.toggleShowLogin();
   }

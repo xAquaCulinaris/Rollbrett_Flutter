@@ -41,6 +41,8 @@ class _RegisterViewState extends State<RegisterView> {
     passwordRepetition = text;
   }
 
+
+  //TODO::Need to check if email already exists, because stuck in loadingscreen
   void _registerButtonPressed() {
     print(email);
     print(username);
@@ -51,7 +53,7 @@ class _RegisterViewState extends State<RegisterView> {
       setState(() {
         isLoading = true;
       });
-      dynamic result = _auth.register(email, password);
+      dynamic result = _auth.register(email, password, username);
       if (result == null) {
         setState(() {
           error = 'something went wrong registering, maybe wrong email?';
@@ -65,7 +67,6 @@ class _RegisterViewState extends State<RegisterView> {
     widget.toggleShowLogin();
   }
 
-  //TODO: Fix automatic sign in on regsiter
 
   Widget _getContainer() {
     return Row(
