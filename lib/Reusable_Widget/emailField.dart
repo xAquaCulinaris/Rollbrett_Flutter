@@ -6,6 +6,7 @@ class EmailField extends StatefulWidget {
   String labelText;
   IconData icon;
   TextInputType keyLayout;
+  Function validationFunc;
 
 
   EmailField({this.text, this.function, this.labelText, this.icon, this.keyLayout});
@@ -21,6 +22,8 @@ class _EmailFieldState extends State<EmailField> {
     return Padding(
       padding: EdgeInsets.all(8),
       child: TextFormField(
+        //TODO:: better email validation
+        validator: (val) => val.isEmpty ? 'Enter an email' : null,
         keyboardType: widget.keyLayout == null ? TextInputType.emailAddress : widget.keyLayout,
         onChanged: (value) {
           setState(() {

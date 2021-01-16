@@ -19,6 +19,8 @@ class _PasswordFieldState extends State<PasswordField> {
     return Padding(
       padding: EdgeInsets.all(8),
       child: TextFormField(
+        //TODO:: better password validation
+        validator: (val) => val.length < 6 ? 'Password must be 6 characters long' : null,
         keyboardType: TextInputType.text,
         obscureText: true,
         onChanged: (value) {

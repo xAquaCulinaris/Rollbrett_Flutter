@@ -5,7 +5,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
-import 'package:rollbrett_rottweil/firebase/firebaseAuth.dart';
+import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,10 +13,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
+  String error = '';
+
   String email;
   String password;
-
-  final FirebaseAuthService _auth = FirebaseAuthService();
 
   void setEmail(String text) {
     email = text;
@@ -27,24 +30,19 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginButtonPressed() async {
-    dynamic result = await _auth.signInAnon();
-    if (result == null) {
-      print("Error signing in");
-    } else {
-      print("User signed in");
-      print(result.uid);
+    print(email);
+    print(password);
+    if(_formKey.currentState.validate()) {
+      print("format okey");
+      dynamic result = _auth.signIn(email, password);
+      if(result == null) {
+        print("error");
+        setState(() => error = 'something went wrong registering, maybe wrong email?');
+      }
     }
-
-
-
-
-    /*Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-      (Route<dynamic> route) => false,
-    );*/
   }
 
+  //TODO: Fix automatic sign in on regsiter
   void _registerButtonPressed() {
     Navigator.push(
       context,
@@ -80,14 +78,20 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  //_getEmail(),
-                  EmailField(
-                      text: email,
-                      function: setEmail,
-                      labelText: "E-Mail",
-                      icon: Icons.email),
-                  PasswordField(setPassword, 'Password'),
-                  _getForgetPassword(),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        EmailField(
+                            text: email,
+                            function: setEmail,
+                            labelText: "E-Mail",
+                            icon: Icons.email),
+                        PasswordField(setPassword, 'Password'),
+                        _getForgetPassword(),
+                      ],
+                    ),
+                  ),
                   RoundedButton("Login", _loginButtonPressed, 40, 20),
                   RoundedButton("Sign Up", _registerButtonPressed, 40, 20),
                 ],
@@ -129,38 +133,35 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          resizeToAvoidBottomPadding: false,
-          backgroundColor: Color(0xfff2f3f7),
-          body: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.7,
-                width: MediaQuery.of(context).size.width,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: const Radius.circular(70),
-                      bottomRight: const Radius.circular(70),
-                    ),
-                  ),
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: Color(0xfff2f3f7),
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: const Radius.circular(70),
+                  bottomRight: const Radius.circular(70),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LogoText(),
-                  _getContainer(),
-                ],
-              )
-            ],
+            ),
           ),
-
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LogoText(),
+              _getContainer(),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

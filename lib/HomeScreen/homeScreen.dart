@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 import '../fonts/rollbrett__flutter_icons.dart';
 import 'homeScreenButton.dart';
 
 class HomeScreen extends StatelessWidget {
+  final AuthService _auth = AuthService();
+
   void coursePreviewButton(BuildContext context) {
     Navigator.of(context).pushNamed('/course_preview');
   }
@@ -27,7 +30,11 @@ class HomeScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           Row(children: [
-            IconButton(icon: Icon(Icons.logout), onPressed: null),
+            IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () async {
+                  await _auth.signOut();
+                }),
             Text('Logout'),
           ]),
         ],
