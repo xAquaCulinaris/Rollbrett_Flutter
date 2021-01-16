@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/CoursePreview/detailedObstacleView.dart';
 import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
+import 'package:rollbrett_rottweil/Login/Authenticate.dart';
 import 'package:rollbrett_rottweil/Login/loginView.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
 import 'package:rollbrett_rottweil/ErrorPage/errorPage.dart';
@@ -16,7 +17,7 @@ class RouteGenerator {
     switch(settings.name) {
 
       case '/':
-        return MaterialPageRoute(builder: (_) => LoginPage());
+        return MaterialPageRoute(builder: (_) => Authenticate());
 
       case '/home':
         return MaterialPageRoute(builder: (_) => HomeScreen());

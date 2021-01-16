@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:rollbrett_rottweil/Login/registerView.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 class LoginPage extends StatefulWidget {
+  final Function toggleShowLogin;
+
+  LoginPage(this.toggleShowLogin);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -16,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+  bool isLoading = false;
   String error = '';
 
   String email;
@@ -32,22 +38,22 @@ class _LoginPageState extends State<LoginPage> {
   void _loginButtonPressed() async {
     print(email);
     print(password);
-    if(_formKey.currentState.validate()) {
-      print("format okey");
+    if (_formKey.currentState.validate()) {
+      setState(() => isLoading = true);
       dynamic result = _auth.signIn(email, password);
-      if(result == null) {
+      if (result == null) {
         print("error");
-        setState(() => error = 'something went wrong registering, maybe wrong email?');
+        setState(() {
+          error = 'something went wrong registering, maybe wrong email?';
+          isLoading = false;
+        });
       }
     }
   }
 
   //TODO: Fix automatic sign in on regsiter
   void _registerButtonPressed() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterView()),
-    );
+    widget.toggleShowLogin();
   }
 
   Widget _getContainer() {
@@ -135,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? Loading() : Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Color(0xfff2f3f7),
       body: Stack(

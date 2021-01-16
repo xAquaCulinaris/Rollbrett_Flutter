@@ -1,12 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 class RegisterView extends StatefulWidget {
+  final Function toggleShowLogin;
+
+  RegisterView(this.toggleShowLogin);
+
   @override
   _RegisterViewState createState() => _RegisterViewState();
 }
@@ -15,13 +20,14 @@ class _RegisterViewState extends State<RegisterView> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+  bool isLoading = false;
+
   String email = "";
   String username = "";
   String password = "";
   String passwordRepetition = "";
 
   String error = '';
-
 
   void setEmail(String text) {
     email = text;
@@ -41,12 +47,22 @@ class _RegisterViewState extends State<RegisterView> {
     print(passwordRepetition);
     print(password);
 
-    if(_formKey.currentState.validate()) {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        isLoading = true;
+      });
       dynamic result = _auth.register(email, password);
-      if(result == null) {
-        setState(() => error = 'something went wrong registering, maybe wrong email?');
+      if (result == null) {
+        setState(() {
+          error = 'something went wrong registering, maybe wrong email?';
+          isLoading = false;
+        });
       }
     }
+  }
+
+  void _loginButtonPressed() {
+    widget.toggleShowLogin();
   }
 
   //TODO: Fix automatic sign in on regsiter
@@ -93,6 +109,7 @@ class _RegisterViewState extends State<RegisterView> {
                         PasswordField(setPasswordRep, 'Password Repetition'),
                         RoundedButton(
                             "Register", _registerButtonPressed, 40, 20),
+                        RoundedButton("Login", _loginButtonPressed, 40, 20)
                       ],
                     ),
                   )
@@ -108,7 +125,8 @@ class _RegisterViewState extends State<RegisterView> {
       padding: EdgeInsets.all(8),
       child: TextFormField(
         //TODO:: better username validation
-        validator: (val) => val.length < 5 ? 'Username must be 4 characters long' : null,
+        validator: (val) =>
+            val.length < 5 ? 'Username must be 4 characters long' : null,
         keyboardType: TextInputType.text,
         onChanged: (value) {
           setState(() {
@@ -128,7 +146,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading? Loading() : Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Color(0xfff2f3f7),
       body: Stack(
