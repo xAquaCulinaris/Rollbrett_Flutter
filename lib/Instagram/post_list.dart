@@ -14,9 +14,7 @@ class _PostListState extends State<PostList> {
   Widget build(BuildContext context) {
     final posts = Provider.of<List<Post>>(context);
 
-    posts.forEach((post) {
-      print(post.uid);
-    });
+
 
     return ListView.builder(
       itemCount: posts.length,

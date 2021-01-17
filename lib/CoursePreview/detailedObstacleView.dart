@@ -22,8 +22,8 @@ class DetailedObstacleView extends StatelessWidget {
             Text("Heigth: " + obstacle.height.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             Text("Height: " + obstacle.width.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
 
-            VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/270BoardSlide.mp4'), looping: true),
-            VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/fsFlip_ParkDC.mp4'), looping: true),
+            VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/270BoardSlide.mp4'), looping: false),
+            VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/fsFlip_ParkDC.mp4'), looping: false),
           ],
         ),
     );

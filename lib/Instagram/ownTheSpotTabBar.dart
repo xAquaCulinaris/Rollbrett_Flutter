@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/Instagram/instagramCloneView.dart';
-import 'package:rollbrett_rottweil/Instagram/instagramNewPostView.dart';
+import 'package:rollbrett_rottweil/Instagram/ownTheSpotView.dart';
+import 'package:rollbrett_rottweil/Instagram/ownTheSpotNewPostView.dart';
 
-class InstagramTabBar extends StatelessWidget {
+class OwnTheSpotTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -21,9 +21,9 @@ class InstagramTabBar extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              InstagramClone(),
-              InstagramNewPostView(),
-              InstagramNewPostView(),
+              OwnTheSpotPostView(),
+              OwnTheSpotNewPostView(),
+              OwnTheSpotNewPostView(),
             ],
           ),
       ),

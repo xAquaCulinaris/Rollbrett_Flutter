@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 
 
-class InstagramClone extends StatelessWidget {
+class OwnTheSpotPostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Post>>.value(

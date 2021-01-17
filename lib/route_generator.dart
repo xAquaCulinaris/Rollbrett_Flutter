@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/CoursePreview/detailedObstacleView.dart';
-import 'package:rollbrett_rottweil/Instagram/instagramTabBar.dart';
+import 'package:rollbrett_rottweil/Instagram/ownTheSpotTabBar.dart';
 import 'package:rollbrett_rottweil/Login/Authenticate.dart';
 import 'package:rollbrett_rottweil/Login/loginView.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
@@ -29,7 +29,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SkateDiceAddPlayer());
 
       case '/own_the_spot':
-        return MaterialPageRoute(builder: (_) => InstagramTabBar());
+        return MaterialPageRoute(builder: (_) => OwnTheSpotTabBar());
 
       case '/error':
         return MaterialPageRoute(builder: (_) => ErrorPage());

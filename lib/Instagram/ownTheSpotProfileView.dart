@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class InstagramNewPostView extends StatelessWidget {
+class OwnTheSpotProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.camera_alt);
+    return Icon(Icons.person);
   }
 }
