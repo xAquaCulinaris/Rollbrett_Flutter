@@ -15,13 +15,41 @@ class PostTopBar extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              radius: MediaQuery.of(context).size.width * 0.06,
-              backgroundImage: NetworkImage(image),
+              backgroundColor: Colors.black,
+              radius: MediaQuery.of(context).size.width * 0.07,
+              child: CircleAvatar(
+                radius: MediaQuery.of(context).size.width * 0.065,
+                backgroundImage: NetworkImage(image),
+              ),
             ),
-            Spacer(),
-            Text(
-              username,
-              style: TextStyle(fontSize: MediaQuery.of(context).size.height / 40),
+            FlatButton(
+              onPressed: () {},
+              child: Column(
+                children: [
+                  Text(
+                    username,
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height / 35),
+                  ),
+                  FlatButton(
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          size: MediaQuery.of(context).size.width / 25,
+                        ),
+                        Text(
+                          "The Hubaa",
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 23,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             Spacer(flex: 10),
           ],

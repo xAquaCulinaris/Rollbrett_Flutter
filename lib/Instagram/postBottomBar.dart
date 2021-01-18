@@ -1,37 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
+import 'package:rollbrett_rottweil/Instagram/ratingBar.dart';
 
 class PostBottomBar extends StatefulWidget {
+  final String userID;
+  List<String> ratedBy;
+  List<int> ratings;
+
+  PostBottomBar(this.userID, this.ratedBy, ratings);
+
   @override
   _PostBottomBarState createState() => _PostBottomBarState();
 }
 
 class _PostBottomBarState extends State<PostBottomBar> {
-  int score = 0;
+
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      height: MediaQuery.of(context).size.height/20,
       width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-       // scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return IconButton(
-            iconSize: MediaQuery.of(context).size.width * 0.04,
-            icon: Icon(
-              index <= score - 1 ? Icons.star_sharp : Icons.star_border_sharp,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              setState(() {
-                score = index+1;
-              });
-            },
-          );
-        },
-      ),
+
+      //TODO:: Fix scrolldirection to horizontal and add logik for rating
+      child: RatingBar(widget.userID, widget.ratedBy, widget.ratings),
     );
   }
 }

@@ -18,7 +18,7 @@ class PostTile extends StatelessWidget {
         children: [
           PostTopBar(post.image, post.username, "uid"),
           VideoListItem(videoPlayerController: VideoPlayerController.network(post.video), looping: true),
-          PostBottomBar(),
+          PostBottomBar(post.uid, post.ratedBy, post.rating),
         ],
       )
     );
