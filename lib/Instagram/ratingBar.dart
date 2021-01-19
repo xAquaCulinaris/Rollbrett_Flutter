@@ -3,8 +3,9 @@ import 'package:rollbrett_rottweil/firebase/ratingService.dart';
 
 class RatingBar extends StatefulWidget {
   final String userID;
+  final String postID;
 
-  RatingBar(this.userID);
+  RatingBar(this.userID, this.postID);
 
   @override
   _RatingBarState createState() => _RatingBarState();
@@ -14,7 +15,7 @@ class _RatingBarState extends State<RatingBar> {
   int userRating = 0;
 
   void setRating() async {
-    int value = await RatingService.getRating('123456', 'j7RUF23t2RGEScMyLWBx');
+    int value = await RatingService.getRating(widget.userID, widget.postID);
     setState(() {
       userRating = value;
     });
@@ -40,6 +41,7 @@ class _RatingBarState extends State<RatingBar> {
           setState(
             () {
               userRating = index + 1;
+              RatingService.setRating(widget.userID, widget.postID, userRating);
             },
           );
         },

@@ -4,8 +4,9 @@ import 'package:rollbrett_rottweil/Instagram/ratingBar.dart';
 
 class PostBottomBar extends StatefulWidget {
   final String userID;
+  final String postID;
 
-  PostBottomBar(this.userID);
+  PostBottomBar(this.userID, this.postID);
 
   @override
   _PostBottomBarState createState() => _PostBottomBarState();
@@ -21,7 +22,7 @@ class _PostBottomBarState extends State<PostBottomBar> {
       width: MediaQuery.of(context).size.width,
 
       //TODO:: Fix scrolldirection to horizontal and add logik for rating
-      child: RatingBar(widget.userID),
+      child: RatingBar(widget.userID, widget.postID),
     );
   }
 }

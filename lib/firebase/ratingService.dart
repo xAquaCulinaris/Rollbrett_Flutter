@@ -1,26 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class RatingService {
-  final CollectionReference collection = Firestore.instance.collection(
-      'ratings');
+  static CollectionReference collection =
+      Firestore.instance.collection('ratings');
 
-
-  static String getRatingID(String username, String postID) {
-    return username + '_' + postID;
+  //return name of the document
+  //TODO:: need  to fix user id, currently taking uid of the post user not the current user
+  static String getRatingID(String userID, String postID) {
+    return userID + '_' + postID;
   }
 
-  static Future<int> getRating(String username, String postID) async {
+  //update rating for the current post and current user
+  static Future setRating(String userID, String postID, int rating) async {
+   collection.document(getRatingID(userID, postID)).updateData({'rating': rating});
+  }
+
+  //get the rating as integer for the current post and current user
+  static Future<int> getRating(String userID, String postID) async {
     int rating = 0;
 
-    await Firestore.instance.collection('ratings')
-        .where(FieldPath.documentId, isEqualTo: getRatingID(username, postID))
+    await collection
+        .where(FieldPath.documentId, isEqualTo: getRatingID(userID, postID))
         .getDocuments()
         .then((event) {
       if (event.documents.isNotEmpty) {
         Map<String, dynamic> documentData = event.documents.single.data;
         print("rating return");
-        rating =  documentData['rating'];
+        rating = documentData['rating'];
       }
     }).catchError((error) {
       print("Document dont exists: $error");

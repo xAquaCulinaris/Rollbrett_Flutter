@@ -14,7 +14,7 @@ class DatabaseServicePosts {
 
   List<Post> _postListConverter(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Post(doc.data['name'] ?? '', doc.data['uid'] ?? '', doc.data['image'] ?? '', doc.data['video'] ?? '');
+      return Post(doc.data['name'] ?? '', doc.data['uid'] ?? '', doc.data['image'] ?? '', doc.data['video'] ?? '', doc.documentID);
     }).toList();
   }
 

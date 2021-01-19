@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/firebase/databasePosts.dart';
-import 'package:rollbrett_rottweil/firebase/databaseUser.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,7 +13,7 @@ class AuthService {
   }
 
   User _convertUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return user != null ? User(user.uid) : null;
   }
 
   Future signIn(String email, String password) async {
@@ -44,7 +44,7 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await DatabaseServiceUser(user.uid, username).updateUserData(username);
+      await UserService(user.uid, username).updateUserData(username);
       return _convertUser(user);
     } catch (e) {
       print(e.toString());
