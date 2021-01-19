@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/firebase/ratingService.dart';
 
 class RatingBar extends StatefulWidget {
   final String userID;
-  List<String> ratedBy;
-  List<int> ratings;
 
-  RatingBar(this.userID, this.ratedBy, this.ratings);
+  RatingBar(this.userID);
 
   @override
   _RatingBarState createState() => _RatingBarState();
@@ -14,18 +13,11 @@ class RatingBar extends StatefulWidget {
 class _RatingBarState extends State<RatingBar> {
   int userRating = 0;
 
-  void setRating() {
-    print("now");
-    print(widget.ratedBy.length);
-    //print(widget.ratings.length);
-    print(widget.ratedBy.length);
-      for (int i = 0; i < widget.ratedBy.length; i++) {
-        print("UID:" + widget.ratedBy[i]);
-        if (widget.ratedBy[i] == widget.userID) {
-          //TODO: Fix to dynamic
-          userRating = 3;
-        }
-      }
+  void setRating() async {
+    int value = await RatingService.getRating('123456', 'j7RUF23t2RGEScMyLWBx');
+    setState(() {
+      userRating = value;
+    });
   }
 
   @override
@@ -33,7 +25,6 @@ class _RatingBarState extends State<RatingBar> {
     setRating();
     super.initState();
   }
-
 
   Widget ratingTile(int index) {
     return Container(

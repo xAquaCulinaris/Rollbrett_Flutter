@@ -17,8 +17,8 @@ class PostTile extends StatelessWidget {
       child: Column(
         children: [
           PostTopBar(post.image, post.username, "uid"),
-          VideoListItem(videoPlayerController: VideoPlayerController.network(post.video), looping: true),
-          PostBottomBar(post.uid, post.ratedBy, post.rating),
+          VideoListItem(videoPlayerController: /*VideoPlayerController.network(post.video)*/ VideoPlayerController.asset('videos/270BoardSlide.mp4'), looping: true),
+          PostBottomBar(post.uid),
         ],
       )
     );
