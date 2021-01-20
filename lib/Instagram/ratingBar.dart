@@ -55,6 +55,8 @@ class _RatingBarState extends State<RatingBar> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       scrollDirection: Axis.horizontal,
