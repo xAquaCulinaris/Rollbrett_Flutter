@@ -8,7 +8,7 @@ class DatabaseServicePosts {
   DatabaseServicePosts({this.uid});
 
   //get posts
-  Stream<List<Post>> get users {
+  Stream<List<Post>> get posts {
     return collection.reference().snapshots().map(_postListConverter);
   }
 

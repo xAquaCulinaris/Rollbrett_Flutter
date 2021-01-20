@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
-import 'package:rollbrett_rottweil/firebase/databasePosts.dart';
 import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  static String userID;
 
 
   //Firebase auth changed and convert firebase user to normal user
@@ -13,7 +14,13 @@ class AuthService {
   }
 
   User _convertUser(FirebaseUser user) {
-    return user != null ? User(user.uid) : null;
+    if (user != null) {
+      userID = user.uid;
+      return User(user.uid);
+    }
+    return null;
+
+  //  return user != null ? User(user.uid) : null;
   }
 
   Future signIn(String email, String password) async {

@@ -11,7 +11,7 @@ class OwnTheSpotPostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Post>>.value(
-      value: DatabaseServicePosts().users,
+      value: DatabaseServicePosts().posts,
       child: PostList(),
     );
   }

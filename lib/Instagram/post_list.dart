@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
-import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/Instagram/postTile.dart';
 
 class PostList extends StatefulWidget {
@@ -12,8 +11,7 @@ class PostList extends StatefulWidget {
 class _PostListState extends State<PostList> {
   @override
   Widget build(BuildContext context) {
-    final posts = Provider.of<List<Post>>(context);
-
+    final posts = Provider.of<List<Post>>(context) ?? [];
 
 
     return ListView.builder(

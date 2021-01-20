@@ -4,6 +4,7 @@ class RatingService {
   static CollectionReference collection =
       Firestore.instance.collection('ratings');
 
+
   //return name of the document
   //TODO:: need  to fix user id, currently taking uid of the post user not the current user
   static String getRatingID(String userID, String postID) {
@@ -12,7 +13,9 @@ class RatingService {
 
   //update rating for the current post and current user
   static Future setRating(String userID, String postID, int rating) async {
-   collection.document(getRatingID(userID, postID)).updateData({'rating': rating});
+    collection.document(getRatingID(userID, postID)).setData({'userID': userID, 'postID': postID, 'rating': rating});
+
+   //collection.document(getRatingID(userID, postID)).updateData({'rating': rating});
   }
 
   //get the rating as integer for the current post and current user

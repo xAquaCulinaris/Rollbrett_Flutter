@@ -7,6 +7,7 @@ import 'homeScreenButton.dart';
 class HomeScreen extends StatelessWidget {
   final AuthService _auth = AuthService();
 
+
   void coursePreviewButton(BuildContext context) {
     Navigator.of(context).pushNamed('/course_preview');
   }

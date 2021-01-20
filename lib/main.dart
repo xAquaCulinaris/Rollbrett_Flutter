@@ -19,6 +19,7 @@ void main() {
       home: StreamProvider<User>.value(
         value: AuthService().user,
         child: Wrapper(),
+        catchError: (_,__) => null,
       ),
     ),
   );
