@@ -21,7 +21,6 @@ class _PostBottomBarState extends State<PostBottomBar> {
       height: MediaQuery.of(context).size.height/20,
       width: MediaQuery.of(context).size.width,
 
-      //TODO:: Fix scrolldirection to horizontal and add logik for rating
       child: RatingBar(widget.userID, widget.postID),
     );
   }

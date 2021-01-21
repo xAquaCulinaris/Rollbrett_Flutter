@@ -6,7 +6,6 @@ class RatingService {
 
 
   //return name of the document
-  //TODO:: need  to fix user id, currently taking uid of the post user not the current user
   static String getRatingID(String userID, String postID) {
     return userID + '_' + postID;
   }
