@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
@@ -27,7 +27,6 @@ class _RegisterViewState extends State<RegisterView> {
   String password = "";
   String passwordRepetition = "";
 
-  String error = '';
 
   void setEmail(String text) {
     email = text;
@@ -42,19 +41,27 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
 
+  void catchEmailError(Object err) {
+    setState(() {
+      isLoading = false;
+    });
+
+    showDialog(context: context, builder: (BuildContext context) {
+      return CustomMessageBox(
+        "Error",
+        "Account with this email already exists",
+        "Okay",
+      );
+    });
+  }
+
   //TODO::Need to check if email already exists, because stuck in loadingscreen
   void _registerButtonPressed() {
     if (_formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
       });
-      dynamic result = _auth.register(email, password, username);
-      if (result == null) {
-        setState(() {
-          error = 'something went wrong registering, maybe wrong email?';
-          isLoading = false;
-        });
-      }
+      dynamic result = _auth.register(email, password, username).catchError(catchEmailError);
     }
   }
 

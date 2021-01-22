@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/firebase/userService.dart';
 
@@ -6,7 +7,6 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static String userID;
-
 
   //Firebase auth changed and convert firebase user to normal user
   Stream<User> get user {
@@ -20,7 +20,7 @@ class AuthService {
     }
     return null;
 
-  //  return user != null ? User(user.uid) : null;
+    //  return user != null ? User(user.uid) : null;
   }
 
   Future signIn(String email, String password) async {
@@ -53,10 +53,8 @@ class AuthService {
       FirebaseUser user = result.user;
       await UserService(user.uid, username).updateUserData(username);
       return _convertUser(user);
-    } catch (e) {
-      print(e.toString());
-      print("Register failed");
-      return null;
+    } catch (signUpError) {
+      return Future.error("Error", StackTrace.fromString("User with this email already exists"));
     }
   }
 }
