@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Instagram/ownTheSpotProfileView.dart';
 import 'package:rollbrett_rottweil/Instagram/ownTheSpotView.dart';
 import 'package:rollbrett_rottweil/Instagram/ownTheSpotNewPostView.dart';
 
@@ -13,8 +14,8 @@ class OwnTheSpotTabBar extends StatelessWidget {
             bottom: TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.alt_route)),
-                Tab(icon: Icon(Icons.search)),
-                Tab(icon: Icon(Icons.camera)),
+                Tab(icon: Icon(Icons.camera_alt)),
+                Tab(icon: Icon(Icons.person)),
               ],
             ),
             title: Text('Rollbrett Rottweil'),
@@ -23,7 +24,7 @@ class OwnTheSpotTabBar extends StatelessWidget {
             children: [
               OwnTheSpotPostView(),
               OwnTheSpotNewPostView(),
-              OwnTheSpotNewPostView(),
+              OwnTheSpotProfileView(),
             ],
           ),
       ),
