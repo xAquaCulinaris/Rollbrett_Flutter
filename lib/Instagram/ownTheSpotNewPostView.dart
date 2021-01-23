@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/CoursePreview/videoListItem.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/video_widget.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rollbrett_rottweil/fonts/rollbrett__flutter_icons.dart';
@@ -36,7 +36,7 @@ class _OwnTheSpotNewPostViewState extends State<OwnTheSpotNewPostView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        video == null ? Icon(Rollbrett_Flutter.video_camera) :  VideoListItem(videoPlayerController:  VideoPlayerController.file(video), looping: true),
+        video == null ? Icon(Rollbrett_Flutter.video_camera) : VideoWidget(VideoPlayerController.file(video)),
         RoundedButton("Select Video", getVideo, 40, 20),
         RoundedButton("New Post", addPost, 40, 20),
       ],

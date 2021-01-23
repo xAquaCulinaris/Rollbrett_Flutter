@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/CoursePreview/videoListItem.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/video_widget.dart';
 import 'package:video_player/video_player.dart';
 import '../Class/obstacle.dart';
 
@@ -22,8 +22,9 @@ class DetailedObstacleView extends StatelessWidget {
             Text("Heigth: " + obstacle.height.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             Text("Height: " + obstacle.width.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
 
-            VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/270BoardSlide.mp4'), looping: false),
-            VideoListItem(videoPlayerController: VideoPlayerController.asset('videos/fsFlip_ParkDC.mp4'), looping: false),
+            VideoWidget(VideoPlayerController.asset('videos/270BoardSlide.mp4')),
+            SizedBox(height: 20),
+            VideoWidget(VideoPlayerController.asset('videos/fsFlip_ParkDC.mp4')),
           ],
         ),
     );
