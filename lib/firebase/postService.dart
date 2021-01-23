@@ -15,8 +15,7 @@ class PostService {
 
   List<Post> _postListConverter(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Post(doc.data['name'] ?? '', doc.data['uid'] ?? '',
-          doc.data['image'] ?? '', doc.data['video'] ?? '', doc.documentID);
+      return Post(doc.data['name'] ?? '', doc.data['uid'] ?? '', doc.data['video'] ?? '', doc.documentID);
     }).toList();
   }
 
@@ -26,7 +25,6 @@ class PostService {
 
     return await collection.document(uuid.v4()).setData(
       {
-        'image': 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
         'name': 'test',
         'uid': 'Mnza2qZ9hgb35HLVXf8Y3e1QDNu1',
         'video':

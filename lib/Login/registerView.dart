@@ -55,7 +55,6 @@ class _RegisterViewState extends State<RegisterView> {
     });
   }
 
-  //TODO::Need to check if email already exists, because stuck in loadingscreen
   void _registerButtonPressed() {
     if (_formKey.currentState.validate()) {
       setState(() {

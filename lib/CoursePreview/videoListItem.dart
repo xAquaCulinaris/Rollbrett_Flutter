@@ -40,6 +40,7 @@ class _VideoListItemState extends State<VideoListItem> {
     );
   }
 
+  //TODO:: fix memory leaks!!
   @override
   void dispose() {
     super.dispose();

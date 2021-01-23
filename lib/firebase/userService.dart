@@ -12,4 +12,6 @@ class UserService {
   Future updateUserData(String name) async {
     return await collection.document(uid).setData({'name': name, 'uid': uid});
   }
+
+
 }
