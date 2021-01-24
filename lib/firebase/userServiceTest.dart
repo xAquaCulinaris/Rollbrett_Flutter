@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
-class userServiceTest {
-  static final CollectionReference collection = Firestore.instance.collection('users');
+class UserServiceTest {
+  static final CollectionReference _collection = Firestore.instance.collection('users');
 
 
   static Future<String> getProfilePicture(String uid) async {
     String imageUrl;
-    await collection
+    await _collection
         .where(FieldPath.documentId, isEqualTo: uid)
         .getDocuments()
         .then((event) {
@@ -21,6 +21,10 @@ class userServiceTest {
     return imageUrl;
   }
 
+
+  static Future<bool> userNameExists(String name) async {
+    return (await _collection.where("name", isEqualTo: name).getDocuments()).documents.length > 0;
+  }
 
 
 }

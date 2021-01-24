@@ -6,6 +6,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
+import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
 class RegisterView extends StatefulWidget {
   final Function toggleShowLogin;
@@ -55,18 +56,33 @@ class _RegisterViewState extends State<RegisterView> {
     });
   }
 
-  void _registerButtonPressed() {
+  void _registerButtonPressed() async {
     if (_formKey.currentState.validate()) {
-      setState(() {
-        isLoading = true;
-      });
-      dynamic result = _auth.register(email, password, username).catchError(catchEmailError);
+
+      if (!await UserServiceTest.userNameExists(username)) {
+        setState(() {
+          isLoading = true;
+        });
+        dynamic result = _auth
+            .register(email, password, username)
+            .catchError(catchEmailError);
+      } else {
+        showDialog(context: context, builder: (BuildContext context) {
+          return CustomMessageBox(
+            "Error",
+            "Username already exists!",
+            "Okay",
+          );
+        });
+      }
     }
   }
 
   void _loginButtonPressed() {
     widget.toggleShowLogin();
   }
+
+
 
 
   Widget _getContainer() {
@@ -127,8 +143,7 @@ class _RegisterViewState extends State<RegisterView> {
       padding: EdgeInsets.all(8),
       child: TextFormField(
         //TODO:: better username validation
-        validator: (val) =>
-            val.length < 5 ? 'Username must be 4 characters long' : null,
+        validator: (val) => val.length < 4 ? 'Username must be 4 characters' : null,
         keyboardType: TextInputType.text,
         onChanged: (value) {
           setState(() {
