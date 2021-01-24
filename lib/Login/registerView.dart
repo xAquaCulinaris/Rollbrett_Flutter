@@ -21,6 +21,7 @@ class _RegisterViewState extends State<RegisterView> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+
   bool isLoading = false;
 
   String email = "";

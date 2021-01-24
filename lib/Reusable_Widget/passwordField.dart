@@ -14,13 +14,40 @@ class PasswordField extends StatefulWidget {
 class _PasswordFieldState extends State<PasswordField> {
   String password;
 
+
+  //TODO: needs to be imporeved!
+  String checkPassword() {
+    int counter = 0;
+    /*if(password != passwordRepetition)
+      return "Passwords dont match";*/
+    if(password.length < 6 || password.length > 16)
+      return "Password needs length needs to be inbetween 6 and 16";
+    else {
+      if(RegExp(r'.*[A-Z].*').hasMatch(password))
+        print("matches");
+        counter++;
+      if(RegExp(r'.*[a-z].*').hasMatch(password))
+        print("matches");
+        counter++;
+      if(RegExp(r".*[*.!@#$%^&(){}[]:;'<>,.?/~`_+-=|\\].*").hasMatch(password))
+        print("matches");
+        counter++;
+      if(RegExp(r".*[*.!@#$%^&(){}[]:;'<>,.?/~`_+-=|\\].*").hasMatch(password))
+        print("matches");
+        counter++;
+    }
+    print("matchs counter: " + counter.toString());
+    return counter >= 2 ? null : "Password must contain at least one upper case letter OR Digit OR special character";
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8),
       child: TextFormField(
         //TODO:: better password validation
-        validator: (val) => val.length < 6 ? 'Password must be 6 characters long' : null,
+        validator: (val) => checkPassword(),
         keyboardType: TextInputType.text,
         obscureText: true,
         onChanged: (value) {

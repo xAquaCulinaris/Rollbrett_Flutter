@@ -16,12 +16,13 @@ class _PostTopBarState extends State<PostTopBar> {
   String downloadedImage;
 
 
-  //TODO:: fix memory leak!!
   void _getImage() async {
       await FireStorageService.getImageFromUID(widget.uid).then((value) {
-        setState(() {
-          downloadedImage = value;
-        });
+        if(mounted) {
+          setState(() {
+            downloadedImage = value;
+          });
+        }
       });
   }
 
