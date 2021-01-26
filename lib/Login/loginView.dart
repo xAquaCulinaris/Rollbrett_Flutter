@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:rollbrett_rottweil/Login/registerView.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
@@ -24,8 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
   String error = '';
 
-  String email;
-  String password;
+  String email = '';
+  String password = '';
 
   void setEmail(String text) {
     email = text;
@@ -93,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                             function: setEmail,
                             labelText: "E-Mail",
                             icon: Icons.email),
-                        PasswordField(setPassword, 'Password'),
+                        PasswordField(setPassword, 'Password', false),
                         _getForgetPassword(),
                       ],
                     ),

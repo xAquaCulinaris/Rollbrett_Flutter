@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class EmailField extends StatefulWidget {
   String text;
@@ -23,7 +24,7 @@ class _EmailFieldState extends State<EmailField> {
       padding: EdgeInsets.all(8),
       child: TextFormField(
         //TODO:: better email validation
-        validator: (val) => val.isEmpty ? 'Enter an email' : null,
+        validator: (val) => EmailValidator.validate(widget.text) ? null : 'Enter a valid email',
         keyboardType: widget.keyLayout == null ? TextInputType.emailAddress : widget.keyLayout,
         onChanged: (value) {
           setState(() {

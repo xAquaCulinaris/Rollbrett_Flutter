@@ -124,8 +124,8 @@ class _RegisterViewState extends State<RegisterView> {
                             labelText: "E-mail",
                             icon: Icons.email),
                         _getUsername(),
-                        PasswordField(setPassword, 'Password'),
-                        PasswordField(setPasswordRep, 'Password Repetition'),
+                        PasswordField(setPassword, 'Password', true),
+                        PasswordField(setPasswordRep, 'Password Repetition', false),
                         RoundedButton(
                             "Register", _registerButtonPressed, 40, 20),
                         RoundedButton("Login", _loginButtonPressed, 40, 20)
