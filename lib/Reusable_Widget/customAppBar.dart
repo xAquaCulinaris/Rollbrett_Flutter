@@ -11,7 +11,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
     Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,14 +26,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
         ),
       ),
       child: Row(
-       // crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-              icon: Icon(
-                Icons.home,
-                size: 30,
-              ),
-              onPressed: () => navigateHomeScreen(context)),
+            icon: Icon(
+              Icons.home,
+              size: 30,
+            ),
+            onPressed: () => navigateHomeScreen(context),
+          ),
           Text(title, style: TextStyle(fontSize: 24)),
         ],
       ),
