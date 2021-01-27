@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/Instagram/ownTheSpotProfileView.dart';
-import 'package:rollbrett_rottweil/Instagram/ownTheSpotView.dart';
-import 'package:rollbrett_rottweil/Instagram/ownTheSpotNewPostView.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot//ownTheSpotProfileView.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotView.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotNewPostView.dart';
+import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 class OwnTheSpotTabBar extends StatelessWidget {
   @override
@@ -24,7 +25,7 @@ class OwnTheSpotTabBar extends StatelessWidget {
             children: [
               OwnTheSpotPostView(),
               OwnTheSpotNewPostView(),
-              OwnTheSpotProfileView(),
+              OwnTheSpotProfileView(AuthService.userID),
             ],
           ),
       ),

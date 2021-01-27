@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
-import 'package:rollbrett_rottweil/Instagram/ratingBar.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ratingBar.dart';
 
 class PostBottomBar extends StatefulWidget {
   final String userID;

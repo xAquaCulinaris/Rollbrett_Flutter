@@ -23,7 +23,6 @@ class _EmailFieldState extends State<EmailField> {
     return Padding(
       padding: EdgeInsets.all(8),
       child: TextFormField(
-        //TODO:: better email validation
         validator: (val) => EmailValidator.validate(widget.text) ? null : 'Enter a valid email',
         keyboardType: widget.keyLayout == null ? TextInputType.emailAddress : widget.keyLayout,
         onChanged: (value) {

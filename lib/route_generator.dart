@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/CoursePreview/detailedObstacleView.dart';
-import 'package:rollbrett_rottweil/Instagram/ownTheSpotTabBar.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotTabBar.dart';
 import 'package:rollbrett_rottweil/Login/Authenticate.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/profilePostView.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
 import 'package:rollbrett_rottweil/ErrorPage/errorPage.dart';
 import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
 
+import 'OwnTheSpot/postArguments.dart';
+
 
 
 class RouteGenerator {
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
@@ -35,6 +39,9 @@ class RouteGenerator {
 
       case '/detailed_view':
           return MaterialPageRoute(builder: (_) => DetailedObstacleView(args));
+
+      case '/profile_post_view':
+        return MaterialPageRoute(builder: (_) => ProfilePostView(args));
 
       default:
         return  MaterialPageRoute(builder: (_) => ErrorPage());

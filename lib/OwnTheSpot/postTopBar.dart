@@ -51,6 +51,7 @@ class _PostTopBarState extends State<PostTopBar> {
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.height / 35),
                   ),
+                  //TODO: navigate to profile, already found solution on stack overflow
                   FlatButton(
                     onPressed: () {},
                     child: Row(

@@ -19,6 +19,17 @@ class PostService {
     }).toList();
   }
 
+  static Post _convertPost(Map<String, dynamic> map, String postID) {
+    return Post(map['name'], map['uid'], map['video'], postID);
+  }
+  
+  static Future<Post> getPostFromID(String id) async {
+    DocumentSnapshot snapshot =
+        await Firestore.instance.document("posts/$id").get();
+
+    return _convertPost(snapshot.data, id);
+  }
+
   //create Post OR update  ist data if already exists
   static Future updatePostData() async {
     var uuid = Uuid();

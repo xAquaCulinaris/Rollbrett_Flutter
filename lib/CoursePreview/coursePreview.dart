@@ -8,7 +8,6 @@ import 'package:rollbrett_rottweil/CoursePreview/obstacleListViewItem.dart';
 import 'package:rollbrett_rottweil/CoursePreview/requirementsWidget.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/customAppBar.dart';
 
-import '../main.dart';
 
 class CoursePreview extends StatefulWidget {
   @override

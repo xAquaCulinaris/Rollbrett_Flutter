@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
-import 'package:rollbrett_rottweil/Instagram/postBottomBar.dart';
-import 'package:rollbrett_rottweil/Instagram/postTopBar.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/postBottomBar.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/postTopBar.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/video_widget.dart';
 import 'package:video_player/video_player.dart';
 

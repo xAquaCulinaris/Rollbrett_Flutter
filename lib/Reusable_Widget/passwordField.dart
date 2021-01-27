@@ -28,7 +28,7 @@ class _PasswordFieldState extends State<PasswordField> {
           if (RegExp(r".*[0-9].*").hasMatch(password)) counter++;
         }
       } else {
-        if (password.length < 6 || password.length > 16) {
+        if (password.length >= 6 && password.length < 16) {
           counter = 2;
         } else {
           return "Password length needs to be inbetween 6 and 16";

@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rollbrett_rottweil/Class/user.dart';
 
 class UserServiceTest {
-  static final CollectionReference _collection = Firestore.instance.collection('users');
-
+  static final CollectionReference _collection =
+      Firestore.instance.collection('users');
 
   static Future<String> getProfilePicture(String uid) async {
     String imageUrl;
@@ -21,10 +22,20 @@ class UserServiceTest {
     return imageUrl;
   }
 
-
   static Future<bool> userNameExists(String name) async {
     return (await _collection.where("name", isEqualTo: name).getDocuments()).documents.length > 0;
   }
 
 
+  static User _convertUser(Map<String, dynamic> map) {
+    return User(uid: map["uid"], name: map["name"]);
+  }
+
+
+  static Future<User> getUser(String uid) async {
+    DocumentSnapshot snapshot =
+        await Firestore.instance.document("users/$uid").get();
+
+    return _convertUser(snapshot.data);
+  }
 }

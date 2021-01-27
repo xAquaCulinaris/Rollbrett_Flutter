@@ -16,7 +16,7 @@ class AuthService {
   User _convertUser(FirebaseUser user) {
     if (user != null) {
       userID = user.uid;
-      return User(user.uid);
+      return User(uid: user.uid);
     }
     return null;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
-import 'package:rollbrett_rottweil/Instagram/post_list.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/post_list.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
 import 'package:provider/provider.dart';
 
