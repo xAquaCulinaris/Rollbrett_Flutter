@@ -17,7 +17,7 @@ class OwnTheSpotProfileView extends StatefulWidget {
 class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
   User user;
   String profilePicture;
-  final List<String> posts = [];
+  final List<String> posts = ["one", "two", "three", "one"];
 
   @override
   void initState() {
@@ -48,8 +48,8 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    return user != null
-        ? Container(
+    if (user != null) {
+      return Container(
             child: Column(
               children: [
                 Text(user.name),
@@ -58,33 +58,47 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
                   radius: MediaQuery.of(context).size.width * 0.105,
                   child: CircleAvatar(
                     radius: MediaQuery.of(context).size.width * 0.1,
-                    //TODO: fix error loading image
-                    backgroundImage: NetworkImage(profilePicture),
+                    backgroundImage: profilePicture == null ? null : NetworkImage(profilePicture),
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width ,
-                  width: MediaQuery.of(context).size.width,
-
-                  //TODO: fix displaying (dynamiclay and multiple rows)
+                Expanded(
                   child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
+                      scrollDirection: Axis.vertical,
+                      itemCount: posts.length.toDouble()/3.0 > posts.length~/3? posts.length~/3+1 : posts.length~/3,
                       itemBuilder: (context, index) {
-                        return ProfilePostTile(user.name, '4af623bc-133f-4525-be0f-acec62e824ba');
-                      /*  return ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              return ProfilePostTile();
-                            });*/
+                        return _horizontalListView(index);
                       }),
                 ),
               ],
             ),
-          )
-        : Loading();
+          );
+    } else {
+      return Loading();
+    }
   }
+
+  Widget _horizontalListView(int index) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.width / 3,
+      width: MediaQuery.of(context).size.width / 3,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: calculateGrid(index),
+          itemBuilder: (_, horizontalIndex) {
+            return ProfilePostTile(
+                user.name, '4af623bc-133f-4525-be0f-acec62e824ba');
+          }),
+    );
+  }
+
+  int calculateGrid(int index) {
+    int length = posts.length;
+    int mod = length % 3;
+
+      if(length.toDouble()~/3.0 == index)
+        return mod;
+
+    return 3;
+  }
+
 }

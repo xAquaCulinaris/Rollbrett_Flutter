@@ -14,8 +14,6 @@ class ProfilePostTile extends StatefulWidget {
 class _ProfilePostTileState extends State<ProfilePostTile> {
   @override
   Widget build(BuildContext context) {
-    print("name: " + widget.name);
-    print("id: " + widget.id);
 
     return InkWell(
       onTap: () {

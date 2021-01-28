@@ -20,9 +20,11 @@ class _RatingBarState extends State<RatingBar> {
 
   void setRating() async {
     int value = await RatingService.getRating(AuthService.userID, widget.postID);
-    setState(() {
-      userRating = value;
-    });
+    if(mounted) {
+      setState(() {
+        userRating = value;
+      });
+    }
   }
 
   @override
