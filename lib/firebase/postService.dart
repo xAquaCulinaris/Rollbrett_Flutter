@@ -19,6 +19,18 @@ class PostService {
     }).toList();
   }
 
+
+  //TODO get all posts from user
+  static Future<List<Post>> getAllPostFromUser(String uid) async{
+    var result = (await collection.where('uid', isEqualTo: uid).getDocuments()).documents;
+    List<Post> converted = [];
+    for(int i = 0; i< result.length; i++) {
+      converted.add(_convertPost(result[i].data, result[i].documentID));
+    }
+    print("lenght: " + converted.length.toString());
+    return converted;
+  }
+
   static Post _convertPost(Map<String, dynamic> map, String postID) {
     return Post(map['name'], map['uid'], map['video'], postID);
   }

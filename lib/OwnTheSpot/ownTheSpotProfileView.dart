@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Class/post.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/profilePostTile.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
+import 'package:rollbrett_rottweil/firebase/postService.dart';
 import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
 class OwnTheSpotProfileView extends StatefulWidget {
@@ -17,13 +19,30 @@ class OwnTheSpotProfileView extends StatefulWidget {
 class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
   User user;
   String profilePicture;
+
+  //TODO: fetch posts
+  List<Post> postss = [];
   final List<String> posts = ["one", "two", "three", "one"];
 
   @override
   void initState() {
     _getUser(widget.uid);
     _getImage();
+    _getPosts(widget.uid);
     super.initState();
+  }
+
+  void _getPosts(String uid) async {
+    print("test1");
+    await PostService.getAllPostFromUser(uid).then((value) {
+      print("test2");
+      if(mounted)
+        print("test3");
+        setState(() {
+          print("setted");
+          postss = value;
+        });
+    });
   }
 
   void _getUser(String uid) async {
@@ -62,9 +81,9 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
+                  child: postss == null ? Text("no posts") :ListView.builder(
                       scrollDirection: Axis.vertical,
-                      itemCount: posts.length.toDouble()/3.0 > posts.length~/3? posts.length~/3+1 : posts.length~/3,
+                      itemCount: postss.length.toDouble()/3.0 > posts.length~/3? posts.length~/3+1 : posts.length~/3,
                       itemBuilder: (context, index) {
                         return _horizontalListView(index);
                       }),
@@ -86,7 +105,7 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
           itemCount: calculateGrid(index),
           itemBuilder: (_, horizontalIndex) {
             return ProfilePostTile(
-                user.name, '4af623bc-133f-4525-be0f-acec62e824ba');
+                user.name, postss[index].postID);
           }),
     );
   }
