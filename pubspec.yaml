@@ -25,19 +25,24 @@ dependencies:
     sdk: flutter
   # chewie: ^0.9.8
   video_player: ^0.9.0
+  #scan for phone shake
   shake: ^0.1.0
 
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+4
   firebase_storage: ^3.1.6
   provider: ^3.1.0
+  #loading animations
   flutter_spinkit: "^4.0.0"
+  #uuid generator
   uuid: ^2.2.2
   image_picker: ^0.6.7+21
   email_validator: '^1.0.5'
-
+  #get thumbnail from video
+  video_thumbnail: ^0.2.5+1
+  #get path to save files on ios and android
+  path_provider: ^1.6.27
   # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
 dev_dependencies:

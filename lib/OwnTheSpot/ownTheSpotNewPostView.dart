@@ -7,20 +7,32 @@ import 'package:rollbrett_rottweil/firebase/postService.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rollbrett_rottweil/fonts/rollbrett__flutter_icons.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:path_provider/path_provider.dart';
 
 class OwnTheSpotNewPostView extends StatefulWidget {
   @override
   _OwnTheSpotNewPostViewState createState() => _OwnTheSpotNewPostViewState();
 }
 
-
 class _OwnTheSpotNewPostViewState extends State<OwnTheSpotNewPostView> {
   File video;
 
-  void addPost() {
-    PostService.updatePostData();
+  Future<String> createThumbnail() async {
+    final path = await VideoThumbnail.thumbnailFile(
+        video:
+            "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+        thumbnailPath: (await getTemporaryDirectory()).path,
+        imageFormat: ImageFormat.JPEG);
+    return path;
   }
 
+  void addPost() async {
+    String path = await createThumbnail();
+    File file = File(path);
+    String url = await PostService.uploadThumbnail(file);
+    PostService.updatePostData(url);
+  }
 
   Future getVideo() async {
     final media = await ImagePicker().getVideo(source: ImageSource.gallery);
@@ -36,7 +48,9 @@ class _OwnTheSpotNewPostViewState extends State<OwnTheSpotNewPostView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        video == null ? Icon(Rollbrett_Flutter.video_camera) : VideoWidget(VideoPlayerController.file(video)),
+        video == null
+            ? Icon(Rollbrett_Flutter.video_camera)
+            : VideoWidget(VideoPlayerController.file(video)),
         RoundedButton("Select Video", getVideo, 40, 20),
         RoundedButton("New Post", addPost, 40, 20),
       ],
