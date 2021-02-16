@@ -3,12 +3,12 @@ import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/CoursePreview/detailedObstacleView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotTabBar.dart';
 import 'package:rollbrett_rottweil/Login/Authenticate.dart';
-import 'package:rollbrett_rottweil/OwnTheSpot/profilePostView.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostView.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
 import 'package:rollbrett_rottweil/ErrorPage/errorPage.dart';
 import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
 
-import 'OwnTheSpot/postArguments.dart';
+import 'OwnTheSpot/ProfileView/postArguments.dart';
 
 
 

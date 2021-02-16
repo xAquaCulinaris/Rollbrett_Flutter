@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/OwnTheSpot/postArguments.dart';
+import 'package:rollbrett_rottweil/Class/post.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/postArguments.dart';
 
 class ProfilePostTile extends StatefulWidget {
-  final String name;
-  final String id;
+  final Post post;
 
-  ProfilePostTile(this.name, this.id);
+  ProfilePostTile(this.post);
 
   @override
   _ProfilePostTileState createState() => _ProfilePostTileState();
@@ -20,7 +20,7 @@ class _ProfilePostTileState extends State<ProfilePostTile> {
         Navigator.pushNamed(
           context,
           '/profile_post_view',
-          arguments: PostArguments(widget.name, widget.id)
+          arguments: PostArguments(widget.post)
         );
       },
       //TODO: add preview image to post, so you can display this here

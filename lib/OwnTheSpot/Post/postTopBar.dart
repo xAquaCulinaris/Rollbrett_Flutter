@@ -43,7 +43,7 @@ class _PostTopBarState extends State<PostTopBar> {
               ),
             ),
             FlatButton(
-              onPressed: () {},
+              onPressed: () {DefaultTabController.of(context).animateTo(2);},
               child: Column(
                 children: [
                   Text(
@@ -51,7 +51,7 @@ class _PostTopBarState extends State<PostTopBar> {
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.height / 35),
                   ),
-                  //TODO: navigate to profile, already found solution on stack overflow
+                  //TODO: navigate to profile AND PASS DATA!
                   FlatButton(
                     onPressed: () {},
                     child: Row(

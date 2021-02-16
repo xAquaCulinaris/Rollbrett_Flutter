@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/OwnTheSpot//ownTheSpotProfileView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotNewPostView.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
+
+import 'ProfileView/ownTheSpotProfileView.dart';
 
 class OwnTheSpotTabBar extends StatelessWidget {
   @override

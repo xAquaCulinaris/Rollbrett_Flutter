@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
-import 'package:rollbrett_rottweil/OwnTheSpot/postTile.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/Post/postTile.dart';
 
 class PostList extends StatefulWidget {
   @override

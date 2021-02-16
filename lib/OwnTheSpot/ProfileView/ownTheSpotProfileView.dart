@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
-import 'package:rollbrett_rottweil/OwnTheSpot/profilePostTile.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostTile.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
@@ -20,9 +20,8 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
   User user;
   String profilePicture;
 
-  //TODO: fetch posts
-  List<Post> postss = [];
-  final List<String> posts = ["one", "two", "three", "one"];
+  List<Post> posts = [];
+
 
   @override
   void initState() {
@@ -33,14 +32,10 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
   }
 
   void _getPosts(String uid) async {
-    print("test1");
     await PostService.getAllPostFromUser(uid).then((value) {
-      print("test2");
       if(mounted)
-        print("test3");
         setState(() {
-          print("setted");
-          postss = value;
+          posts = value;
         });
     });
   }
@@ -81,9 +76,9 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
                   ),
                 ),
                 Expanded(
-                  child: postss == null ? Text("no posts") :ListView.builder(
+                  child: posts == null ? Text("no posts") :ListView.builder(
                       scrollDirection: Axis.vertical,
-                      itemCount: postss.length.toDouble()/3.0 > posts.length~/3? posts.length~/3+1 : posts.length~/3,
+                      itemCount: posts.length.toDouble()/3.0 > posts.length~/3? posts.length~/3+1 : posts.length~/3,
                       itemBuilder: (context, index) {
                         return _horizontalListView(index);
                       }),
@@ -104,8 +99,9 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
           scrollDirection: Axis.horizontal,
           itemCount: calculateGrid(index),
           itemBuilder: (_, horizontalIndex) {
-            return ProfilePostTile(
-                user.name, postss[index].postID);
+            //TODO: index is always 0
+            print("index: " + horizontalIndex.toString());
+            return ProfilePostTile(posts[horizontalIndex]);
           }),
     );
   }
