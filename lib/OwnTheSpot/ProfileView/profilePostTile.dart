@@ -23,8 +23,7 @@ class _ProfilePostTileState extends State<ProfilePostTile> {
           arguments: PostArguments(widget.post)
         );
       },
-      //TODO: add preview image to post, so you can display this here
-      child: Image(image: AssetImage('assets/hubba.jpg'), height: MediaQuery.of(context).size.width / 3, width: MediaQuery.of(context).size.width / 3,),
+      child: Image(image: NetworkImage(widget.post.thumbnail), height: MediaQuery.of(context).size.width / 3, width: MediaQuery.of(context).size.width / 3,),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
 import 'package:uuid/uuid.dart';
 
@@ -21,7 +20,7 @@ class PostService {
   List<Post> _postListConverter(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Post(doc.data['name'] ?? '', doc.data['uid'] ?? '',
-          doc.data['video'] ?? '', doc.documentID);
+          doc.data['video'] ?? '', doc.documentID, doc.data['thumbnail']);
     }).toList();
   }
 
@@ -39,7 +38,7 @@ class PostService {
   }
 
   static Post _convertPost(Map<String, dynamic> map, String postID) {
-    return Post(map['name'], map['uid'], map['video'], postID);
+    return Post(map['name'], map['uid'], map['video'], postID, map['thumbnail']);
   }
 
   static Future<Post> getPostFromID(String id) async {

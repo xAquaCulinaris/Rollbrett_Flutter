@@ -3,8 +3,7 @@ class Post {
   final String username;
   final String video;
   final String postID;
+  final String thumbnail;
 
-  Post(this.username, this.uid, this.video, this.postID);
-
-//TODO:: add thumbnail field
+  Post(this.username, this.uid, this.video, this.postID, this.thumbnail);
 }

@@ -99,7 +99,6 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
           scrollDirection: Axis.horizontal,
           itemCount: calculateGrid(index),
           itemBuilder: (_, horizontalIndex) {
-            //TODO: index is always 0
             print("index: " + horizontalIndex.toString());
             return ProfilePostTile(posts[horizontalIndex]);
           }),
