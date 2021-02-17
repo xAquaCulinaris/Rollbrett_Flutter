@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class UsernameField extends StatefulWidget {
   String username;
+  Function func;
 
-  UsernameField(this.username);
+  UsernameField(this.username, this.func);
 
   @override
   _UsernameFieldState createState() => _UsernameFieldState();
@@ -19,9 +20,7 @@ class _UsernameFieldState extends State<UsernameField> {
         validator: (val) => val.length < 4 ? 'Username must be 4 characters' : null,
         keyboardType: TextInputType.text,
         onChanged: (value) {
-          setState(() {
-            widget.username = value;
-          });
+         widget.func(value);
         },
         decoration: InputDecoration(
           prefixIcon: Icon(

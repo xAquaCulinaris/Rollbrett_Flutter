@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 
 class UserServiceTest {
@@ -28,7 +27,7 @@ class UserServiceTest {
 
 
   static User _convertUser(Map<String, dynamic> map) {
-    return User(uid: map["uid"], name: map["name"]);
+    return User(uid: map["uid"], name: map["name"], profilePicture: map['profilePic']);
   }
 
 
@@ -38,4 +37,15 @@ class UserServiceTest {
 
     return _convertUser(snapshot.data);
   }
+
+  static void updatePassword(String uid, String pass) async {
+
+  }
+
+  //update rating for the current post and current user
+  static void updateUser(String uid, String name, String profilePic) async {
+    _collection.document(uid).setData({'name': name, 'profilePic': profilePic});
+  }
+
+
 }

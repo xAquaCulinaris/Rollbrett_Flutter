@@ -1,4 +1,6 @@
 class Post {
+  //TODO: remove username because its not changeable
+
   final String uid;
   final String username;
   final String video;

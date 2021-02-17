@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePicture.dart';
-import 'package:rollbrett_rottweil/Reusable_Widget/customAppBar.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
@@ -16,14 +15,16 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
+  final _formKey = GlobalKey<FormState>();
 
   String uid = AuthService.userID;
   User user;
+  bool changedPicture = false;
   String profilePicture;
   String username;
   String password;
 
-
+  //TODO: need to fix image upload (and image change)
 
   @override
   void initState() {
@@ -50,12 +51,35 @@ class _EditProfileViewState extends State<EditProfileView> {
       }
     });
   }
-  void _saveButtonPressed() {
+
+  void _saveButtonPressed() async{
+    bool error = false;
+    if (_formKey.currentState.validate()) {
+      if(username != user.name) {
+        if(await UserServiceTest.userNameExists(username)) {
+          error = true;
+        }
+      }
+    } else {
+      error = true;
+    }
+
+    if(!error) {
+      UserServiceTest.updateUser(uid,username, changedPicture ? profilePicture : 'avatar.png');
+    }
 
   }
 
+  void _setUsername(String value) {
+    if (mounted) {
+      setState(() {
+        username = value;
+      });
+    }
+  }
+
   void _setPassword(String value) {
-    if(mounted) {
+    if (mounted) {
       setState(() {
         password = value;
       });
@@ -65,15 +89,22 @@ class _EditProfileViewState extends State<EditProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Edit profile'),),
-      body:  user == null ? Loading() : Column(
-          children: [
-            ProfilePicture(profilePicture),
-            UsernameField(user.name),
-            PasswordField(_setPassword, 'Password', true),
-            RoundedButton('Save', _saveButtonPressed, 40, 20),
-          ],
-      )
+      appBar: AppBar(
+        title: Text('Edit profile'),
+      ),
+      body: Form(
+        key: _formKey,
+        child: user == null
+            ? Loading()
+            : Column(
+                children: [
+                  ProfilePicture(profilePicture),
+                  UsernameField(user.name, _setUsername),
+                  PasswordField(_setPassword, 'Password', true),
+                  RoundedButton('Save', _saveButtonPressed, 40, 20),
+                ],
+              ),
+      ),
     );
   }
 }

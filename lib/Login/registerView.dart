@@ -22,14 +22,12 @@ class _RegisterViewState extends State<RegisterView> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
-
   bool isLoading = false;
 
   String email = "";
   String username = "";
   String password = "";
   String passwordRepetition = "";
-
 
   void setEmail(String text) {
     email = text;
@@ -43,24 +41,24 @@ class _RegisterViewState extends State<RegisterView> {
     passwordRepetition = text;
   }
 
-
   void catchEmailError(Object err) {
     setState(() {
       isLoading = false;
     });
 
-    showDialog(context: context, builder: (BuildContext context) {
-      return CustomMessageBox(
-        "Error",
-        "Account with this email already exists",
-        "Okay",
-      );
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomMessageBox(
+            "Error",
+            "Account with this email already exists",
+            "Okay",
+          );
+        });
   }
 
   void _registerButtonPressed() async {
     if (_formKey.currentState.validate()) {
-
       if (!await UserServiceTest.userNameExists(username)) {
         setState(() {
           isLoading = true;
@@ -69,13 +67,15 @@ class _RegisterViewState extends State<RegisterView> {
             .register(email, password, username)
             .catchError(catchEmailError);
       } else {
-        showDialog(context: context, builder: (BuildContext context) {
-          return CustomMessageBox(
-            "Error",
-            "Username already exists!",
-            "Okay",
-          );
-        });
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomMessageBox(
+                "Error",
+                "Username already exists!",
+                "Okay",
+              );
+            });
       }
     }
   }
@@ -84,8 +84,13 @@ class _RegisterViewState extends State<RegisterView> {
     widget.toggleShowLogin();
   }
 
-
-
+  void _setUsername(String value) {
+    if (mounted) {
+      setState(() {
+        username = value;
+      });
+    }
+  }
 
   Widget _getContainer() {
     return Row(
@@ -124,9 +129,10 @@ class _RegisterViewState extends State<RegisterView> {
                             function: setEmail,
                             labelText: "E-mail",
                             icon: Icons.email),
-                        UsernameField(username),
+                        UsernameField(username, _setUsername),
                         PasswordField(setPassword, 'Password', true),
-                        PasswordField(setPasswordRep, 'Password Repetition', false),
+                        PasswordField(
+                            setPasswordRep, 'Password Repetition', false),
                         RoundedButton(
                             "Register", _registerButtonPressed, 40, 20),
                         RoundedButton("Login", _loginButtonPressed, 40, 20)
@@ -140,36 +146,37 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return isLoading? Loading() : Scaffold(
-      resizeToAvoidBottomPadding: false,
-      backgroundColor: Color(0xfff2f3f7),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: const Radius.circular(70),
-                  bottomRight: const Radius.circular(70),
+    return isLoading
+        ? Loading()
+        : Scaffold(
+            resizeToAvoidBottomPadding: false,
+            backgroundColor: Color(0xfff2f3f7),
+            body: Stack(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: MediaQuery.of(context).size.width,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: const Radius.circular(70),
+                        bottomRight: const Radius.circular(70),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LogoText(),
+                    _getContainer(),
+                  ],
+                )
+              ],
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LogoText(),
-              _getContainer(),
-            ],
-          )
-        ],
-      ),
-    );
+          );
   }
 }

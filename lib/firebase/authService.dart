@@ -50,7 +50,8 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await UserService(user.uid, username).updateUserData(username);
+      //TODO; add dynamic picture
+      await UserService(user.uid, username, 'https://firebasestorage.googleapis.com/v0/b/rollbrett-rottweil-flutter.appspot.com/o/thumbnails%2F1a817c2a-0291-4af6-af22-4904fa72c12c?alt=media&token=1dec4a49-b478-4807-94c1-301bcc7f1727').updateUserData(username);
       return _convertUser(user);
     } catch (signUpError) {
       return Future.error("Error", StackTrace.fromString("User with this email already exists"));
