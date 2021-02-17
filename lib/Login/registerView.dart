@@ -5,6 +5,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/usernameField.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
@@ -123,7 +124,7 @@ class _RegisterViewState extends State<RegisterView> {
                             function: setEmail,
                             labelText: "E-mail",
                             icon: Icons.email),
-                        _getUsername(),
+                        UsernameField(username),
                         PasswordField(setPassword, 'Password', true),
                         PasswordField(setPasswordRep, 'Password Repetition', false),
                         RoundedButton(
@@ -139,28 +140,6 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Widget _getUsername() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        //TODO:: better username validation
-        validator: (val) => val.length < 4 ? 'Username must be 4 characters' : null,
-        keyboardType: TextInputType.text,
-        onChanged: (value) {
-          setState(() {
-            username = value;
-          });
-        },
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            Icons.person,
-            color: Colors.grey,
-          ),
-          labelText: 'Username',
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -12,15 +12,17 @@ class HomeScreenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       color: Colors.grey,
-      onPressed: () {func(context);},
+      onPressed: () {
+        func(context);
+      },
       textColor: Colors.white,
       padding: const EdgeInsets.all(0.0),
       child: Container(
-          padding: const EdgeInsets.all(10.0),
-          height: MediaQuery.of(context).size.height / 3,
-          width: MediaQuery.of(context).size.width / 2.4,
-          child: Center(
-              child: Column(
+        padding: const EdgeInsets.all(10.0),
+        height: MediaQuery.of(context).size.height / 3,
+        width: MediaQuery.of(context).size.width / 2.4,
+        child: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
@@ -30,7 +32,9 @@ class HomeScreenButton extends StatelessWidget {
               ),
               Text(text, style: TextStyle(fontSize: 20)),
             ],
-          ))),
+          ),
+        ),
+      ),
     );
   }
 }

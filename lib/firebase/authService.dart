@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/firebase/userService.dart';
 

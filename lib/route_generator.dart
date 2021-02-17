@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/CoursePreview/detailedObstacleView.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/EditProfile/editProfileView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotTabBar.dart';
 import 'package:rollbrett_rottweil/Login/Authenticate.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostView.dart';
@@ -42,6 +43,9 @@ class RouteGenerator {
 
       case '/profile_post_view':
         return MaterialPageRoute(builder: (_) => ProfilePostView(args));
+
+      case '/edit_profile_view':
+        return MaterialPageRoute(builder: (_) => EditProfileView());
 
       default:
         return  MaterialPageRoute(builder: (_) => ErrorPage());
