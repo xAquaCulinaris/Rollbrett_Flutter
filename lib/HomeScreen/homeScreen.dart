@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/HomeScreen/drawerButton.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 import '../fonts/rollbrett__flutter_icons.dart';
@@ -6,7 +7,6 @@ import 'homeScreenButton.dart';
 
 class HomeScreen extends StatelessWidget {
   final AuthService _auth = AuthService();
-
 
   void coursePreviewButton(BuildContext context) {
     Navigator.of(context).pushNamed('/course_preview');
@@ -24,23 +24,30 @@ class HomeScreen extends StatelessWidget {
     Navigator.of(context).pushNamed('/a');
   }
 
+  void logOutButton() async {
+    await _auth.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          Row(children: [
-            IconButton(
-                icon: Icon(Icons.logout),
-                onPressed: () async {
-                  await _auth.signOut();
-                }),
-            Text('Logout'),
-          ]),
-        ],
         title: Text("Rollbrett Rottweil"),
-        bottom: null, //maybe implement instagramm tabbar
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
+              child: Text("Settings"),
+            ),
+            DrawerButton(Icons.account_circle, "Edit", logOutButton),
+            DrawerButton(Icons.logout, "Logout", logOutButton)
+          ],
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -12,8 +12,7 @@ class _PostListState extends State<PostList> {
   @override
   Widget build(BuildContext context) {
     final posts = Provider.of<List<Post>>(context) ?? [];
-
-
+    
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {

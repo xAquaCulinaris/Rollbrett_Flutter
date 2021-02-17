@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePicture.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostTile.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
@@ -66,15 +67,8 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
       return Container(
             child: Column(
               children: [
+                ProfilePicture(profilePicture),
                 Text(user.name),
-                CircleAvatar(
-                  backgroundColor: Colors.black,
-                  radius: MediaQuery.of(context).size.width * 0.105,
-                  child: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.1,
-                    backgroundImage: profilePicture == null ? null : NetworkImage(profilePicture),
-                  ),
-                ),
                 Expanded(
                   child: posts == null ? Text("no posts") :ListView.builder(
                       scrollDirection: Axis.vertical,
