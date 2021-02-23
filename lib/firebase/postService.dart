@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
@@ -19,7 +18,7 @@ class PostService {
 
   List<Post> _postListConverter(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Post(doc.data['name'] ?? '', doc.data['uid'] ?? '',
+      return Post(doc.data['uid'] ?? '',
           doc.data['video'] ?? '', doc.documentID, doc.data['thumbnail']);
     }).toList();
   }
@@ -38,7 +37,7 @@ class PostService {
   }
 
   static Post _convertPost(Map<String, dynamic> map, String postID) {
-    return Post(map['name'], map['uid'], map['video'], postID, map['thumbnail']);
+    return Post(map['uid'], map['video'], postID, map['thumbnail']);
   }
 
   static Future<Post> getPostFromID(String id) async {
@@ -57,13 +56,12 @@ class PostService {
     return url;
   }
 
-  //create Post OR update  ist data if already exists
+  //create Post OR update data if already exists
   static Future updatePostData(String thumbnailUrl) async {
     var uuid = Uuid();
 
     return await collection.document(uuid.v4()).setData(
       {
-        'name': 'test',
         'uid': 'Mnza2qZ9hgb35HLVXf8Y3e1QDNu1',
         'video':
             'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',

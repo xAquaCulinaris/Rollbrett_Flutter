@@ -6,8 +6,6 @@ class FireStorageService extends ChangeNotifier {
   FireStorageService();
 
 
-
-
   static Future<String> getImageFromUID(String uid) async {
     return await UserServiceTest.getProfilePicture(uid);
   }

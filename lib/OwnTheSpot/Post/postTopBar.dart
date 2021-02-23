@@ -1,12 +1,12 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
+import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
 class PostTopBar extends StatefulWidget {
-  final String username;
   final String uid;
 
-  PostTopBar(this.username, this.uid);
+  PostTopBar(this.uid);
 
   @override
   _PostTopBarState createState() => _PostTopBarState();
@@ -14,7 +14,17 @@ class PostTopBar extends StatefulWidget {
 
 class _PostTopBarState extends State<PostTopBar> {
   String downloadedImage;
+  String username = "";
 
+  void _getUsername() async {
+    await UserServiceTest.getUsername(widget.uid).then((value) {
+      if(mounted) {
+        setState(() {
+          username = value;
+        });
+      }
+    });
+  }
 
   void _getImage() async {
       await FireStorageService.getImageFromUID(widget.uid).then((value) {
@@ -29,6 +39,7 @@ class _PostTopBarState extends State<PostTopBar> {
   @override
   Widget build(BuildContext context) {
     _getImage();
+    _getUsername();
     return Container(
       child: Padding(
         padding: EdgeInsets.all(10.0),
@@ -47,7 +58,7 @@ class _PostTopBarState extends State<PostTopBar> {
               child: Column(
                 children: [
                   Text(
-                    widget.username,
+                    username,
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.height / 35),
                   ),

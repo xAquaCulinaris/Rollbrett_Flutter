@@ -22,14 +22,23 @@ class UserServiceTest {
   }
 
   static Future<bool> userNameExists(String name) async {
-    return (await _collection.where("name", isEqualTo: name).getDocuments()).documents.length > 0;
+    return (await _collection.where("name", isEqualTo: name).getDocuments())
+            .documents
+            .length >
+        0;
   }
-
 
   static User _convertUser(Map<String, dynamic> map) {
-    return User(uid: map["uid"], name: map["name"], profilePicture: map['profilePic']);
+    return User(
+        uid: map["uid"], name: map["name"], profilePicture: map['profilePic']);
   }
 
+  static Future<String> getUsername(String uid) async {
+    DocumentSnapshot snapshot =
+    await Firestore.instance.document("users/$uid").get();
+
+    return _convertUser(snapshot.data).name;
+  }
 
   static Future<User> getUser(String uid) async {
     DocumentSnapshot snapshot =
@@ -38,14 +47,10 @@ class UserServiceTest {
     return _convertUser(snapshot.data);
   }
 
-  static void updatePassword(String uid, String pass) async {
-
-  }
+  static void updatePassword(String uid, String pass) async {}
 
   //update rating for the current post and current user
   static void updateUser(String uid, String name, String profilePic) async {
     _collection.document(uid).setData({'name': name, 'profilePic': profilePic});
   }
-
-
 }

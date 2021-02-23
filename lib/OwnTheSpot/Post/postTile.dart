@@ -13,14 +13,10 @@ class PostTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("PostUID: " + post.postID);
-    print("UserID: " + post.uid);
-    print("Username: " + post.username);
-
     return Container(
       child: Column(
         children: [
-          PostTopBar(post.username, post.uid),
+          PostTopBar(post.uid),
          // VideoWidget(VideoPlayerController.network(post.video)),
           VideoWidget(VideoPlayerController.asset('videos/270BoardSlide.mp4')),
           PostBottomBar(post.uid, post.postID),
