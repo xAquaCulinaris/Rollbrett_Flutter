@@ -1,32 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
-import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
 import 'package:rollbrett_rottweil/Class/skateDiceTricks.dart';
+import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDices.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceExpandableCheckBox.dart';
 
 class SkateDiceConfig extends StatefulWidget {
-  final List<SkateDicePlayer> players;
-
-  SkateDiceConfig(this.players);
-
   @override
   _SkateDiceConfigState createState() => _SkateDiceConfigState();
 }
 
 class _SkateDiceConfigState extends State<SkateDiceConfig> {
   List<ObstacleType> obstacleTypes = ObstacleType.values;
-  List<SkateDiceObstacles> allObstacles = SkateDiceObstacles.getObstacles();
+//  List<SkateDiceObstacles> allObstacles = SkateDiceObstacles.getObstacles();
 
-  var obstacleMap = <Map>[];
+ // var obstacleMap = <Map>[];
 
 
   @override
   void initState() {
     super.initState();
-    print("init");
 
-    for (int i = 0; i < obstacleTypes.length; i++) {
+    /*for (int i = 0; i < obstacleTypes.length; i++) {
       var map = {};
 
 
@@ -51,7 +46,7 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
     }
 
 
-    print(obstacleMap);
+    print(obstacleMap);*/
   }
 
 
@@ -69,7 +64,7 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
                 itemCount: obstacleTypes.length,
                 itemBuilder: (BuildContext context, int index) =>
                 //_dropDownList(obstacleTypes[index], index),
-                SkateDiceExpandableCheckBox(obstacleMap, index)
+                SkateDiceExpandableCheckBox(index)
             ),
 
 
@@ -78,7 +73,7 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
                 alignment: FractionalOffset.bottomCenter,
                 child: Padding(
                     padding: EdgeInsets.only(bottom: 10.0),
-                    child: FloatingActionButton(onPressed: _startGame, child: Icon(Icons.navigate_next, size: 50,),),
+                    child: FloatingActionButton(onPressed: null/*_startGame*/, child: Icon(Icons.navigate_next, size: 50,),),
                 ),
               ),
             ),
@@ -88,7 +83,7 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
   }
 
 
-  void _startGame() {
+  /*void _startGame() {
     List<SkateDiceObstacles> obstacleList = [];
     List<SkateDiceTricks> obstacleTricks = [];
 
@@ -97,26 +92,28 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
 
 
 
-
-    for (int x = 0; x < obstacleMap.length; x++) {
+    for (int x = 0; x < SkateDiceModelController.of(context).skateDiceMap.length; x++) {
+      //TODO when no is selected disable checkbox
       //need to look if at least one children ist checked
-      if(obstacleMap[x]['isChecked'] == true) {
+      if(SkateDiceModelController.of(context).skateDiceMap[x]['isChecked'] == true) {
         //loop trough all tricks and add them
         for (int z = 0; z < allTricks.length; z++) {
-          var test1 = obstacleMap[x]['obstacleType'];
+          var test1 = SkateDiceModelController.of(context).skateDiceMap[x]['obstacleType'];
           var test2 = allTricks[z].obstacleType.toString();
 
           if (test1 == test2) {
             obstacleTricks.add(allTricks[z]);
+            SkateDiceModelController.of(context).obstacleTricks.add(allTricks[z]);
           }
         }
 
         //loop through all obstacles and add them if 'isChecked' is true
-        for (int y = 0; y < obstacleMap[x]['itemCount']; y++) {
-          if(obstacleMap[x]['obstacles'][y]['isChecked']) {
+        for (int y = 0; y < SkateDiceModelController.of(context).skateDiceMap[x]['itemCount']; y++) {
+          if(SkateDiceModelController.of(context).skateDiceMap[x]['obstacles'][y]['isChecked']) {
             for(SkateDiceObstacles toAdd in allObstacle) {
-              if(toAdd.name == obstacleMap[x]['obstacles'][y]['obstacleName']) {
+              if(toAdd.name == SkateDiceModelController.of(context).skateDiceMap[x]['obstacles'][y]['obstacleName']) {
                 obstacleList.add(toAdd);
+                SkateDiceModelController.of(context).obstacleList.add(toAdd);
               }
             }
           }
@@ -124,12 +121,11 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
       }
     }
 
-
-
+  //TODO FIx PLAYER LIST
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SkateDices(widget.players, obstacleList, obstacleTricks)),
+      MaterialPageRoute(builder: (context) => SkateDices(SkateDiceModelController.of(context).players, SkateDiceModelController.of(context).obstacleList, SkateDiceModelController.of(context).obstacleTricks)),
     );
-  }
+  }*/
 }
 

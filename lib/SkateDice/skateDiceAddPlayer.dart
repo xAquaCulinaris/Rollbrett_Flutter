@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/customAppBar.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
+import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceConfig.dart';
 
 class SkateDiceAddPlayer extends StatefulWidget {
@@ -19,7 +20,9 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
   void _nextPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SkateDiceConfig(players)),
+     //TODO FIX?
+     // MaterialPageRoute(builder: (context) => SkateDiceConfig(players)),
+      MaterialPageRoute(builder: (context) => SkateDiceConfig()),
     );
   }
 
@@ -33,6 +36,7 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
     } else {
       setState(() {
         players.add(SkateDicePlayer(name));
+        SkateDiceModelController.of(context).players.add(SkateDicePlayer(name));
       });
 
     }

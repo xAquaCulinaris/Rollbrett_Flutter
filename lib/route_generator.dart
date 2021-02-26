@@ -8,6 +8,8 @@ import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostView.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
 import 'package:rollbrett_rottweil/ErrorPage/errorPage.dart';
 import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
+import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
+import 'package:rollbrett_rottweil/SkateDice/skateDiceTabBar.dart';
 
 import 'OwnTheSpot/ProfileView/postArguments.dart';
 
@@ -46,6 +48,9 @@ class RouteGenerator {
 
       case '/edit_profile_view':
         return MaterialPageRoute(builder: (_) => EditProfileView());
+        
+      case '/skate_dice_tabbar':
+        return MaterialPageRoute(builder: (_) => SkateDiceModelController(child: SkateDiceTabBar()));
 
       default:
         return  MaterialPageRoute(builder: (_) => ErrorPage());

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/SkateDice/SkateDiceCheckBox.dart';
+import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
 
 class SkateDiceExpandableCheckBox extends StatefulWidget {
-  final List<Map> map;
+
   final int index;
 
-  SkateDiceExpandableCheckBox(this.map, this.index);
+  SkateDiceExpandableCheckBox(this.index);
 
 
   @override
@@ -13,7 +14,7 @@ class SkateDiceExpandableCheckBox extends StatefulWidget {
 }
 
 class _SkateDiceExpandableCheckBoxState extends State<SkateDiceExpandableCheckBox> {
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,10 +23,10 @@ class _SkateDiceExpandableCheckBoxState extends State<SkateDiceExpandableCheckBo
           children: [
             IconButton(
                 icon: Icon(
-                    !widget.map[widget.index]['isExpanded'] ? Icons.arrow_right : Icons.arrow_drop_down),
+                    !SkateDiceModelController.of(context).skateDiceMap[widget.index]['isExpanded'] ? Icons.arrow_right : Icons.arrow_drop_down),
                 onPressed: () {
                   setState(() {
-                    widget.map[widget.index]['isExpanded'] = !widget.map[widget.index]['isExpanded'];
+                    SkateDiceModelController.of(context).skateDiceMap[widget.index]['isExpanded'] = !SkateDiceModelController.of(context).skateDiceMap[widget.index]['isExpanded'];
                   });
                 }),
 
@@ -33,27 +34,27 @@ class _SkateDiceExpandableCheckBoxState extends State<SkateDiceExpandableCheckBo
 
             Expanded(
               child: CheckboxListTile(
-                  title: Text(widget.map[widget.index]['obstacleType'].toString()),
-                  value: widget.map[widget.index]['isChecked'],
+                  title: Text(SkateDiceModelController.of(context).skateDiceMap[widget.index]['obstacleType'].toString()),
+                  value: SkateDiceModelController.of(context).skateDiceMap[widget.index]['isChecked'],
                   onChanged: (newValue) {
                     setState(() {
-                      widget.map[widget.index]['isChecked'] = newValue;
+                      SkateDiceModelController.of(context).skateDiceMap[widget.index]['isChecked'] = newValue;
 
                        if (!newValue) {
-                      widget.map[widget.index]['isExpanded'] = false;
+                         SkateDiceModelController.of(context).skateDiceMap[widget.index]['isExpanded'] = false;
                     }
                     });
                   }),
             )
           ],
         ),
-       widget.map[widget.index]['isExpanded'] ?
+        SkateDiceModelController.of(context).skateDiceMap[widget.index]['isExpanded'] ?
        ListView.builder(
            scrollDirection: Axis.vertical,
            shrinkWrap: true,
-           itemCount:  widget.map[widget.index]['itemCount'],
+           itemCount:  SkateDiceModelController.of(context).skateDiceMap[widget.index]['itemCount'],
            itemBuilder: (BuildContext context, int index) =>
-           SkateDiceCheckBox(widget.map, widget.index, index)
+           SkateDiceCheckBox(SkateDiceModelController.of(context).skateDiceMap, widget.index, index)
        ) : Text(""),
       ],
     );

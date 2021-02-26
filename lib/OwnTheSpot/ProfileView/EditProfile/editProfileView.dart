@@ -52,11 +52,11 @@ class _EditProfileViewState extends State<EditProfileView> {
     });
   }
 
-  void _saveButtonPressed() async{
+  void _saveButtonPressed() async {
     bool error = false;
     if (_formKey.currentState.validate()) {
-      if(username != user.name) {
-        if(await UserServiceTest.userNameExists(username)) {
+      if (username != user.name) {
+        if (await UserServiceTest.userNameExists(username)) {
           error = true;
         }
       }
@@ -64,10 +64,10 @@ class _EditProfileViewState extends State<EditProfileView> {
       error = true;
     }
 
-    if(!error) {
-      UserServiceTest.updateUser(uid,username, changedPicture ? profilePicture : 'avatar.png');
+    if (!error) {
+      UserServiceTest.updateUser(
+          uid, username, changedPicture ? profilePicture : 'avatar.png');
     }
-
   }
 
   void _setUsername(String value) {
@@ -101,9 +101,40 @@ class _EditProfileViewState extends State<EditProfileView> {
                   ProfilePicture(profilePicture),
                   UsernameField(user.name, _setUsername),
                   PasswordField(_setPassword, 'Password', true),
+                  stanceSelection(),
                   RoundedButton('Save', _saveButtonPressed, 40, 20),
                 ],
               ),
+      ),
+    );
+  }
+
+  Widget stanceSelection() {
+    String currentStance = 'Regular';
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 500,
+        child: DropdownButton<String>(
+          value: currentStance,
+          elevation: 16,
+          underline: Container(
+            height: 1,
+            color: Colors.grey,
+          ),
+          onChanged: (String newValue) {
+            setState(() {
+              currentStance = newValue;
+            });
+          },
+          items: <String>['Regular', 'Goofy']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
