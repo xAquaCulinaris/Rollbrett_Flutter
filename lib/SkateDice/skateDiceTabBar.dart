@@ -24,7 +24,7 @@ class SkateDiceTabBar extends StatelessWidget {
           children: [
             SkateDiceAddPlayer(),
             SkateDiceConfig(),
-            SkateDices([])
+            SkateDices()
           ],
         ),
       ),

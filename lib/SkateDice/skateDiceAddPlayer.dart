@@ -16,12 +16,9 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
 
   String name;
 
-
   void _nextPage() {
     Navigator.push(
       context,
-     //TODO FIX?
-     // MaterialPageRoute(builder: (context) => SkateDiceConfig(players)),
       MaterialPageRoute(builder: (context) => SkateDiceConfig()),
     );
   }
@@ -38,7 +35,6 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
         players.add(SkateDicePlayer(name));
         SkateDiceModelController.of(context).players.add(SkateDicePlayer(name));
       });
-
     }
   }
 
@@ -54,39 +50,45 @@ class _SkateDiceAddPlayerState extends State<SkateDiceAddPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomAppBar('Skate Dice Add Players'),
-
-        body: Padding(
-          padding: EdgeInsets.all(40),
-          child: //Text("asd"),
-
-          Column(
+    return Padding(
+      padding: EdgeInsets.all(40),
+      child: Column(
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: EmailField(text: name, function: setPlayerName, labelText: "Add Player", icon: Icons.person_add, keyLayout: TextInputType.text),
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.add_circle_outline),
-                      onPressed: addPlayer)
-                ],
+              Expanded(
+                child: EmailField(
+                    text: name,
+                    function: setPlayerName,
+                    labelText: "Add Player",
+                    icon: Icons.person_add,
+                    keyLayout: TextInputType.text),
               ),
-             players.length != 0 ?
-             ListView.builder(
-                itemCount: players.length,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Text("Player " + (index+1).toString() + ": " +  players[index].name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),);
-                },
-              ) : Text("No players added"),
-
-              FloatingActionButton(onPressed: () {_nextPage();}),
-
+              IconButton(
+                  icon: Icon(Icons.add_circle_outline), onPressed: addPlayer)
             ],
           ),
+          players.length != 0
+              ? ListView.builder(
+                  itemCount: players.length,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Text(
+                      "Player " +
+                          (index + 1).toString() +
+                          ": " +
+                          players[index].name,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    );
+                  },
+                )
+              : Text("No players added"),
+          FloatingActionButton(onPressed: () {
+            _nextPage();
+          }),
+        ],
       ),
     );
   }

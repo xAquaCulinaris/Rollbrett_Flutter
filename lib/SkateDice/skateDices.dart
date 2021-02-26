@@ -10,18 +10,11 @@ import 'package:rollbrett_rottweil/SkateDice/skateDicePlayerScoreItem.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceText.dart';
 import 'package:shake/shake.dart';
 
-//TODO add when joining this view everithing is getting calculated (so no start button is needed)
-
 class SkateDices extends StatefulWidget {
-  List<SkateDicePlayer> players;
 
   //List<SkateDiceObstacles> obstacleList;
   //List<SkateDiceTricks> obstacleTricks;
 
-  SkateDices(
-    this.players,
-    /*this.obstacleList, this.obstacleTricks*/
-  );
 
   @override
   _SkateDicesState createState() => _SkateDicesState();
@@ -157,8 +150,8 @@ class _SkateDicesState extends State<SkateDices> {
     List<Widget> list = new List<Widget>();
 
     //for (int i = 0; i < widget.players.length; i++) {
-    for (int i = 0; i < widget.players.length; i++) {
-      list.add(SkateDicePlayerScoreItem(widget.players[i], false));
+    for (int i = 0; i < SkateDiceModelController.of(context).players.length; i++) {
+      list.add(SkateDicePlayerScoreItem(SkateDiceModelController.of(context).players[i], false));
     }
 
     return Column(
@@ -168,41 +161,37 @@ class _SkateDicesState extends State<SkateDices> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO CALL SOMEWHERE ELSE (not efficient)
     _getConfiguredTricks();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Skate Dices"),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // SkateDiceText(text1),
-                  SkateDiceText(currentTrick[0]),
-                  SizedBox(width: 10),
-                  //SkateDiceText(text2),
-                  SkateDiceText(currentTrick[1]),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // SkateDiceText(text3),
-                  SkateDiceText(currentTrick[2]),
-                  SizedBox(width: 10),
-                  // SkateDiceText(text4),
-                  SkateDiceText(currentTrick[3]),
-                ],
-              ),
-              SizedBox(width: 100),
-              RoundedButton("Roll Dices", _rollDices, 40, 20),
-              _getPlayerScores(),
-            ],
-          ),
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // SkateDiceText(text1),
+                SkateDiceText(currentTrick[0]),
+                SizedBox(width: 10),
+                //SkateDiceText(text2),
+                SkateDiceText(currentTrick[1]),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // SkateDiceText(text3),
+                SkateDiceText(currentTrick[2]),
+                SizedBox(width: 10),
+                // SkateDiceText(text4),
+                SkateDiceText(currentTrick[3]),
+              ],
+            ),
+            SizedBox(width: 100),
+            RoundedButton("Roll Dices", _rollDices, 40, 20),
+            _getPlayerScores(),
+          ],
         ),
       ),
     );
@@ -215,7 +204,6 @@ class _SkateDicesState extends State<SkateDices> {
 
     SkateDiceModelController.of(context).obstacleList.clear();
     SkateDiceModelController.of(context).obstacleTricks.clear();
-
 
     for (int x = 0;
         x < SkateDiceModelController.of(context).skateDiceMap.length;
