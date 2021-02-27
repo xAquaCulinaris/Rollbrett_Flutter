@@ -1,27 +1,27 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
-import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
-import 'package:rollbrett_rottweil/Class/skateDiceTricks.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDicePlayer.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceTricks.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
+import 'package:rollbrett_rottweil/SkateDice/addPlayer.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDicePlayerScoreItem.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceText.dart';
 import 'package:shake/shake.dart';
 
 class SkateDices extends StatefulWidget {
-
-  //List<SkateDiceObstacles> obstacleList;
-  //List<SkateDiceTricks> obstacleTricks;
-
-
   @override
   _SkateDicesState createState() => _SkateDicesState();
 }
 
 class _SkateDicesState extends State<SkateDices> {
   ShakeDetector detector;
+
+  List<SkateDicePlayer> players = [];
+  List<SkateDiceObstacles> obstacleList = [];
+  List<SkateDiceTricks> obstacleTricks = [];
 
   List<String> direction = ["Frontside", "Backside"];
 
@@ -41,26 +41,17 @@ class _SkateDicesState extends State<SkateDices> {
   void _rollDices() {
     Random random = new Random();
 
-    int randomObstacle = random
-        .nextInt(SkateDiceModelController.of(context).obstacleList.length);
+    int randomObstacle = random.nextInt(obstacleList.length);
 
     //filter type of tricks that are possible
-    List<SkateDiceTricks> trickListfiltered =
-        SkateDiceModelController.of(context)
-            .obstacleTricks
-            .where((element) =>
-                element.obstacleType ==
-                SkateDiceModelController.of(context)
-                    .obstacleList[randomObstacle]
-                    .obstacleType)
-            .toList();
+    List<SkateDiceTricks> trickListfiltered = obstacleTricks
+        .where((element) =>
+            element.obstacleType == obstacleList[randomObstacle].obstacleType)
+        .toList();
     int randomTrick = random.nextInt(trickListfiltered.length);
     int randomStance = random.nextInt(stance.length);
 
-    if (SkateDiceModelController.of(context)
-            .obstacleList[randomObstacle]
-            .obstacleType ==
-        ObstacleType.Flat) {
+    if (obstacleList[randomObstacle].obstacleType == ObstacleType.Flat) {
       setState(() {
         currentTrick[0] = {
           'name': enumToString(stance[randomStance].toString()),
@@ -71,32 +62,19 @@ class _SkateDicesState extends State<SkateDices> {
           'picture': 'null'
         };
         currentTrick[2] = {
-          'name': enumToString(SkateDiceModelController.of(context)
-              .obstacleList[randomObstacle]
-              .obstacleType
-              .toString()),
-          'picture': SkateDiceModelController.of(context)
-              .obstacleList[randomObstacle]
-              .picture
+          'name': enumToString(
+              obstacleList[randomObstacle].obstacleType.toString()),
+          'picture': obstacleList[randomObstacle].picture
         };
         currentTrick[3] = {'name': '', 'picture': 'null'};
       });
     } else {
       String directionString = "";
-      if (SkateDiceModelController.of(context)
-              .obstacleList[randomObstacle]
-              .direction !=
-          Direction.None) {
-        if (SkateDiceModelController.of(context)
-                .obstacleList[randomObstacle]
-                .direction ==
-            Direction.Frontside) {
+      if (obstacleList[randomObstacle].direction != Direction.None) {
+        if (obstacleList[randomObstacle].direction == Direction.Frontside) {
           directionString = "Frontside";
         }
-        if (SkateDiceModelController.of(context)
-                .obstacleList[randomObstacle]
-                .direction ==
-            Direction.Backside) {
+        if (obstacleList[randomObstacle].direction == Direction.Backside) {
           directionString = "Backside";
         } else {
           directionString = direction[random.nextInt(direction.length)];
@@ -114,17 +92,23 @@ class _SkateDicesState extends State<SkateDices> {
           'picture': 'null'
         };
         currentTrick[3] = {
-          'name': enumToString(SkateDiceModelController.of(context)
-              .obstacleList[randomObstacle]
-              .name
-              .toString()),
-          'picture': SkateDiceModelController.of(context)
-              .obstacleList[randomObstacle]
-              .picture
+          'name': enumToString(obstacleList[randomObstacle].name.toString()),
+          'picture': obstacleList[randomObstacle].picture
         };
       });
     }
   }
+
+  void _addPlayer(String name) {
+    if (name == "" || name == null) {
+      print("name cant be empty");
+    } else {
+      setState(() {
+        players.add(SkateDicePlayer(name));
+      });
+    }
+  }
+
 
   @override
   void initState() {
@@ -150,8 +134,11 @@ class _SkateDicesState extends State<SkateDices> {
     List<Widget> list = new List<Widget>();
 
     //for (int i = 0; i < widget.players.length; i++) {
-    for (int i = 0; i < SkateDiceModelController.of(context).players.length; i++) {
-      list.add(SkateDicePlayerScoreItem(SkateDiceModelController.of(context).players[i], false));
+    for (int i = 0;
+        i < players.length;
+        i++) {
+      list.add(SkateDicePlayerScoreItem(
+          players[i], false));
     }
 
     return Column(
@@ -190,6 +177,7 @@ class _SkateDicesState extends State<SkateDices> {
             ),
             SizedBox(width: 100),
             RoundedButton("Roll Dices", _rollDices, 40, 20),
+            AddPlayer(_addPlayer),
             _getPlayerScores(),
           ],
         ),
@@ -202,8 +190,8 @@ class _SkateDicesState extends State<SkateDices> {
     List<SkateDiceTricks> allTricks = SkateDiceTricks.getTricks();
     List<SkateDiceObstacles> allObstacle = SkateDiceObstacles.getObstacles();
 
-    SkateDiceModelController.of(context).obstacleList.clear();
-    SkateDiceModelController.of(context).obstacleTricks.clear();
+    obstacleList.clear();
+    obstacleTricks.clear();
 
     for (int x = 0;
         x < SkateDiceModelController.of(context).skateDiceMap.length;
@@ -219,9 +207,7 @@ class _SkateDicesState extends State<SkateDices> {
           var test2 = allTricks[z].obstacleType.toString();
 
           if (test1 == test2) {
-            SkateDiceModelController.of(context)
-                .obstacleTricks
-                .add(allTricks[z]);
+            obstacleTricks.add(allTricks[z]);
           }
         }
 
@@ -237,7 +223,7 @@ class _SkateDicesState extends State<SkateDices> {
               if (toAdd.name ==
                   SkateDiceModelController.of(context).skateDiceMap[x]
                       ['obstacles'][y]['obstacleName']) {
-                SkateDiceModelController.of(context).obstacleList.add(toAdd);
+                obstacleList.add(toAdd);
               }
             }
           }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/Class/skateDiceData.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceData.dart';
 
 
 class SkateDiceModelController extends InheritedWidget {

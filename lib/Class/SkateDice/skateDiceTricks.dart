@@ -1,4 +1,4 @@
-import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
 
 class SkateDiceTricks {
   final String name;

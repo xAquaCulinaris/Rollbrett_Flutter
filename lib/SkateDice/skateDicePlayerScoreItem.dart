@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDicePlayer.dart';
 
 class SkateDicePlayerScoreItem extends StatefulWidget {
   final SkateDicePlayer player;

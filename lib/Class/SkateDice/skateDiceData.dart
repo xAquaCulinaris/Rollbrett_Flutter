@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
-import 'package:rollbrett_rottweil/Class/skateDicePlayer.dart';
-import 'package:rollbrett_rottweil/Class/skateDiceTricks.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDicePlayer.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceTricks.dart';
 
 class SkateDiceData {
-  List<SkateDicePlayer> players = [];
-  List<SkateDiceObstacles> obstacleList = [];
-  List<SkateDiceTricks> obstacleTricks = [];
   var skateDiceMap = _getDefault();
+
+
   final StreamController _streamController = StreamController.broadcast();
 
   Stream get stream => _streamController.stream;

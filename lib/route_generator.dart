@@ -5,14 +5,10 @@ import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/EditProfile/editProfil
 import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotTabBar.dart';
 import 'package:rollbrett_rottweil/Login/Authenticate.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostView.dart';
-import 'package:rollbrett_rottweil/SkateDice/skateDiceAddPlayer.dart';
 import 'package:rollbrett_rottweil/ErrorPage/errorPage.dart';
 import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
 import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceTabBar.dart';
-
-import 'OwnTheSpot/ProfileView/postArguments.dart';
-
 
 
 class RouteGenerator {
@@ -30,9 +26,6 @@ class RouteGenerator {
 
       case '/course_preview':
         return MaterialPageRoute(builder: (_) => CoursePreview());
-
-      case '/skate_dice':
-        return MaterialPageRoute(builder: (_) => SkateDiceAddPlayer());
 
       case '/own_the_spot':
         return MaterialPageRoute(builder: (_) => OwnTheSpotTabBar());

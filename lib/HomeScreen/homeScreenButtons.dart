@@ -10,8 +10,6 @@ class HomeScreenButtons extends StatelessWidget {
 
   void skateDicesButton(BuildContext context) {
     Navigator.of(context).pushNamed('/skate_dice_tabbar');
-    //TODO FIX
-    //Navigator.of(context).pushNamed('/skate_dice');
   }
 
   void ownTheSpotButton(BuildContext context) {

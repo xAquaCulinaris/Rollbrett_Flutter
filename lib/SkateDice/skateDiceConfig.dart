@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/Class/skateDiceObstacles.dart';
+import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
 import 'package:rollbrett_rottweil/SkateDice/skateDiceExpandableCheckBox.dart';
 
 class SkateDiceConfig extends StatefulWidget {
