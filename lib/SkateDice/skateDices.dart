@@ -17,6 +17,7 @@ class SkateDices extends StatefulWidget {
 }
 
 class _SkateDicesState extends State<SkateDices> {
+  String newPlayerName = "";
   ShakeDetector detector;
 
   List<SkateDicePlayer> players = [];
@@ -103,12 +104,18 @@ class _SkateDicesState extends State<SkateDices> {
     if (name == "" || name == null) {
       print("name cant be empty");
     } else {
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+        FocusManager.instance.primaryFocus.unfocus();
+      }
+
       setState(() {
         players.add(SkateDicePlayer(name));
+        //TODO clear textfield
+        newPlayerName = "";
       });
     }
   }
-
 
   @override
   void initState() {
@@ -134,11 +141,8 @@ class _SkateDicesState extends State<SkateDices> {
     List<Widget> list = new List<Widget>();
 
     //for (int i = 0; i < widget.players.length; i++) {
-    for (int i = 0;
-        i < players.length;
-        i++) {
-      list.add(SkateDicePlayerScoreItem(
-          players[i], false));
+    for (int i = 0; i < players.length; i++) {
+      list.add(SkateDicePlayerScoreItem(players[i], false));
     }
 
     return Column(
@@ -150,38 +154,43 @@ class _SkateDicesState extends State<SkateDices> {
   Widget build(BuildContext context) {
     //TODO CALL SOMEWHERE ELSE (not efficient)
     _getConfiguredTricks();
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Column(
               children: [
-                // SkateDiceText(text1),
-                SkateDiceText(currentTrick[0]),
-                SizedBox(width: 10),
-                //SkateDiceText(text2),
-                SkateDiceText(currentTrick[1]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // SkateDiceText(text1),
+                    SkateDiceText(currentTrick[0]),
+                    SizedBox(width: 10),
+                    //SkateDiceText(text2),
+                    SkateDiceText(currentTrick[1]),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // SkateDiceText(text3),
+                    SkateDiceText(currentTrick[2]),
+                    SizedBox(width: 10),
+                    // SkateDiceText(text4),
+                    SkateDiceText(currentTrick[3]),
+                  ],
+                ),
+                SizedBox(width: 100),
+                RoundedButton("Roll Dices", _rollDices, 40, 20),
+                AddPlayer(newPlayerName, _addPlayer),
+                _getPlayerScores(),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // SkateDiceText(text3),
-                SkateDiceText(currentTrick[2]),
-                SizedBox(width: 10),
-                // SkateDiceText(text4),
-                SkateDiceText(currentTrick[3]),
-              ],
-            ),
-            SizedBox(width: 100),
-            RoundedButton("Roll Dices", _rollDices, 40, 20),
-            AddPlayer(_addPlayer),
-            _getPlayerScores(),
-          ],
+          ),
         ),
       ),
+      resizeToAvoidBottomPadding: false,
     );
   }
 

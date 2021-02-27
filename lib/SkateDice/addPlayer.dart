@@ -3,9 +3,10 @@ import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 
 
 class AddPlayer extends StatefulWidget {
+  String name;
   Function func;
 
-  AddPlayer(this.func);
+  AddPlayer(this.name, this.func);
 
   @override
   _AddPlayerState createState() => _AddPlayerState();
@@ -13,10 +14,9 @@ class AddPlayer extends StatefulWidget {
 
 
 class _AddPlayerState extends State<AddPlayer> {
-  String name;
 
   void setPlayerName(String name) {
-    this.name = name;
+    widget.name = name;
   }
 
   @override
@@ -25,14 +25,14 @@ class _AddPlayerState extends State<AddPlayer> {
       children: [
         Expanded(
           child: EmailField(
-              text: name,
+              text: widget.name,
               function: setPlayerName,
               labelText: "Add Player",
               icon: Icons.person_add,
               keyLayout: TextInputType.text),
         ),
         IconButton(
-            icon: Icon(Icons.add_circle_outline), onPressed: () => widget.func(name))
+            icon: Icon(Icons.add_circle_outline), onPressed: () => widget.func(widget.name))
       ],
     );
   }
