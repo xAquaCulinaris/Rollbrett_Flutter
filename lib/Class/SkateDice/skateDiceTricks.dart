@@ -36,4 +36,40 @@ class SkateDiceTricks {
     List<SkateDiceTricks> list = [kickflip, noseSlideLedge, noseSlideRail, boardslide, noseGrind, heelflip, tre, shuv, three_shuv, one_eighty, varial_flip, varial_heel, fifty_fifty, five_o, smith, feeble, blunt, tailslide, croocked];
     return list;
   }
+
+  static List<SkateDiceTricks> getFlatTricks() {
+    List<SkateDiceTricks> all = getTricks();
+    List<SkateDiceTricks> filtered = List<SkateDiceTricks>();
+
+    for(SkateDiceTricks trick in all) {
+      if (trick.obstacleType == ObstacleType.Flat) {
+        filtered.add(trick);
+      }
+    }
+    return filtered;
+  }
+
+  static List<SkateDiceTricks> getGrindTricks() {
+    List<SkateDiceTricks> all = getTricks();
+    List<SkateDiceTricks> filtered = List<SkateDiceTricks>();
+
+    for(SkateDiceTricks trick in all) {
+      if (trick.obstacleType == ObstacleType.Grind) {
+        filtered.add(trick);
+      }
+    }
+    return filtered;
+  }
+
+  static List<SkateDiceTricks> getManualTricks() {
+    List<SkateDiceTricks> all = getTricks();
+    List<SkateDiceTricks> filtered = List<SkateDiceTricks>();
+
+    for(SkateDiceTricks trick in all) {
+      if (trick.obstacleType == ObstacleType.ManualPad) {
+        filtered.add(trick);
+      }
+    }
+    return filtered;
+  }
 }

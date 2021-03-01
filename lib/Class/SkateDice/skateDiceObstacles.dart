@@ -26,7 +26,7 @@ class SkateDiceObstacles {
 enum ObstacleType {
   Grind,
   Flat,
- // ManualPad,
+  ManualPad,
 }
 
 enum Difficulty {

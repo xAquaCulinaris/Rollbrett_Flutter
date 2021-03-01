@@ -45,7 +45,6 @@ class SkateDiceData {
       obstacleMap.add(map);
     }
 
-    print(obstacleMap);
 
     return obstacleMap;
   }
