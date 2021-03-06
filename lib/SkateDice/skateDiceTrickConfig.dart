@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
 import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceTricks.dart';
+import 'package:rollbrett_rottweil/SkateDice/SkateDiceModelController.dart';
 
 class SkateDiceTrickConfig extends StatefulWidget {
   @override
@@ -12,9 +13,29 @@ class _SkateDiceTrickConfigState extends State<SkateDiceTrickConfig> {
   bool grindExpanded = false;
   bool manualExpanded = false;
 
+
+  @override
+  void initState() {
+    super.initState();
+
+    for(int i = 0; i < flatTricks.length; i++) {
+      flatArray.add(true);
+    }
+    for(int i = 0; i < grindTricks.length; i++) {
+      grindArray.add(true);
+    }
+  }
+
+  List<bool> flatArray = [];
+  List<bool> grindArray = [];
+
+
+
   List<SkateDiceTricks> flatTricks = SkateDiceTricks.getFlatTricks();
   List<SkateDiceTricks> grindTricks = SkateDiceTricks.getGrindTricks();
-  List<SkateDiceTricks> maunalTricks = SkateDiceTricks.getManualTricks();
+  List<SkateDiceTricks> manualTricks = SkateDiceTricks.getManualTricks();
+
+
 
   void flatExpandedChange() {
     if (mounted) {
@@ -42,20 +63,20 @@ class _SkateDiceTrickConfigState extends State<SkateDiceTrickConfig> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return ListView(
+        children: <Widget>[
         expandableBox("Flat Tricks", flatExpanded, flatExpandedChange,
-            flatTricks, ObstacleType.Flat),
+            flatTricks, ObstacleType.Flat,flatArray,  SkateDiceModelController.of(context).flatArray),
         expandableBox("Grinds & Slides", grindExpanded, grindExpandedChange,
-            grindTricks, ObstacleType.Grind),
-        expandableBox("Manuals", manualExpanded, manualExpandedChange,
-            maunalTricks, ObstacleType.ManualPad),
-      ],
+            grindTricks, ObstacleType.Grind, grindArray,  SkateDiceModelController.of(context).grindArray),
+     //   expandableBox("Manuals", manualExpanded, manualExpandedChange,
+          //  manualTricks, ObstacleType.ManualPad,  SkateDiceModelController.of(context).manualArray),
+    ]
     );
   }
 
   Widget expandableBox(String name, bool state, Function changeState,
-      List<SkateDiceTricks> tricks, ObstacleType type) {
+      List<SkateDiceTricks> tricks, ObstacleType type, List<bool> checkBoxStates, List<SkateDiceTricks> trickArray) {
     return Column(
       children: [
         Row(
@@ -72,21 +93,34 @@ class _SkateDiceTrickConfigState extends State<SkateDiceTrickConfig> {
         ),
         state
             ? ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: tricks.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    trickItem(index, tricks))
+                    trickItem(index, tricks, checkBoxStates, trickArray))
             : SizedBox.shrink()
       ],
     );
   }
 
-  Widget trickItem(int index, List<SkateDiceTricks> trickList) {
-    return Row(
-      children: [
-        Text(trickList[index].name),
-      ],
+  Widget trickItem(int index, List<SkateDiceTricks> trickList, List<bool> checkStatus, List<SkateDiceTricks> trickArray) {
+    return CheckboxListTile(
+        title: Text(trickList[index].name),
+        value: checkStatus[index],
+        onChanged: (newValue) {
+          setState(() {
+            checkStatus[index] = newValue;
+
+            if (newValue)
+              trickArray.add(trickList[index]);
+            else
+              trickArray.remove(trickList[index]);
+            print(trickArray);
+            print("");
+            print(checkStatus);
+          });
+        },
     );
   }
 }

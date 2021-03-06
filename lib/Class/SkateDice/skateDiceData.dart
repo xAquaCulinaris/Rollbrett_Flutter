@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
-import 'package:rollbrett_rottweil/Class/SkateDice/skateDicePlayer.dart';
 import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceTricks.dart';
+
 
 class SkateDiceData {
   var skateDiceMap = _getDefault();
+
+  List<SkateDiceTricks> flatArray = SkateDiceTricks.getFlatTricks();
+  List<SkateDiceTricks> grindArray = SkateDiceTricks.getGrindTricks();
+ // List<bool> manualArray = [];
 
 
   final StreamController _streamController = StreamController.broadcast();

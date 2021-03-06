@@ -11,16 +11,15 @@ class SkateDiceTricks {
 
   static SkateDiceTricks kickflip = SkateDiceTricks("Kickflip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
   static SkateDiceTricks heelflip = SkateDiceTricks("Heelflip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
-  static SkateDiceTricks tre = SkateDiceTricks("360 Flip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
+  static SkateDiceTricks tre = SkateDiceTricks("360 Flip", Stance.All, ObstacleType.Flat, Difficulty.Medium);
   static SkateDiceTricks shuv = SkateDiceTricks("Shuv", Stance.All, ObstacleType.Flat, Difficulty.Easy);
-  static SkateDiceTricks three_shuv = SkateDiceTricks("3 Shuv", Stance.All, ObstacleType.Flat, Difficulty.Easy);
+  static SkateDiceTricks three_shuv = SkateDiceTricks("3 Shuv", Stance.All, ObstacleType.Flat, Difficulty.Medium);
   static SkateDiceTricks one_eighty = SkateDiceTricks("180", Stance.All, ObstacleType.Flat, Difficulty.Easy);
   static SkateDiceTricks varial_flip = SkateDiceTricks("Varial Flip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
-  static SkateDiceTricks varial_heel = SkateDiceTricks("Varial Heel", Stance.All, ObstacleType.Flat, Difficulty.Easy);
+  static SkateDiceTricks varial_heel = SkateDiceTricks("Varial Heel", Stance.All, ObstacleType.Flat, Difficulty.Medium);
 
 
-  static SkateDiceTricks noseSlideLedge = SkateDiceTricks("Nose Slide", Stance.All, ObstacleType.Grind, Difficulty.Easy);
-  static SkateDiceTricks noseSlideRail = SkateDiceTricks("Nose Slide", Stance.All, ObstacleType.Grind, Difficulty.Medium);
+  static SkateDiceTricks noseSlide = SkateDiceTricks("Nose Slide", Stance.All, ObstacleType.Grind, Difficulty.Easy);
   static SkateDiceTricks boardslide = SkateDiceTricks("Boardslide", Stance.All, ObstacleType.Grind, Difficulty.Easy);
   static SkateDiceTricks noseGrind = SkateDiceTricks("Nose Grind", Stance.All, ObstacleType.Grind, Difficulty.Medium);
   static SkateDiceTricks fifty_fifty = SkateDiceTricks("50-50 Grind", Stance.All, ObstacleType.Grind, Difficulty.Easy);
@@ -33,7 +32,7 @@ class SkateDiceTricks {
 
 
   static List<SkateDiceTricks> getTricks() {
-    List<SkateDiceTricks> list = [kickflip, noseSlideLedge, noseSlideRail, boardslide, noseGrind, heelflip, tre, shuv, three_shuv, one_eighty, varial_flip, varial_heel, fifty_fifty, five_o, smith, feeble, blunt, tailslide, croocked];
+    List<SkateDiceTricks> list = [kickflip, noseSlide, boardslide, noseGrind, heelflip, tre, shuv, three_shuv, one_eighty, varial_flip, varial_heel, fifty_fifty, five_o, smith, feeble, blunt, tailslide, croocked];
     return list;
   }
 

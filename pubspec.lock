@@ -149,7 +149,7 @@ packages:
   flutter_beacon:
     dependency: "direct dev"
     description:
-      path: "/home/marian/Programming/flutter/flutter_beacon-master"
+      path: "/home/marian/Desktop/programming/flutter_beacon-master"
       relative: false
     source: path
     version: "0.4.0"
