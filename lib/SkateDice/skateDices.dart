@@ -39,6 +39,93 @@ class _SkateDicesState extends State<SkateDices> {
     return text.split('.').last;
   }
 
+
+  void _diffEasy(var trickListfiltered, int randomTrick, int randomObstacle) {
+    setState(() {
+      currentTrick[0] = {
+        'name': trickListfiltered[randomTrick].name,
+        'picture': 'null'
+      };
+      currentTrick[1] = {
+        'name':
+            enumToString(obstacleList[randomObstacle].name.toString()),
+        'picture': obstacleList[randomObstacle].picture
+      };
+      currentTrick[2] = {'name': '', 'picture': 'null'};
+      currentTrick[3] = {'name': '', 'picture': 'null'};
+    });
+  }
+
+  void _diffMed(var trickListfiltered, int randomObstacle, int randomTrick, int randomDirection) {
+    String directionString = "";
+    if (obstacleList[randomObstacle].direction != Direction.None) {
+      if (obstacleList[randomObstacle].direction == Direction.Frontside) {
+        directionString = "Frontside";
+      }
+      if (obstacleList[randomObstacle].direction == Direction.Backside) {
+        directionString = "Backside";
+      } else {
+        directionString = direction[randomDirection];
+      }
+    }
+
+    setState(() {
+      if (directionString != "") {
+        currentTrick[0] = {'name': directionString, 'picture': 'null'};
+        currentTrick[1] = {
+          'name': trickListfiltered[randomTrick].name,
+          'picture': 'null'
+        };
+        currentTrick[2] = {
+          'name': enumToString(obstacleList[randomObstacle].name.toString()),
+          'picture': obstacleList[randomObstacle].picture
+        };
+      } else {
+        currentTrick[0] = {
+          'name': trickListfiltered[randomTrick].name,
+          'picture': 'null'
+        };
+        currentTrick[1] = {
+          'name': enumToString(obstacleList[randomObstacle].name.toString()),
+          'picture': obstacleList[randomObstacle].picture
+        };
+        currentTrick[2] = {'name': '', 'picture': 'null'};
+      }
+
+      currentTrick[3] = {'name': '', 'picture': 'null'};
+    });
+  }
+  
+  void _diffHard(var trickListfiltered, int randomObstacle, int randomDirection, int randomStance, int randomTrick ) {
+    String directionString = "";
+    if (obstacleList[randomObstacle].direction != Direction.None) {
+      if (obstacleList[randomObstacle].direction == Direction.Frontside) {
+        directionString = "Frontside";
+      }
+      if (obstacleList[randomObstacle].direction == Direction.Backside) {
+        directionString = "Backside";
+      } else {
+        directionString = direction[randomDirection];
+      }
+    }
+
+    setState(() {
+      currentTrick[0] = {
+        'name': enumToString(stance[randomStance].toString()),
+        'picture': 'null'
+      };
+      currentTrick[1] = {'name': directionString, 'picture': 'null'};
+      currentTrick[2] = {
+        'name': trickListfiltered[randomTrick].name,
+        'picture': 'null'
+      };
+      currentTrick[3] = {
+        'name': enumToString(obstacleList[randomObstacle].name.toString()),
+        'picture': obstacleList[randomObstacle].picture
+      };
+    });
+  }
+
   void _rollDices() {
     Random random = new Random();
 
@@ -51,53 +138,14 @@ class _SkateDicesState extends State<SkateDices> {
         .toList();
     int randomTrick = random.nextInt(trickListfiltered.length);
     int randomStance = random.nextInt(stance.length);
+    int randomDirection = random.nextInt(direction.length);
 
-    if (obstacleList[randomObstacle].obstacleType == ObstacleType.Flat) {
-      setState(() {
-        currentTrick[0] = {
-          'name': enumToString(stance[randomStance].toString()),
-          'picture': 'null'
-        };
-        currentTrick[1] = {
-          'name': trickListfiltered[randomTrick].name,
-          'picture': 'null'
-        };
-        currentTrick[2] = {
-          'name': enumToString(
-              obstacleList[randomObstacle].obstacleType.toString()),
-          'picture': obstacleList[randomObstacle].picture
-        };
-        currentTrick[3] = {'name': '', 'picture': 'null'};
-      });
-    } else {
-      String directionString = "";
-      if (obstacleList[randomObstacle].direction != Direction.None) {
-        if (obstacleList[randomObstacle].direction == Direction.Frontside) {
-          directionString = "Frontside";
-        }
-        if (obstacleList[randomObstacle].direction == Direction.Backside) {
-          directionString = "Backside";
-        } else {
-          directionString = direction[random.nextInt(direction.length)];
-        }
-      }
-
-      setState(() {
-        currentTrick[0] = {
-          'name': enumToString(stance[randomStance].toString()),
-          'picture': 'null'
-        };
-        currentTrick[1] = {'name': directionString, 'picture': 'null'};
-        currentTrick[2] = {
-          'name': trickListfiltered[randomTrick].name,
-          'picture': 'null'
-        };
-        currentTrick[3] = {
-          'name': enumToString(obstacleList[randomObstacle].name.toString()),
-          'picture': obstacleList[randomObstacle].picture
-        };
-      });
-    }
+    if (SkateDiceModelController.of(context).difficulty == Difficulty.Easy)
+      _diffEasy(trickListfiltered, randomTrick, randomObstacle);
+    else if(SkateDiceModelController.of(context).difficulty == Difficulty.Medium)
+      _diffMed(trickListfiltered, randomObstacle, randomTrick, randomDirection);
+    else
+      _diffHard(trickListfiltered, randomObstacle, randomDirection, randomStance, randomTrick);
   }
 
   void _addPlayer(String name) {
@@ -194,7 +242,6 @@ class _SkateDicesState extends State<SkateDices> {
     );
   }
 
-
   List<SkateDiceTricks> getConfiguredTricks() {
     List<SkateDiceTricks> allTricks = [];
     allTricks.addAll(SkateDiceModelController.of(context).flatArray);
@@ -203,11 +250,10 @@ class _SkateDicesState extends State<SkateDices> {
 
     return allTricks;
   }
-  
 
   void _setConfiguredTricks() {
     print("loading config");
-   // List<SkateDiceTricks> allConfiguredTricks = SkateDiceTricks.getTricks();
+    // List<SkateDiceTricks> allConfiguredTricks = SkateDiceTricks.getTricks();
     List<SkateDiceTricks> allConfiguredTricks = getConfiguredTricks();
     List<SkateDiceObstacles> allObstacle = SkateDiceObstacles.getObstacles();
 

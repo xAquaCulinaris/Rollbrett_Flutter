@@ -8,6 +8,10 @@ class SkateDiceConfig extends StatefulWidget {
 }
 
 class _SkateDiceConfigState extends State<SkateDiceConfig> {
+  bool grind = false;
+  bool flat = false;
+  bool manuelPad = false;
+
   List<ObstacleType> obstacleTypes = ObstacleType.values;
 
   @override
