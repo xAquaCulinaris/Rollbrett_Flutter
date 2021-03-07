@@ -20,7 +20,7 @@ class _UsernameFieldState extends State<UsernameField> {
         validator: (val) => val.length < 4 ? 'Username must be 4 characters' : null,
         keyboardType: TextInputType.text,
         onChanged: (value) {
-         widget.func(value);
+          widget.func(value);
         },
         decoration: InputDecoration(
           prefixIcon: Icon(

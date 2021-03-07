@@ -10,20 +10,16 @@ class PostTile extends StatelessWidget {
 
   PostTile(this.post);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          PostTopBar(post.uid),
-         // VideoWidget(VideoPlayerController.network(post.video)),
-          VideoWidget(VideoPlayerController.asset('videos/270BoardSlide.mp4')),
-          PostBottomBar(post.uid, post.postID),
-        ],
-      )
-    );
+        child: Column(
+      children: [
+        PostTopBar(post.uid),
+        // VideoWidget(VideoPlayerController.network(post.video)),
+        VideoWidget(VideoPlayerController.asset('videos/270BoardSlide.mp4')),
+        PostBottomBar(post.uid, post.postID),
+      ],
+    ));
   }
 }
-
-

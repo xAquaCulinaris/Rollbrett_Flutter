@@ -11,7 +11,10 @@ class SkateDiceTabBar extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(icon: Icon(Icons.home), onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false),),
+          leading: IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false),
+          ),
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Rollbrett_Flutter.noun_half_pipe_699586)),
@@ -22,11 +25,7 @@ class SkateDiceTabBar extends StatelessWidget {
           title: Text('Skate Dice'),
         ),
         body: TabBarView(
-          children: [
-            SkateDiceConfig(),
-            SkateDiceTrickConfig(),
-            SkateDices()
-          ],
+          children: [SkateDiceConfig(), SkateDiceTrickConfig(), SkateDices()],
         ),
       ),
     );

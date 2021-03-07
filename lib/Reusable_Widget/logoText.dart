@@ -10,10 +10,7 @@ class LogoText extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 40),
           child: Text(
             "Rollbrett Rottweil",
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height / 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
+            style: TextStyle(fontSize: MediaQuery.of(context).size.height / 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
       ],

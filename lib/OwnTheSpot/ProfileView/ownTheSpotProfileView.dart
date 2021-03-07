@@ -23,7 +23,6 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
 
   List<Post> posts = [];
 
-
   @override
   void initState() {
     _getUser(widget.uid);
@@ -34,7 +33,7 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
 
   void _getPosts(String uid) async {
     await PostService.getAllPostFromUser(uid).then((value) {
-      if(mounted)
+      if (mounted)
         setState(() {
           posts = value;
         });
@@ -65,21 +64,23 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
   Widget build(BuildContext context) {
     if (user != null) {
       return Container(
-            child: Column(
-              children: [
-                ProfilePicture(profilePicture),
-                Text(user.name),
-                Expanded(
-                  child: posts == null ? Text("no posts") :ListView.builder(
+        child: Column(
+          children: [
+            ProfilePicture(profilePicture),
+            Text(user.name),
+            Expanded(
+              child: posts == null
+                  ? Text("no posts")
+                  : ListView.builder(
                       scrollDirection: Axis.vertical,
-                      itemCount: posts.length.toDouble()/3.0 > posts.length~/3? posts.length~/3+1 : posts.length~/3,
+                      itemCount: posts.length.toDouble() / 3.0 > posts.length ~/ 3 ? posts.length ~/ 3 + 1 : posts.length ~/ 3,
                       itemBuilder: (context, index) {
                         return _horizontalListView(index);
                       }),
-                ),
-              ],
             ),
-          );
+          ],
+        ),
+      );
     } else {
       return Loading();
     }
@@ -103,10 +104,8 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
     int length = posts.length;
     int mod = length % 3;
 
-      if(length.toDouble()~/3.0 == index)
-        return mod;
+    if (length.toDouble() ~/ 3.0 == index) return mod;
 
     return 3;
   }
-
 }

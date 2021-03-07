@@ -9,8 +9,7 @@ class SkateDicePlayerScoreItem extends StatefulWidget {
   SkateDicePlayerScoreItem(this.player, this.isLastPlayer);
 
   @override
-  _SkateDicePlayerScoreItemState createState() =>
-      _SkateDicePlayerScoreItemState();
+  _SkateDicePlayerScoreItemState createState() => _SkateDicePlayerScoreItemState();
 }
 
 class _SkateDicePlayerScoreItemState extends State<SkateDicePlayerScoreItem> {
@@ -45,8 +44,7 @@ class _SkateDicePlayerScoreItemState extends State<SkateDicePlayerScoreItem> {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0),
       child: Container(
-          decoration: BoxDecoration(
-              color: Colors.grey, border: Border.all(color: Colors.black)),
+          decoration: BoxDecoration(color: Colors.grey, border: Border.all(color: Colors.black)),
           child: Center(
             child: Text(letter, style: TextStyle(fontSize: 20, color: Colors.black)),
           )),

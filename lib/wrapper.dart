@@ -13,6 +13,4 @@ class Wrapper extends StatelessWidget {
 
     return user == null ? Authenticate() : HomeScreen();
   }
-
-
 }

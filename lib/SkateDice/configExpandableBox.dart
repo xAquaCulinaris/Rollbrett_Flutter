@@ -14,7 +14,6 @@ class ConfigExpandableBox extends StatefulWidget {
 
   ConfigExpandableBox(this.name, this.state, this.changeState, this.tricks, this.type, this.checkBoxStates, this.trickArray);
 
-
   @override
   _ConfigExpandableBoxState createState() => _ConfigExpandableBoxState();
 }
@@ -42,8 +41,7 @@ class _ConfigExpandableBoxState extends State<ConfigExpandableBox> {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: widget.tricks.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    TrickListTile(index, widget.tricks[index], widget.checkBoxStates, widget.trickArray))
+                itemBuilder: (BuildContext context, int index) => TrickListTile(index, widget.tricks[index], widget.checkBoxStates, widget.trickArray))
             : SizedBox.shrink()
       ],
     );

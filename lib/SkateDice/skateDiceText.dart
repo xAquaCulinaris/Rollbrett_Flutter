@@ -26,10 +26,7 @@ class _SkateDiceTextState extends State<SkateDiceText> {
                   ? CircleAvatar(
                       child: GestureDetector(
                         onTap: () async {
-                          await showDialog(
-                              context: context,
-                              builder: (_) =>
-                                  PopUpImage(widget.map['picture']));
+                          await showDialog(context: context, builder: (_) => PopUpImage(widget.map['picture']));
                         },
                       ),
                       radius: 15.0,

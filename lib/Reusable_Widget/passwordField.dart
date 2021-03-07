@@ -23,8 +23,7 @@ class _PasswordFieldState extends State<PasswordField> {
         else {
           if (RegExp(r'.*[A-Z].*').hasMatch(password)) counter++;
           if (RegExp(r'.*[a-z].*').hasMatch(password)) counter++;
-          if (RegExp(".*[*.!@#\$%^&(){}[\]:;'<>,.?\/~`_+-=|\\].*")
-              .hasMatch(password)) counter++;
+          if (RegExp(".*[*.!@#\$%^&(){}[\]:;'<>,.?\/~`_+-=|\\].*").hasMatch(password)) counter++;
           if (RegExp(r".*[0-9].*").hasMatch(password)) counter++;
         }
       } else {
@@ -36,9 +35,7 @@ class _PasswordFieldState extends State<PasswordField> {
       }
 
       print("matchs counter: " + counter.toString());
-      return counter >= 2
-          ? null
-          : "Password must contain at least one upper case letter OR Digit OR special character";
+      return counter >= 2 ? null : "Password must contain at least one upper case letter OR Digit OR special character";
     }
   }
 

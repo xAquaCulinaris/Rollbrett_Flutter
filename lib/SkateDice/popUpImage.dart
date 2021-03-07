@@ -6,7 +6,6 @@ class PopUpImage extends StatelessWidget {
 
   PopUpImage(this.picture);
 
-
   @override
   Widget build(BuildContext context) {
     return Dialog(

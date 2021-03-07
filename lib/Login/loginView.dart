@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
@@ -50,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
   void _registerButtonPressed() {
     widget.toggleShowLogin();
   }
@@ -78,8 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         "Login",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 30),
+                        style: TextStyle(fontSize: MediaQuery.of(context).size.height / 30),
                       ),
                     ],
                   ),
@@ -87,11 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        EmailField(
-                            text: email,
-                            function: setEmail,
-                            labelText: "E-Mail",
-                            icon: Icons.email),
+                        EmailField(text: email, function: setEmail, labelText: "E-Mail", icon: Icons.email),
                         PasswordField(setPassword, 'Password', false),
                         _getForgetPassword(),
                       ],
@@ -140,33 +133,35 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ? Loading() : Scaffold(
-      resizeToAvoidBottomPadding: false,
-      backgroundColor: Color(0xfff2f3f7),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: const Radius.circular(70),
-                  bottomRight: const Radius.circular(70),
+    return isLoading
+        ? Loading()
+        : Scaffold(
+            resizeToAvoidBottomPadding: false,
+            backgroundColor: Color(0xfff2f3f7),
+            body: Stack(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: MediaQuery.of(context).size.width,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: const Radius.circular(70),
+                        bottomRight: const Radius.circular(70),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LogoText(),
+                    _getContainer(),
+                  ],
+                )
+              ],
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LogoText(),
-              _getContainer(),
-            ],
-          )
-        ],
-      ),
-    );
+          );
   }
 }

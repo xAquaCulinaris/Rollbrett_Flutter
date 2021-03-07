@@ -1,4 +1,3 @@
-
 class SkateDiceObstacles {
   final String name;
   final ObstacleType obstacleType;
@@ -10,18 +9,16 @@ class SkateDiceObstacles {
 
   static SkateDiceObstacles flatRail = SkateDiceObstacles("Flat Rail", ObstacleType.Grind, Difficulty.Medium, Direction.All, 'assets/rail.jpg');
   static SkateDiceObstacles hubba = SkateDiceObstacles("Hubba", ObstacleType.Grind, Difficulty.Medium, Direction.All, 'assets/hubba.jpg');
+
   //static SkateDiceObstacles manualPad = SkateDiceObstacles("Manual Pad", ObstacleType.ManualPad, Difficulty.Easy, Direction.All);
   static SkateDiceObstacles manualPadLedge = SkateDiceObstacles("Manual Pad Ledge", ObstacleType.Grind, Difficulty.Medium, Direction.All, 'assets/ledge.jpg');
   static SkateDiceObstacles flatground = SkateDiceObstacles("Flatground", ObstacleType.Flat, Difficulty.Easy, Direction.None, 'assets/stair.jpeg');
-
-
 
   static List<SkateDiceObstacles> getObstacles() {
     List<SkateDiceObstacles> list = [flatRail, hubba, flatground, manualPadLedge];
     return list;
   }
 }
-
 
 enum ObstacleType {
   Grind,

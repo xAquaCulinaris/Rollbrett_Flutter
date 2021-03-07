@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
 import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
@@ -18,7 +17,7 @@ class _PostTopBarState extends State<PostTopBar> {
 
   void _getUsername() async {
     await UserServiceTest.getUsername(widget.uid).then((value) {
-      if(mounted) {
+      if (mounted) {
         setState(() {
           username = value;
         });
@@ -27,13 +26,13 @@ class _PostTopBarState extends State<PostTopBar> {
   }
 
   void _getImage() async {
-      await FireStorageService.getImageFromUID(widget.uid).then((value) {
-        if(mounted) {
-          setState(() {
-            downloadedImage = value;
-          });
-        }
-      });
+    await FireStorageService.getImageFromUID(widget.uid).then((value) {
+      if (mounted) {
+        setState(() {
+          downloadedImage = value;
+        });
+      }
+    });
   }
 
   @override
@@ -54,13 +53,14 @@ class _PostTopBarState extends State<PostTopBar> {
               ),
             ),
             FlatButton(
-              onPressed: () {DefaultTabController.of(context).animateTo(2);},
+              onPressed: () {
+                DefaultTabController.of(context).animateTo(2);
+              },
               child: Column(
                 children: [
                   Text(
                     username,
-                    style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height / 35),
+                    style: TextStyle(fontSize: MediaQuery.of(context).size.height / 35),
                   ),
                   //TODO: navigate to profile AND PASS DATA!
                   FlatButton(
@@ -73,9 +73,7 @@ class _PostTopBarState extends State<PostTopBar> {
                         ),
                         Text(
                           "The Hubaa",
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width / 23,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: MediaQuery.of(context).size.width / 23, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

@@ -65,8 +65,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     }
 
     if (!error) {
-      UserServiceTest.updateUser(
-          uid, username, changedPicture ? profilePicture : 'avatar.png');
+      UserServiceTest.updateUser(uid, username, changedPicture ? profilePicture : 'avatar.png');
     }
   }
 
@@ -127,8 +126,7 @@ class _EditProfileViewState extends State<EditProfileView> {
               currentStance = newValue;
             });
           },
-          items: <String>['Regular', 'Goofy']
-              .map<DropdownMenuItem<String>>((String value) {
+          items: <String>['Regular', 'Goofy'].map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem(
               value: value,
               child: Text(value),

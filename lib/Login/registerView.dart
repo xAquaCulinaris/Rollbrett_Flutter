@@ -63,9 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
         setState(() {
           isLoading = true;
         });
-        dynamic result = _auth
-            .register(email, password, username)
-            .catchError(catchEmailError);
+        dynamic result = _auth.register(email, password, username).catchError(catchEmailError);
       } else {
         showDialog(
             context: context,
@@ -115,8 +113,7 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       Text(
                         "Register",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 30),
+                        style: TextStyle(fontSize: MediaQuery.of(context).size.height / 30),
                       ),
                     ],
                   ),
@@ -124,17 +121,11 @@ class _RegisterViewState extends State<RegisterView> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        EmailField(
-                            text: email,
-                            function: setEmail,
-                            labelText: "E-mail",
-                            icon: Icons.email),
+                        EmailField(text: email, function: setEmail, labelText: "E-mail", icon: Icons.email),
                         UsernameField(username, _setUsername),
                         PasswordField(setPassword, 'Password', true),
-                        PasswordField(
-                            setPasswordRep, 'Password Repetition', false),
-                        RoundedButton(
-                            "Register", _registerButtonPressed, 40, 20),
+                        PasswordField(setPasswordRep, 'Password Repetition', false),
+                        RoundedButton("Register", _registerButtonPressed, 40, 20),
                         RoundedButton("Login", _loginButtonPressed, 40, 20)
                       ],
                     ),

@@ -18,18 +18,18 @@ class RequirementsWidget extends StatefulWidget {
   _RequirementsWidgetState createState() => _RequirementsWidgetState();
 }
 
-
 class _RequirementsWidgetState extends State<RequirementsWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [if (!widget.authorizationStatusOk)
-        IconButton(
-            icon: Icon(Icons.portable_wifi_off),
-            color: Colors.red,
-            onPressed: () async {
-              await flutterBeacon.requestAuthorization;
-            }),
+      children: [
+        if (!widget.authorizationStatusOk)
+          IconButton(
+              icon: Icon(Icons.portable_wifi_off),
+              color: Colors.red,
+              onPressed: () async {
+                await flutterBeacon.requestAuthorization;
+              }),
         if (!widget.locationServiceEnabled)
           IconButton(
               icon: Icon(Icons.location_off),

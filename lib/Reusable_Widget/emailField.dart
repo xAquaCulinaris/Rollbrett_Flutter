@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 
 class EmailField extends StatefulWidget {
   String text;
@@ -9,13 +9,11 @@ class EmailField extends StatefulWidget {
   TextInputType keyLayout;
   Function validationFunc;
 
-
   EmailField({this.text, this.function, this.labelText, this.icon, this.keyLayout});
 
   @override
   _EmailFieldState createState() => _EmailFieldState();
 }
-
 
 class _EmailFieldState extends State<EmailField> {
   @override

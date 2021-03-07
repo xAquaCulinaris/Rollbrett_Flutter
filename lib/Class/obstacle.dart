@@ -38,11 +38,5 @@ class Obstacle {
     return _stair;
   }
 
-
-
   Obstacle(this.name, this.image, this.inRange, this.width, this.height, this.difficulty);
-
-
-
 }
-

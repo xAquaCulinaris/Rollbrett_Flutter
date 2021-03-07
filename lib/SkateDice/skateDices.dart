@@ -26,12 +26,7 @@ class _SkateDicesState extends State<SkateDices> {
 
   List<String> direction = ["Frontside", "Backside"];
 
-  List<Stance> stance = [
-    Stance.Regular,
-    Stance.Switch,
-    Stance.Fakie,
-    Stance.Nollie
-  ];
+  List<Stance> stance = [Stance.Regular, Stance.Switch, Stance.Fakie, Stance.Nollie];
 
   List<Map<String, String>> currentTrick = List<Map<String, String>>();
 
@@ -39,18 +34,10 @@ class _SkateDicesState extends State<SkateDices> {
     return text.split('.').last;
   }
 
-
   void _diffEasy(var trickListfiltered, int randomTrick, int randomObstacle) {
     setState(() {
-      currentTrick[0] = {
-        'name': trickListfiltered[randomTrick].name,
-        'picture': 'null'
-      };
-      currentTrick[1] = {
-        'name':
-            enumToString(obstacleList[randomObstacle].name.toString()),
-        'picture': obstacleList[randomObstacle].picture
-      };
+      currentTrick[0] = {'name': trickListfiltered[randomTrick].name, 'picture': 'null'};
+      currentTrick[1] = {'name': enumToString(obstacleList[randomObstacle].name.toString()), 'picture': obstacleList[randomObstacle].picture};
       currentTrick[2] = {'name': '', 'picture': 'null'};
       currentTrick[3] = {'name': '', 'picture': 'null'};
     });
@@ -72,31 +59,19 @@ class _SkateDicesState extends State<SkateDices> {
     setState(() {
       if (directionString != "") {
         currentTrick[0] = {'name': directionString, 'picture': 'null'};
-        currentTrick[1] = {
-          'name': trickListfiltered[randomTrick].name,
-          'picture': 'null'
-        };
-        currentTrick[2] = {
-          'name': enumToString(obstacleList[randomObstacle].name.toString()),
-          'picture': obstacleList[randomObstacle].picture
-        };
+        currentTrick[1] = {'name': trickListfiltered[randomTrick].name, 'picture': 'null'};
+        currentTrick[2] = {'name': enumToString(obstacleList[randomObstacle].name.toString()), 'picture': obstacleList[randomObstacle].picture};
       } else {
-        currentTrick[0] = {
-          'name': trickListfiltered[randomTrick].name,
-          'picture': 'null'
-        };
-        currentTrick[1] = {
-          'name': enumToString(obstacleList[randomObstacle].name.toString()),
-          'picture': obstacleList[randomObstacle].picture
-        };
+        currentTrick[0] = {'name': trickListfiltered[randomTrick].name, 'picture': 'null'};
+        currentTrick[1] = {'name': enumToString(obstacleList[randomObstacle].name.toString()), 'picture': obstacleList[randomObstacle].picture};
         currentTrick[2] = {'name': '', 'picture': 'null'};
       }
 
       currentTrick[3] = {'name': '', 'picture': 'null'};
     });
   }
-  
-  void _diffHard(var trickListfiltered, int randomObstacle, int randomDirection, int randomStance, int randomTrick ) {
+
+  void _diffHard(var trickListfiltered, int randomObstacle, int randomDirection, int randomStance, int randomTrick) {
     String directionString = "";
     if (obstacleList[randomObstacle].direction != Direction.None) {
       if (obstacleList[randomObstacle].direction == Direction.Frontside) {
@@ -110,19 +85,10 @@ class _SkateDicesState extends State<SkateDices> {
     }
 
     setState(() {
-      currentTrick[0] = {
-        'name': enumToString(stance[randomStance].toString()),
-        'picture': 'null'
-      };
+      currentTrick[0] = {'name': enumToString(stance[randomStance].toString()), 'picture': 'null'};
       currentTrick[1] = {'name': directionString, 'picture': 'null'};
-      currentTrick[2] = {
-        'name': trickListfiltered[randomTrick].name,
-        'picture': 'null'
-      };
-      currentTrick[3] = {
-        'name': enumToString(obstacleList[randomObstacle].name.toString()),
-        'picture': obstacleList[randomObstacle].picture
-      };
+      currentTrick[2] = {'name': trickListfiltered[randomTrick].name, 'picture': 'null'};
+      currentTrick[3] = {'name': enumToString(obstacleList[randomObstacle].name.toString()), 'picture': obstacleList[randomObstacle].picture};
     });
   }
 
@@ -132,17 +98,14 @@ class _SkateDicesState extends State<SkateDices> {
     int randomObstacle = random.nextInt(obstacleList.length);
 
     //filter type of tricks that are possible
-    List<SkateDiceTricks> trickListfiltered = obstacleTricks
-        .where((element) =>
-            element.obstacleType == obstacleList[randomObstacle].obstacleType)
-        .toList();
+    List<SkateDiceTricks> trickListfiltered = obstacleTricks.where((element) => element.obstacleType == obstacleList[randomObstacle].obstacleType).toList();
     int randomTrick = random.nextInt(trickListfiltered.length);
     int randomStance = random.nextInt(stance.length);
     int randomDirection = random.nextInt(direction.length);
 
     if (SkateDiceModelController.of(context).difficulty == Difficulty.Easy)
       _diffEasy(trickListfiltered, randomTrick, randomObstacle);
-    else if(SkateDiceModelController.of(context).difficulty == Difficulty.Medium)
+    else if (SkateDiceModelController.of(context).difficulty == Difficulty.Medium)
       _diffMed(trickListfiltered, randomObstacle, randomTrick, randomDirection);
     else
       _diffHard(trickListfiltered, randomObstacle, randomDirection, randomStance, randomTrick);
@@ -260,17 +223,13 @@ class _SkateDicesState extends State<SkateDices> {
     obstacleList.clear();
     obstacleTricks.clear();
 
-    for (int x = 0;
-        x < SkateDiceModelController.of(context).skateDiceMap.length;
-        x++) {
+    for (int x = 0; x < SkateDiceModelController.of(context).skateDiceMap.length; x++) {
       //TODO when no is selected disable checkbox
       //need to look if at least one children ist checked
-      if (SkateDiceModelController.of(context).skateDiceMap[x]['isChecked'] ==
-          true) {
+      if (SkateDiceModelController.of(context).skateDiceMap[x]['isChecked'] == true) {
         //loop trough all tricks and add them
         for (int z = 0; z < allConfiguredTricks.length; z++) {
-          var test1 = SkateDiceModelController.of(context).skateDiceMap[x]
-              ['obstacleType'];
+          var test1 = SkateDiceModelController.of(context).skateDiceMap[x]['obstacleType'];
           var test2 = allConfiguredTricks[z].obstacleType.toString();
 
           if (test1 == test2) {
@@ -279,17 +238,10 @@ class _SkateDicesState extends State<SkateDices> {
         }
 
         //loop through all obstacles and add them if 'isChecked' is true
-        for (int y = 0;
-            y <
-                SkateDiceModelController.of(context).skateDiceMap[x]
-                    ['itemCount'];
-            y++) {
-          if (SkateDiceModelController.of(context).skateDiceMap[x]['obstacles']
-              [y]['isChecked']) {
+        for (int y = 0; y < SkateDiceModelController.of(context).skateDiceMap[x]['itemCount']; y++) {
+          if (SkateDiceModelController.of(context).skateDiceMap[x]['obstacles'][y]['isChecked']) {
             for (SkateDiceObstacles toAdd in allObstacle) {
-              if (toAdd.name ==
-                  SkateDiceModelController.of(context).skateDiceMap[x]
-                      ['obstacles'][y]['obstacleName']) {
+              if (toAdd.name == SkateDiceModelController.of(context).skateDiceMap[x]['obstacles'][y]['obstacleName']) {
                 obstacleList.add(toAdd);
               }
             }

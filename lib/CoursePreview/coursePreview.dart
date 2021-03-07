@@ -1,21 +1,19 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:rollbrett_rottweil/Class/obstacle.dart';
 import 'package:rollbrett_rottweil/CoursePreview/obstacleListViewItem.dart';
 import 'package:rollbrett_rottweil/CoursePreview/requirementsWidget.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/customAppBar.dart';
 
-
 class CoursePreview extends StatefulWidget {
   @override
   _CoursePreviewState createState() => _CoursePreviewState();
 }
 
-class _CoursePreviewState extends State<CoursePreview>
-    with WidgetsBindingObserver {
+class _CoursePreviewState extends State<CoursePreview> with WidgetsBindingObserver {
   List<Obstacle> obstacleInRange = Obstacle.getObstacles();
 
   final StreamController<BluetoothState> streamController = StreamController();
@@ -36,9 +34,7 @@ class _CoursePreviewState extends State<CoursePreview>
 
   listeningState() async {
     print('Listening to bluetooth state');
-    _streamBluetooth = flutterBeacon
-        .bluetoothStateChanged()
-        .listen((BluetoothState state) async {
+    _streamBluetooth = flutterBeacon.bluetoothStateChanged().listen((BluetoothState state) async {
       print('BluetoothState = $state');
       streamController.add(state);
 
@@ -58,11 +54,8 @@ class _CoursePreviewState extends State<CoursePreview>
     final bluetoothState = await flutterBeacon.bluetoothState;
     final bluetoothEnabled = bluetoothState == BluetoothState.stateOn;
     final authorizationStatus = await flutterBeacon.authorizationStatus;
-    final authorizationStatusOk =
-        authorizationStatus == AuthorizationStatus.allowed ||
-            authorizationStatus == AuthorizationStatus.always;
-    final locationServiceEnabled =
-        await flutterBeacon.checkLocationServicesIfEnabled;
+    final authorizationStatusOk = authorizationStatus == AuthorizationStatus.allowed || authorizationStatus == AuthorizationStatus.always;
+    final locationServiceEnabled = await flutterBeacon.checkLocationServicesIfEnabled;
 
     setState(() {
       this.authorizationStatusOk = authorizationStatusOk;
@@ -79,9 +72,7 @@ class _CoursePreviewState extends State<CoursePreview>
     }
 
     await checkAllRequirements();
-    if (!authorizationStatusOk ||
-        !locationServiceEnabled ||
-        !bluetoothEnabled) {
+    if (!authorizationStatusOk || !locationServiceEnabled || !bluetoothEnabled) {
       print('RETURNED, authorizationStatusOk=$authorizationStatusOk, '
           'locationServiceEnabled=$locationServiceEnabled, '
           'bluetoothEnabled=$bluetoothEnabled');
@@ -100,8 +91,7 @@ class _CoursePreviewState extends State<CoursePreview>
         return;
       }
     }
-    _streamRanging =
-        flutterBeacon.ranging(regions).listen((RangingResult result) {
+    _streamRanging = flutterBeacon.ranging(regions).listen((RangingResult result) {
       print(result);
 
       if (result != null && mounted) {
@@ -120,8 +110,7 @@ class _CoursePreviewState extends State<CoursePreview>
           //Custom part
           for (int i = 0; i < _beacons.length; i++) {
             //handrail
-            if (_beacons[i].proximityUUID ==
-                'B9407F30-F5F8-466E-AFF9-25556B57FE6D') {
+            if (_beacons[i].proximityUUID == 'B9407F30-F5F8-466E-AFF9-25556B57FE6D') {
               obstacleInRange[1].inRange = true;
             }
 
@@ -204,22 +193,18 @@ class _CoursePreviewState extends State<CoursePreview>
     _streamRanging?.cancel();
     _streamBluetooth?.cancel();
     flutterBeacon.close;
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar("Course Preview"),
-      body:
-          !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
-              ? RequirementsWidget(streamController, authorizationStatusOk,
-                  locationServiceEnabled, bluetoothEnabled)
-              : ListView.builder(
-                  itemCount: obstacleInRange.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      ObstacleListViewItem(obstacleInRange, index),
-                ),
+      body: !bluetoothEnabled || !locationServiceEnabled || !authorizationStatusOk
+          ? RequirementsWidget(streamController, authorizationStatusOk, locationServiceEnabled, bluetoothEnabled)
+          : ListView.builder(
+              itemCount: obstacleInRange.length,
+              itemBuilder: (BuildContext context, int index) => ObstacleListViewItem(obstacleInRange, index),
+            ),
     );
   }
 }

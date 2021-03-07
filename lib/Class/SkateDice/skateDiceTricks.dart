@@ -8,7 +8,6 @@ class SkateDiceTricks {
 
   SkateDiceTricks(this.name, this.stance, this.obstacleType, this.difficulty);
 
-
   static SkateDiceTricks kickflip = SkateDiceTricks("Kickflip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
   static SkateDiceTricks heelflip = SkateDiceTricks("Heelflip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
   static SkateDiceTricks tre = SkateDiceTricks("360 Flip", Stance.All, ObstacleType.Flat, Difficulty.Medium);
@@ -17,7 +16,6 @@ class SkateDiceTricks {
   static SkateDiceTricks one_eighty = SkateDiceTricks("180", Stance.All, ObstacleType.Flat, Difficulty.Easy);
   static SkateDiceTricks varial_flip = SkateDiceTricks("Varial Flip", Stance.All, ObstacleType.Flat, Difficulty.Easy);
   static SkateDiceTricks varial_heel = SkateDiceTricks("Varial Heel", Stance.All, ObstacleType.Flat, Difficulty.Medium);
-
 
   static SkateDiceTricks noseSlide = SkateDiceTricks("Nose Slide", Stance.All, ObstacleType.Grind, Difficulty.Easy);
   static SkateDiceTricks boardslide = SkateDiceTricks("Boardslide", Stance.All, ObstacleType.Grind, Difficulty.Easy);
@@ -30,9 +28,27 @@ class SkateDiceTricks {
   static SkateDiceTricks tailslide = SkateDiceTricks("Tail Slide", Stance.All, ObstacleType.Grind, Difficulty.Medium);
   static SkateDiceTricks croocked = SkateDiceTricks("Croocked Grind", Stance.All, ObstacleType.Grind, Difficulty.Medium);
 
-
   static List<SkateDiceTricks> getTricks() {
-    List<SkateDiceTricks> list = [kickflip, noseSlide, boardslide, noseGrind, heelflip, tre, shuv, three_shuv, one_eighty, varial_flip, varial_heel, fifty_fifty, five_o, smith, feeble, blunt, tailslide, croocked];
+    List<SkateDiceTricks> list = [
+      kickflip,
+      noseSlide,
+      boardslide,
+      noseGrind,
+      heelflip,
+      tre,
+      shuv,
+      three_shuv,
+      one_eighty,
+      varial_flip,
+      varial_heel,
+      fifty_fifty,
+      five_o,
+      smith,
+      feeble,
+      blunt,
+      tailslide,
+      croocked
+    ];
     return list;
   }
 
@@ -40,7 +56,7 @@ class SkateDiceTricks {
     List<SkateDiceTricks> all = getTricks();
     List<SkateDiceTricks> filtered = List<SkateDiceTricks>();
 
-    for(SkateDiceTricks trick in all) {
+    for (SkateDiceTricks trick in all) {
       if (trick.obstacleType == ObstacleType.Flat) {
         filtered.add(trick);
       }
@@ -52,7 +68,7 @@ class SkateDiceTricks {
     List<SkateDiceTricks> all = getTricks();
     List<SkateDiceTricks> filtered = List<SkateDiceTricks>();
 
-    for(SkateDiceTricks trick in all) {
+    for (SkateDiceTricks trick in all) {
       if (trick.obstacleType == ObstacleType.Grind) {
         filtered.add(trick);
       }
@@ -64,7 +80,7 @@ class SkateDiceTricks {
     List<SkateDiceTricks> all = getTricks();
     List<SkateDiceTricks> filtered = List<SkateDiceTricks>();
 
-    for(SkateDiceTricks trick in all) {
+    for (SkateDiceTricks trick in all) {
       if (trick.obstacleType == ObstacleType.ManualPad) {
         filtered.add(trick);
       }

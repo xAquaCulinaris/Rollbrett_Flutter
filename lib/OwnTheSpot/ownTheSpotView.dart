@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rollbrett_rottweil/Class/post.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/post_list.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
-import 'package:provider/provider.dart';
-
-
 
 class OwnTheSpotPostView extends StatelessWidget {
   @override

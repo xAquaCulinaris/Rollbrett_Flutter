@@ -3,5 +3,4 @@ class SkateDicePlayer {
   int letters = 0;
 
   SkateDicePlayer(this.name);
-
 }

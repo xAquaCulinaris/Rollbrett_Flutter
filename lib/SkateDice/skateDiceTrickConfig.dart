@@ -70,37 +70,16 @@ class _SkateDiceTrickConfigState extends State<SkateDiceTrickConfig> {
   @override
   Widget build(BuildContext context) {
     return ListView(children: <Widget>[
-      expandableBox(
-          "Flat Tricks",
-          flatExpanded,
-          flatExpandedChange,
-          flatTricks,
-          ObstacleType.Flat,
-          flatArray,
-          SkateDiceModelController.of(context).flatArray),
-      expandableBox(
-          "Grinds & Slides",
-          grindExpanded,
-          grindExpandedChange,
-          grindTricks,
-          ObstacleType.Grind,
-          grindArray,
-          SkateDiceModelController.of(context).grindArray),
-     // difficultyExpandable(),
+      expandableBox("Flat Tricks", flatExpanded, flatExpandedChange, flatTricks, ObstacleType.Flat, flatArray, SkateDiceModelController.of(context).flatArray),
+      expandableBox("Grinds & Slides", grindExpanded, grindExpandedChange, grindTricks, ObstacleType.Grind, grindArray, SkateDiceModelController.of(context).grindArray),
+      // difficultyExpandable(),
       DifficultySelection(difficultyExpanded, difficultyExpandedChange, difficultyArray)
       //   expandableBox("Manuals", manualExpanded, manualExpandedChange,
       //  manualTricks, ObstacleType.ManualPad,  SkateDiceModelController.of(context).manualArray),
     ]);
   }
 
-  Widget expandableBox(
-      String name,
-      bool state,
-      Function changeState,
-      List<SkateDiceTricks> tricks,
-      ObstacleType type,
-      List<bool> checkBoxStates,
-      List<SkateDiceTricks> trickArray) {
+  Widget expandableBox(String name, bool state, Function changeState, List<SkateDiceTricks> tricks, ObstacleType type, List<bool> checkBoxStates, List<SkateDiceTricks> trickArray) {
     return Column(
       children: [
         Row(
@@ -121,15 +100,13 @@ class _SkateDiceTrickConfigState extends State<SkateDiceTrickConfig> {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: tricks.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    trickItem(index, tricks, checkBoxStates, trickArray))
+                itemBuilder: (BuildContext context, int index) => trickItem(index, tricks, checkBoxStates, trickArray))
             : SizedBox.shrink()
       ],
     );
   }
 
-  Widget trickItem(int index, List<SkateDiceTricks> trickList,
-      List<bool> checkStatus, List<SkateDiceTricks> trickArray) {
+  Widget trickItem(int index, List<SkateDiceTricks> trickList, List<bool> checkStatus, List<SkateDiceTricks> trickArray) {
     return CheckboxListTile(
       title: Text(trickList[index].name),
       value: checkStatus[index],

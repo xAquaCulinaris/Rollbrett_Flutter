@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'detailedObstacleView.dart';
 import '../Class/obstacle.dart';
 
 class ObstacleListViewItem extends StatefulWidget {
@@ -22,8 +21,7 @@ class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
             child: FlatButton(
           onPressed: widget.obstacleList[widget.index].inRange
               ? () {
-                  Navigator.of(context).pushNamed('/detailed_view',
-                      arguments: widget.obstacleList[widget.index]);
+                  Navigator.of(context).pushNamed('/detailed_view', arguments: widget.obstacleList[widget.index]);
                 }
               : null,
           child: Stack(
@@ -50,12 +48,9 @@ class _ObstacleListViewItemState extends State<ObstacleListViewItem> {
                 alignment: Alignment.centerRight,
                 child: Column(
                   children: <Widget>[
-                    Text("Difficulty: " +
-                        widget.obstacleList[widget.index].difficulty),
-                    Text("Height: " +
-                        widget.obstacleList[widget.index].height.toString()),
-                    Text("Width: " +
-                        widget.obstacleList[widget.index].width.toString()),
+                    Text("Difficulty: " + widget.obstacleList[widget.index].difficulty),
+                    Text("Height: " + widget.obstacleList[widget.index].height.toString()),
+                    Text("Width: " + widget.obstacleList[widget.index].width.toString()),
                   ],
                 ),
               )

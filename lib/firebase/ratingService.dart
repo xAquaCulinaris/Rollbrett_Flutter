@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RatingService {
-  static CollectionReference collection =
-      Firestore.instance.collection('ratings');
-
+  static CollectionReference collection = Firestore.instance.collection('ratings');
 
   //return name of the document
   static String getRatingID(String userID, String postID) {
@@ -19,10 +17,7 @@ class RatingService {
   static Future<int> getRating(String userID, String postID) async {
     int rating = 0;
 
-    await collection
-        .where(FieldPath.documentId, isEqualTo: getRatingID(userID, postID))
-        .getDocuments()
-        .then((event) {
+    await collection.where(FieldPath.documentId, isEqualTo: getRatingID(userID, postID)).getDocuments().then((event) {
       if (event.documents.isNotEmpty) {
         Map<String, dynamic> documentData = event.documents.single.data;
         rating = documentData['rating'];

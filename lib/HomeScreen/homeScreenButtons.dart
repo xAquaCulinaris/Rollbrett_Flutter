@@ -20,7 +20,6 @@ class HomeScreenButtons extends StatelessWidget {
     Navigator.of(context).pushNamed('/a');
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,14 +31,9 @@ class HomeScreenButtons extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(width: 20),
-            HomeScreenButton(
-                "Course Preview",
-                Rollbrett_Flutter.noun_half_pipe_699586,
-                coursePreviewButton,
-                context),
+            HomeScreenButton("Course Preview", Rollbrett_Flutter.noun_half_pipe_699586, coursePreviewButton, context),
             SizedBox(width: 20),
-            HomeScreenButton("Skate Dices", Rollbrett_Flutter.dice,
-                skateDicesButton, context),
+            HomeScreenButton("Skate Dices", Rollbrett_Flutter.dice, skateDicesButton, context),
             SizedBox(width: 20),
           ],
         ),
@@ -49,11 +43,9 @@ class HomeScreenButtons extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(width: 20),
-            HomeScreenButton("Own the Spot", Rollbrett_Flutter.video_camera,
-                ownTheSpotButton, context),
+            HomeScreenButton("Own the Spot", Rollbrett_Flutter.video_camera, ownTheSpotButton, context),
             SizedBox(width: 20),
-            HomeScreenButton("Credits", Rollbrett_Flutter.skateboard,
-                creditsButton, context),
+            HomeScreenButton("Credits", Rollbrett_Flutter.skateboard, creditsButton, context),
             SizedBox(width: 20),
           ],
         )

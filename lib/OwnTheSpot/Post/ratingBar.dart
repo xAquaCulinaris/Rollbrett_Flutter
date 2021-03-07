@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/ratingService.dart';
 
@@ -17,10 +15,9 @@ class RatingBar extends StatefulWidget {
 class _RatingBarState extends State<RatingBar> {
   int userRating = 0;
 
-
   void setRating() async {
     int value = await RatingService.getRating(AuthService.userID, widget.postID);
-    if(mounted) {
+    if (mounted) {
       setState(() {
         userRating = value;
       });
@@ -47,7 +44,7 @@ class _RatingBarState extends State<RatingBar> {
           setState(
             () {
               userRating = index + 1;
-              RatingService.setRating(AuthService.userID,widget.postID, userRating);
+              RatingService.setRating(AuthService.userID, widget.postID, userRating);
             },
           );
         },
@@ -57,8 +54,6 @@ class _RatingBarState extends State<RatingBar> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       scrollDirection: Axis.horizontal,

@@ -8,8 +8,7 @@ class DifficultySelection extends StatefulWidget {
   Function difficultyExpandedChange;
   bool difficultyExpanded;
 
-  DifficultySelection(this.difficultyExpanded, this.difficultyExpandedChange,
-      this.difficultyArray);
+  DifficultySelection(this.difficultyExpanded, this.difficultyExpandedChange, this.difficultyArray);
 
   @override
   _DifficultySelectionState createState() => _DifficultySelectionState();
@@ -26,9 +25,7 @@ class _DifficultySelectionState extends State<DifficultySelection> {
             onPressed: () {
               widget.difficultyExpandedChange();
             },
-            child: Icon(widget.difficultyExpanded
-                ? Icons.arrow_drop_down
-                : Icons.arrow_right),
+            child: Icon(widget.difficultyExpanded ? Icons.arrow_drop_down : Icons.arrow_right),
           ),
           Text("Difficulty"),
         ],

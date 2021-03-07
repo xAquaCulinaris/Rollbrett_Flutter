@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/postArguments.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/Post/postTile.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/postArguments.dart';
 import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
 class ProfilePostView extends StatefulWidget {
@@ -22,7 +22,6 @@ class _ProfilePostViewState extends State<ProfilePostView> {
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {

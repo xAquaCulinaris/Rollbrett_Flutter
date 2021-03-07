@@ -26,7 +26,7 @@ class HomeScreenDrawer extends StatelessWidget {
             ),
             child: Text("Settings"),
           ),
-          DrawerButton(Icons.account_circle, "Edit", editProfileButton,context),
+          DrawerButton(Icons.account_circle, "Edit", editProfileButton, context),
           DrawerButton(Icons.logout, "Logout", logOutButton, context)
         ],
       ),

@@ -19,19 +19,12 @@ class _SkateDiceConfigState extends State<SkateDiceConfig> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
-          ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: obstacleTypes.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  SkateDiceExpandableCheckBox(index)
-          ),
-        ],
-      );
+      children: [
+        ListView.builder(scrollDirection: Axis.vertical, shrinkWrap: true, itemCount: obstacleTypes.length, itemBuilder: (BuildContext context, int index) => SkateDiceExpandableCheckBox(index)),
+      ],
+    );
   }
 }

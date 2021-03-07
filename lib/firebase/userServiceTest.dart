@@ -2,15 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 
 class UserServiceTest {
-  static final CollectionReference _collection =
-      Firestore.instance.collection('users');
+  static final CollectionReference _collection = Firestore.instance.collection('users');
 
   static Future<String> getProfilePicture(String uid) async {
     String imageUrl;
-    await _collection
-        .where(FieldPath.documentId, isEqualTo: uid)
-        .getDocuments()
-        .then((event) {
+    await _collection.where(FieldPath.documentId, isEqualTo: uid).getDocuments().then((event) {
       if (event.documents.isNotEmpty) {
         Map<String, dynamic> documentData = event.documents.single.data;
         imageUrl = documentData['profilePic'];
@@ -22,27 +18,21 @@ class UserServiceTest {
   }
 
   static Future<bool> userNameExists(String name) async {
-    return (await _collection.where("name", isEqualTo: name).getDocuments())
-            .documents
-            .length >
-        0;
+    return (await _collection.where("name", isEqualTo: name).getDocuments()).documents.length > 0;
   }
 
   static User _convertUser(Map<String, dynamic> map) {
-    return User(
-        uid: map["uid"], name: map["name"], profilePicture: map['profilePic']);
+    return User(uid: map["uid"], name: map["name"], profilePicture: map['profilePic']);
   }
 
   static Future<String> getUsername(String uid) async {
-    DocumentSnapshot snapshot =
-    await Firestore.instance.document("users/$uid").get();
+    DocumentSnapshot snapshot = await Firestore.instance.document("users/$uid").get();
 
     return _convertUser(snapshot.data).name;
   }
 
   static Future<User> getUser(String uid) async {
-    DocumentSnapshot snapshot =
-        await Firestore.instance.document("users/$uid").get();
+    DocumentSnapshot snapshot = await Firestore.instance.document("users/$uid").get();
 
     return _convertUser(snapshot.data);
   }

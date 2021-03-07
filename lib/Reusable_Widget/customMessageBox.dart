@@ -30,14 +30,9 @@ class _CustomMessageBoxState extends State<CustomMessageBox> {
         Container(
           padding: EdgeInsets.only(left: 20, top: 65, right: 20, bottom: 20),
           margin: EdgeInsets.only(top: 45),
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
-              ]),
+          decoration: BoxDecoration(shape: BoxShape.rectangle, color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: [
+            BoxShadow(color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+          ]),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -46,8 +41,7 @@ class _CustomMessageBoxState extends State<CustomMessageBox> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 15),
-              Text(widget.description,
-                  style: TextStyle(fontSize: 14), textAlign: TextAlign.center),
+              Text(widget.description, style: TextStyle(fontSize: 14), textAlign: TextAlign.center),
               SizedBox(height: 22),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -55,8 +49,7 @@ class _CustomMessageBoxState extends State<CustomMessageBox> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child:
-                      Text(widget.buttonText, style: TextStyle(fontSize: 18)),
+                  child: Text(widget.buttonText, style: TextStyle(fontSize: 18)),
                 ),
               )
             ],

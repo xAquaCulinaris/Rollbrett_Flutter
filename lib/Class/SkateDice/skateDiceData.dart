@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceObstacles.dart';
 import 'package:rollbrett_rottweil/Class/SkateDice/skateDiceTricks.dart';
 
-
 class SkateDiceData {
   var skateDiceMap = _getDefault();
 
@@ -12,17 +11,11 @@ class SkateDiceData {
   List<SkateDiceTricks> manualArray = [];
   Difficulty difficulty = Difficulty.Easy;
 
-
   final StreamController _streamController = StreamController.broadcast();
 
   Stream get stream => _streamController.stream;
 
   Sink get sink => _streamController.sink;
-
-
-
-
-
 
   static List<Map> _getDefault() {
     List<ObstacleType> obstacleTypes = ObstacleType.values;
@@ -52,7 +45,6 @@ class SkateDiceData {
 
       obstacleMap.add(map);
     }
-
 
     return obstacleMap;
   }

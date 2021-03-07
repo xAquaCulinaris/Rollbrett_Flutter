@@ -14,16 +14,15 @@ class ProfilePostTile extends StatefulWidget {
 class _ProfilePostTileState extends State<ProfilePostTile> {
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/profile_post_view',
-          arguments: PostArguments(widget.post)
-        );
+        Navigator.pushNamed(context, '/profile_post_view', arguments: PostArguments(widget.post));
       },
-      child: Image(image: NetworkImage(widget.post.thumbnail), height: MediaQuery.of(context).size.width / 3, width: MediaQuery.of(context).size.width / 3,),
+      child: Image(
+        image: NetworkImage(widget.post.thumbnail),
+        height: MediaQuery.of(context).size.width / 3,
+        width: MediaQuery.of(context).size.width / 3,
+      ),
     );
   }
 }

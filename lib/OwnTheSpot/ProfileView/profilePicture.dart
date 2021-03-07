@@ -4,6 +4,7 @@ class ProfilePicture extends StatefulWidget {
   final String profilePicture;
 
   ProfilePicture(this.profilePicture);
+
   @override
   _ProfilePictureState createState() => _ProfilePictureState();
 }
