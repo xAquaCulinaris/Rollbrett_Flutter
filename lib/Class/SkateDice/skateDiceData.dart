@@ -9,7 +9,8 @@ class SkateDiceData {
 
   List<SkateDiceTricks> flatArray = SkateDiceTricks.getFlatTricks();
   List<SkateDiceTricks> grindArray = SkateDiceTricks.getGrindTricks();
- // List<bool> manualArray = [];
+  List<SkateDiceTricks> manualArray = [];
+  Difficulty difficulty = Difficulty.Easy;
 
 
   final StreamController _streamController = StreamController.broadcast();
@@ -17,6 +18,9 @@ class SkateDiceData {
   Stream get stream => _streamController.stream;
 
   Sink get sink => _streamController.sink;
+
+
+
 
 
 

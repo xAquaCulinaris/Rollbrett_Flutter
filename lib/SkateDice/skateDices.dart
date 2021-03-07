@@ -153,7 +153,7 @@ class _SkateDicesState extends State<SkateDices> {
   @override
   Widget build(BuildContext context) {
     //TODO CALL SOMEWHERE ELSE (not efficient)
-    _getConfiguredTricks();
+    _setConfiguredTricks();
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -194,9 +194,21 @@ class _SkateDicesState extends State<SkateDices> {
     );
   }
 
-  void _getConfiguredTricks() {
+
+  List<SkateDiceTricks> getConfiguredTricks() {
+    List<SkateDiceTricks> allTricks = [];
+    allTricks.addAll(SkateDiceModelController.of(context).flatArray);
+    allTricks.addAll(SkateDiceModelController.of(context).grindArray);
+    allTricks.addAll(SkateDiceModelController.of(context).manualArray);
+
+    return allTricks;
+  }
+  
+
+  void _setConfiguredTricks() {
     print("loading config");
-    List<SkateDiceTricks> allTricks = SkateDiceTricks.getTricks();
+   // List<SkateDiceTricks> allConfiguredTricks = SkateDiceTricks.getTricks();
+    List<SkateDiceTricks> allConfiguredTricks = getConfiguredTricks();
     List<SkateDiceObstacles> allObstacle = SkateDiceObstacles.getObstacles();
 
     obstacleList.clear();
@@ -210,13 +222,13 @@ class _SkateDicesState extends State<SkateDices> {
       if (SkateDiceModelController.of(context).skateDiceMap[x]['isChecked'] ==
           true) {
         //loop trough all tricks and add them
-        for (int z = 0; z < allTricks.length; z++) {
+        for (int z = 0; z < allConfiguredTricks.length; z++) {
           var test1 = SkateDiceModelController.of(context).skateDiceMap[x]
               ['obstacleType'];
-          var test2 = allTricks[z].obstacleType.toString();
+          var test2 = allConfiguredTricks[z].obstacleType.toString();
 
           if (test1 == test2) {
-            obstacleTricks.add(allTricks[z]);
+            obstacleTricks.add(allConfiguredTricks[z]);
           }
         }
 
