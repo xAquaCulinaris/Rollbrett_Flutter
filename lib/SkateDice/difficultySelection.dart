@@ -34,7 +34,19 @@ class _DifficultySelectionState extends State<DifficultySelection> {
           ? Column(
               children: <Widget>[
                 CheckboxListTile(
-                    title: Text("Easy"),
+                    title: Tooltip(
+                        message: "Easy tricks where you can choose obstacle, stance and direction on your own",
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(10),
+                        showDuration: Duration(seconds: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.9),
+                          borderRadius: const BorderRadius.all(Radius.circular(4)),
+                        ),
+                        textStyle: TextStyle(color: Colors.black),
+                        preferBelow: true,
+                        verticalOffset: 20,
+                        child: Text("Easy")),
                     value: widget.difficultyArray[0],
                     onChanged: (newValue) {
                       selectDifficulty(0);
