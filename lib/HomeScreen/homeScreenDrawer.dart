@@ -3,7 +3,12 @@ import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 import 'homeScreenDrawerButton.dart';
 
-class HomeScreenDrawer extends StatelessWidget {
+class HomeScreenDrawer extends StatefulWidget {
+  @override
+  _HomeScreenDrawerState createState() => _HomeScreenDrawerState();
+}
+
+class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
   final AuthService _auth = AuthService();
 
   void editProfileButton(BuildContext context) {

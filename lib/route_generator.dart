@@ -3,7 +3,8 @@ import 'package:rollbrett_rottweil/CoursePreview/coursePreview.dart';
 import 'package:rollbrett_rottweil/CoursePreview/detailedObstacleView.dart';
 import 'package:rollbrett_rottweil/ErrorPage/errorPage.dart';
 import 'package:rollbrett_rottweil/HomeScreen/homeScreen.dart';
-import 'package:rollbrett_rottweil/Login/Authenticate.dart';
+import 'package:rollbrett_rottweil/Login/loginView.dart';
+import 'package:rollbrett_rottweil/Login/registerView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/EditProfile/editProfileView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostView.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ownTheSpotTabBar.dart';
@@ -16,7 +17,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => Authenticate());
+        return MaterialPageRoute(builder: (_) => LoginPage());
 
       case '/home':
         return MaterialPageRoute(builder: (_) => HomeScreen());
@@ -41,6 +42,9 @@ class RouteGenerator {
 
       case '/skate_dice_tabbar':
         return MaterialPageRoute(builder: (_) => SkateDiceModelController(child: SkateDiceTabBar()));
+
+      case '/register':
+        return MaterialPageRoute(builder: (_) => RegisterView());
 
       default:
         return MaterialPageRoute(builder: (_) => ErrorPage());

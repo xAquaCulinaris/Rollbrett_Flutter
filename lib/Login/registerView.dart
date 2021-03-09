@@ -9,11 +9,8 @@ import 'package:rollbrett_rottweil/Reusable_Widget/usernameField.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
+
 class RegisterView extends StatefulWidget {
-  final Function toggleShowLogin;
-
-  RegisterView(this.toggleShowLogin);
-
   @override
   _RegisterViewState createState() => _RegisterViewState();
 }
@@ -63,23 +60,20 @@ class _RegisterViewState extends State<RegisterView> {
         setState(() {
           isLoading = true;
         });
-        dynamic result = _auth.register(email, password, username).catchError(catchEmailError);
+        _auth.register(email, password, username).catchError(catchEmailError);
       } else {
         showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return CustomMessageBox(
-                "Error",
-                "Username already exists!",
-                "Okay",
-              );
-            });
+          context: context,
+          builder: (BuildContext context) {
+            return CustomMessageBox(
+              "Error",
+              "Username already exists!",
+              "Okay",
+            );
+          },
+        );
       }
     }
-  }
-
-  void _loginButtonPressed() {
-    widget.toggleShowLogin();
   }
 
   void _setUsername(String value) {
@@ -126,7 +120,6 @@ class _RegisterViewState extends State<RegisterView> {
                         PasswordField(setPassword, 'Password', true),
                         PasswordField(setPasswordRep, 'Password Repetition', false),
                         RoundedButton("Register", _registerButtonPressed, 40, 20),
-                        RoundedButton("Login", _loginButtonPressed, 40, 20)
                       ],
                     ),
                   )

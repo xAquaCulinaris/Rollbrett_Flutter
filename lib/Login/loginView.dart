@@ -7,10 +7,6 @@ import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 
 class LoginPage extends StatefulWidget {
-  final Function toggleShowLogin;
-
-  LoginPage(this.toggleShowLogin);
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -50,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _registerButtonPressed() {
-    widget.toggleShowLogin();
+    Navigator.of(context).pushNamed('/register');
   }
 
   Widget _getContainer() {
