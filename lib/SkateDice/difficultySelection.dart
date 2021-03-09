@@ -34,19 +34,7 @@ class _DifficultySelectionState extends State<DifficultySelection> {
           ? Column(
               children: <Widget>[
                 CheckboxListTile(
-                    title: Tooltip(
-                        message: "Easy tricks where you can choose obstacle, stance and direction on your own",
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.all(10),
-                        showDuration: Duration(seconds: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.9),
-                          borderRadius: const BorderRadius.all(Radius.circular(4)),
-                        ),
-                        textStyle: TextStyle(color: Colors.black),
-                        preferBelow: true,
-                        verticalOffset: 20,
-                        child: Text("Easy")),
+                    title: Text("Easy"),
                     value: widget.difficultyArray[0],
                     onChanged: (newValue) {
                       selectDifficulty(0);
@@ -70,6 +58,8 @@ class _DifficultySelectionState extends State<DifficultySelection> {
   }
 
   void selectDifficulty(int n) {
+    String message;
+
     setState(() {
       for (int i = 0; i < widget.difficultyArray.length; i++) {
         widget.difficultyArray[i] = false;
@@ -80,14 +70,20 @@ class _DifficultySelectionState extends State<DifficultySelection> {
     switch (n) {
       case 0:
         SkateDiceModelController.of(context).difficulty = Difficulty.Easy;
+        message = "Easy tricks where you can choose obstacle, stance and direction on your own";
         break;
       case 1:
         SkateDiceModelController.of(context).difficulty = Difficulty.Medium;
+        message = "Medium tricks where you can choose stance";
         break;
       case 2:
         SkateDiceModelController.of(context).difficulty = Difficulty.Hard;
+        message = "Hard tricks where you can choose nothing";
         break;
     }
+
+    Scaffold.of(context).showSnackBar(new SnackBar(content: new Text(message)));
+
     print(SkateDiceModelController.of(context).difficulty);
   }
 }
