@@ -3,7 +3,7 @@ import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static String userID;
 
@@ -33,6 +33,11 @@ class AuthService {
       return null;
     }
   }
+
+  static Future<void> resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
 
   Future signOut() async {
     try {

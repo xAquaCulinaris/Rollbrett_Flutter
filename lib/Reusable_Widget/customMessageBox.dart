@@ -60,9 +60,9 @@ class _CustomMessageBoxState extends State<CustomMessageBox> {
           right: 20,
           child: CircleAvatar(
             backgroundColor: Colors.white,
-            radius: 45,
+            radius: 40,
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(45)),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
               child: Image.asset('assets/info_icon.png'),
             ),
           ),

@@ -59,6 +59,8 @@ class _EditProfileViewState extends State<EditProfileView> {
     });
   }
 
+  //TODO add change password logic
+
   void _saveButtonPressed() async {
     print(currentStance);
     bool error = false;
@@ -103,7 +105,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     }
   }
 
-  void setStance(String text) {
+  void _setStance(String text) {
     currentStance = text;
   }
 
@@ -122,7 +124,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                   ProfilePicture(profilePicture),
                   UsernameField(username, _setUsername),
                   PasswordField(_setPassword, 'Password', true),
-                  StanceSelection(currentStance, setStance),
+                  StanceSelection(currentStance, _setStance),
                   RoundedButton('Save', _saveButtonPressed, 40, 20),
                 ],
               ),

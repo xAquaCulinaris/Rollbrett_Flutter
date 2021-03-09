@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/logoText.dart';
@@ -49,6 +50,29 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context).pushNamed('/register');
   }
 
+  void _resetPassButtonPressed() async {
+    if (email != '') AuthService.resetPassword(email).then((value) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CustomMessageBox(
+              "Success",
+              "Password reset link has been sent to your email!",
+              "Okay",
+            );
+          });
+    } );
+    else  showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomMessageBox(
+            "Error",
+            "Enter a valid email to reset your Password!",
+            "Okay",
+          );
+        });
+  }
+
   Widget _getContainer() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -95,34 +119,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _getPassword() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        onChanged: (value) {
-          setState(() {
-            password = value;
-          });
-        },
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            Icons.lock,
-            color: Colors.grey,
-          ),
-          labelText: 'Password',
-        ),
-      ),
-    );
-  }
-
   Widget _getForgetPassword() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FlatButton(onPressed: () {}, child: Text('Forget Password?')),
+        FlatButton(
+            onPressed: () {
+              _resetPassButtonPressed();
+            },
+            child: Text('Forget Password?')),
       ],
     );
   }
