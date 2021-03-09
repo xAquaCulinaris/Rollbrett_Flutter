@@ -31,9 +31,9 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   @override
   void initState() {
+    super.initState();
     _getUser();
     _getImage();
-    super.initState();
   }
 
   void _getUser() async {
@@ -41,7 +41,11 @@ class _EditProfileViewState extends State<EditProfileView> {
       if (mounted)
         setState(() {
           user = value;
+          username = user.name;
+          currentStance = user.stance;
         });
+      print(username);
+      print(currentStance);
     });
   }
 
@@ -56,6 +60,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 
   void _saveButtonPressed() async {
+    print(currentStance);
     bool error = false;
     if (_formKey.currentState.validate()) {
       if (username != user.name) {
@@ -67,8 +72,18 @@ class _EditProfileViewState extends State<EditProfileView> {
       error = true;
     }
 
+    String changeName;
+    String changeStance;
+    String changeProfilePic;
+
+    changeName = username != user.name ? username : user.name;
+    changeStance = currentStance != user.stance ? currentStance : user.stance;
+    changeProfilePic = changedPicture
+        ? profilePicture
+        : 'https://firebasestorage.googleapis.com/v0/b/rollbrett-rottweil-flutter.appspot.com/o/thumbnails%2F1a817c2a-0291-4af6-af22-4904fa72c12c?alt=media&token=1dec4a49-b478-4807-94c1-301bcc7f1727';
+
     if (!error) {
-      UserServiceTest.updateUser(uid, username, changedPicture ? profilePicture : 'avatar.png');
+      UserServiceTest.updateUser(uid, changeName, changeProfilePic, changeStance);
     }
   }
 
@@ -105,7 +120,7 @@ class _EditProfileViewState extends State<EditProfileView> {
             : Column(
                 children: [
                   ProfilePicture(profilePicture),
-                  UsernameField(user.name, _setUsername),
+                  UsernameField(username, _setUsername),
                   PasswordField(_setPassword, 'Password', true),
                   StanceSelection(currentStance, setStance),
                   RoundedButton('Save', _saveButtonPressed, 40, 20),

@@ -40,7 +40,7 @@ class UserServiceTest {
   static void updatePassword(String uid, String pass) async {}
 
   //update rating for the current post and current user
-  static void updateUser(String uid, String name, String profilePic) async {
-    _collection.document(uid).setData({'name': name, 'profilePic': profilePic});
+  static void updateUser(String uid, String name, String profilePic, String stance) async {
+    _collection.document(uid).setData({'name': name, 'profilePic': profilePic, 'stance': stance});
   }
 }

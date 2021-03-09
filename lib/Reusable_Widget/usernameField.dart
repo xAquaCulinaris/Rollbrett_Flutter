@@ -16,6 +16,7 @@ class _UsernameFieldState extends State<UsernameField> {
     return Padding(
       padding: EdgeInsets.all(8),
       child: TextFormField(
+        initialValue: widget.username,
         //TODO:: better username validation
         validator: (val) => val.length < 4 ? 'Username must be 4 characters' : null,
         keyboardType: TextInputType.text,
