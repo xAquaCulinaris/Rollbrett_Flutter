@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/StanceSelectoin.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
@@ -19,10 +20,13 @@ class _RegisterViewState extends State<RegisterView> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+
+
   bool isLoading = false;
 
   String email = "";
   String username = "";
+  String stance = "Regular";
   String password = "";
   String passwordRepetition = "";
 
@@ -36,6 +40,10 @@ class _RegisterViewState extends State<RegisterView> {
 
   void setPasswordRep(String text) {
     passwordRepetition = text;
+  }
+
+  void setStance(String text) {
+    stance = text;
   }
 
   void catchEmailError(Object err) {
@@ -55,12 +63,14 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   void _registerButtonPressed() async {
+    print(stance);
     if (_formKey.currentState.validate()) {
       if (!await UserServiceTest.userNameExists(username)) {
         setState(() {
           isLoading = true;
         });
-        _auth.register(email, password, username).catchError(catchEmailError);
+        //TODO fix changeing view on registration (it doesent change to home screen right now)
+        _auth.register(email, password, username, stance).catchError(catchEmailError);
       } else {
         showDialog(
           context: context,
@@ -117,6 +127,7 @@ class _RegisterViewState extends State<RegisterView> {
                       children: [
                         EmailField(text: email, function: setEmail, labelText: "E-mail", icon: Icons.email),
                         UsernameField(username, _setUsername),
+                        StanceSelection(stance, setStance),
                         PasswordField(setPassword, 'Password', true),
                         PasswordField(setPasswordRep, 'Password Repetition', false),
                         RoundedButton("Register", _registerButtonPressed, 40, 20),

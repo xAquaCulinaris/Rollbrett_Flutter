@@ -22,7 +22,7 @@ class UserServiceTest {
   }
 
   static User _convertUser(Map<String, dynamic> map) {
-    return User(uid: map["uid"], name: map["name"], profilePicture: map['profilePic']);
+    return User(uid: map["uid"], name: map["name"], profilePicture: map['profilePic'], stance: map['stance']);
   }
 
   static Future<String> getUsername(String uid) async {

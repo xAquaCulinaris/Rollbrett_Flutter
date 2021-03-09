@@ -44,13 +44,13 @@ class AuthService {
     }
   }
 
-  Future register(String email, String password, String username) async {
+  Future register(String email, String password, String username, String stance) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       //TODO; add dynamic picture
       await UserService(user.uid, username,
-              'https://firebasestorage.googleapis.com/v0/b/rollbrett-rottweil-flutter.appspot.com/o/thumbnails%2F1a817c2a-0291-4af6-af22-4904fa72c12c?alt=media&token=1dec4a49-b478-4807-94c1-301bcc7f1727')
+              'https://firebasestorage.googleapis.com/v0/b/rollbrett-rottweil-flutter.appspot.com/o/thumbnails%2F1a817c2a-0291-4af6-af22-4904fa72c12c?alt=media&token=1dec4a49-b478-4807-94c1-301bcc7f1727', stance)
           .updateUserData(username);
       return _convertUser(user);
     } catch (signUpError) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePicture.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/StanceSelectoin.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
@@ -16,6 +17,8 @@ class EditProfileView extends StatefulWidget {
 
 class _EditProfileViewState extends State<EditProfileView> {
   final _formKey = GlobalKey<FormState>();
+
+  String currentStance = 'Regular';
 
   String uid = AuthService.userID;
   User user;
@@ -85,6 +88,10 @@ class _EditProfileViewState extends State<EditProfileView> {
     }
   }
 
+  void setStance(String text) {
+    currentStance = text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,39 +107,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                   ProfilePicture(profilePicture),
                   UsernameField(user.name, _setUsername),
                   PasswordField(_setPassword, 'Password', true),
-                  stanceSelection(),
+                  StanceSelection(currentStance, setStance),
                   RoundedButton('Save', _saveButtonPressed, 40, 20),
                 ],
               ),
-      ),
-    );
-  }
-
-  Widget stanceSelection() {
-    String currentStance = 'Regular';
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 500,
-        child: DropdownButton<String>(
-          value: currentStance,
-          elevation: 16,
-          underline: Container(
-            height: 1,
-            color: Colors.grey,
-          ),
-          onChanged: (String newValue) {
-            setState(() {
-              currentStance = newValue;
-            });
-          },
-          items: <String>['Regular', 'Goofy'].map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-        ),
       ),
     );
   }
