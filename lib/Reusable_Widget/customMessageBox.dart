@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 
 class CustomMessageBox extends StatefulWidget {
-  final String title;
-  final String description;
-  final String buttonText;
+  String title;
+  String description;
+  String buttonText;
+  bool navigateHomeScreen;
 
-  CustomMessageBox(this.title, this.description, this.buttonText);
+  CustomMessageBox.fromCustomMessageBox(String title, String description, String buttonText, bool navigateHomeScreen) {
+    this.title = title;
+    this.description = description;
+    this.buttonText = buttonText;
+    this.navigateHomeScreen = navigateHomeScreen;
+  }
+
+  CustomMessageBox(this.title, this.description, this.buttonText) {
+    this.title = title;
+    this.description = description;
+    this.buttonText = buttonText;
+    this.navigateHomeScreen = false;
+  }
 
   @override
   _CustomMessageBoxState createState() => _CustomMessageBoxState();
@@ -47,7 +60,11 @@ class _CustomMessageBoxState extends State<CustomMessageBox> {
                 alignment: Alignment.bottomCenter,
                 child: FlatButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    if (widget.navigateHomeScreen)
+                      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                    else
+                      Navigator.of(context).pop();
+
                   },
                   child: Text(widget.buttonText, style: TextStyle(fontSize: 18)),
                 ),

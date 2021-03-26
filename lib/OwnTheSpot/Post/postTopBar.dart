@@ -53,6 +53,7 @@ class _PostTopBarState extends State<PostTopBar> {
               ),
             ),
             FlatButton(
+              //TODO: navigate to profile AND PASS DATA!
               onPressed: () {
                 DefaultTabController.of(context).animateTo(2);
               },
@@ -62,7 +63,6 @@ class _PostTopBarState extends State<PostTopBar> {
                     username,
                     style: TextStyle(fontSize: MediaQuery.of(context).size.height / 35),
                   ),
-                  //TODO: navigate to profile AND PASS DATA!
                   FlatButton(
                     onPressed: () {},
                     child: Row(

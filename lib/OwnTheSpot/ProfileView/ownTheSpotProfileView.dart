@@ -68,6 +68,7 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
           children: [
             ProfilePicture(profilePicture),
             Text(user.name),
+            Text(user.stance),
             Expanded(
               child: posts == null
                   ? Text("no posts")

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/Class/user.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePicture.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/StanceSelectoin.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
@@ -26,6 +27,8 @@ class _EditProfileViewState extends State<EditProfileView> {
   String profilePicture;
   String username;
   String password;
+
+  String errorText;
 
   //TODO: need to fix image upload (and image change)
 
@@ -68,6 +71,7 @@ class _EditProfileViewState extends State<EditProfileView> {
       if (username != user.name) {
         if (await UserServiceTest.userNameExists(username)) {
           error = true;
+          errorText = "Username already exists!";
         }
       }
     } else {
@@ -86,6 +90,27 @@ class _EditProfileViewState extends State<EditProfileView> {
 
     if (!error) {
       UserServiceTest.updateUser(uid, changeName, changeProfilePic, changeStance);
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CustomMessageBox.fromCustomMessageBox(
+              "Success",
+              "Updated data Successfully",
+              "Okay",
+              true,
+            );
+          });
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return CustomMessageBox(
+              "Error",
+              errorText,
+              "Okay",
+            );
+          });
     }
   }
 
