@@ -146,7 +146,6 @@ class _RegisterViewState extends State<RegisterView> {
     return isLoading
         ? Loading()
         : Scaffold(
-            resizeToAvoidBottomPadding: false,
             backgroundColor: Color(0xfff2f3f7),
             body: SingleChildScrollView(
               child: Stack(

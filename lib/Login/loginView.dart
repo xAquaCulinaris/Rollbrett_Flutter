@@ -35,13 +35,21 @@ class _LoginPageState extends State<LoginPage> {
     print(password);
     if (_formKey.currentState.validate()) {
       setState(() => isLoading = true);
-      dynamic result = _auth.signIn(email, password);
+      dynamic result = await _auth.signIn(email, password);
+
       if (result == null) {
         print("error");
-        setState(() {
-          error = 'something went wrong registering, maybe wrong email?';
-          isLoading = false;
-        });
+        setState(() => isLoading = false);
+
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomMessageBox(
+                "Error",
+                'Something went wrong, maybe wrong email or password?',
+                "Okay",
+              );
+            });
       }
     }
   }
@@ -51,26 +59,28 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _resetPassButtonPressed() async {
-    if (email != '') AuthService.resetPassword(email).then((value) {
+    if (email != '')
+      AuthService.resetPassword(email).then((value) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomMessageBox(
+                "Success",
+                "Password reset link has been sent to your email!",
+                "Okay",
+              );
+            });
+      });
+    else
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return CustomMessageBox(
-              "Success",
-              "Password reset link has been sent to your email!",
+              "Error",
+              "Enter a valid email to reset your Password!",
               "Okay",
             );
           });
-    } );
-    else  showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CustomMessageBox(
-            "Error",
-            "Enter a valid email to reset your Password!",
-            "Okay",
-          );
-        });
   }
 
   Widget _getContainer() {
