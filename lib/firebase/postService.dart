@@ -60,7 +60,18 @@ class PostService {
     );
   }
 
-  static Future<void> deletePost(String uid) async {
-    return collection.document(uid).delete();
+  static Future<void> deletePost(String postID) async {
+    deleteRatings(postID);
+    return collection.document(postID).delete();
+  }
+
+  static Future<void> deleteRatings(String postID) {
+    return Firestore.instance.collection('ratings').getDocuments().then((value) {
+      List<DocumentSnapshot> allDocs = value.documents;
+      List<DocumentSnapshot> filteredDocs = allDocs.where((document) => document.data['postID'] == postID).toList();
+      for (DocumentSnapshot ds in filteredDocs) {
+        ds.reference.delete();
+      }
+    });
   }
 }
