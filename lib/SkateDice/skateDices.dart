@@ -165,6 +165,9 @@ class _SkateDicesState extends State<SkateDices> {
   Widget build(BuildContext context) {
     //TODO CALL SOMEWHERE ELSE (not efficient)
     _setConfiguredTricks();
+
+
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(

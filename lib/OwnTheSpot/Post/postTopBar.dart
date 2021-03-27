@@ -4,7 +4,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
-import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class PostTopBar extends StatefulWidget {
   final String uid;
@@ -21,7 +21,7 @@ class _PostTopBarState extends State<PostTopBar> {
   String username = "";
 
   void _getUsername() async {
-    await UserServiceTest.getUsername(widget.uid).then((value) {
+    await UserService.getUsername(widget.uid).then((value) {
       if (mounted) {
         setState(() {
           username = value;

@@ -8,7 +8,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/passwordField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/usernameField.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
-import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 
 class RegisterView extends StatefulWidget {
@@ -65,7 +65,7 @@ class _RegisterViewState extends State<RegisterView> {
   void _registerButtonPressed() async {
     print(stance);
     if (_formKey.currentState.validate()) {
-      if (!await UserServiceTest.userNameExists(username)) {
+      if (!await UserService.userNameExists(username)) {
         setState(() {
           isLoading = true;
         });
@@ -148,29 +148,31 @@ class _RegisterViewState extends State<RegisterView> {
         : Scaffold(
             resizeToAvoidBottomPadding: false,
             backgroundColor: Color(0xfff2f3f7),
-            body: Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.7,
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: const Radius.circular(70),
-                        bottomRight: const Radius.circular(70),
+            body: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.of(context).size.width,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: const Radius.circular(70),
+                          bottomRight: const Radius.circular(70),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LogoText(),
-                    _getContainer(),
-                  ],
-                )
-              ],
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LogoText(),
+                      _getContainer(),
+                    ],
+                  )
+                ],
+              ),
             ),
           );
   }

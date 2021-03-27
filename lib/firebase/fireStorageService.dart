@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class FireStorageService extends ChangeNotifier {
   FireStorageService();
 
   static Future<String> getImageFromUID(String uid) async {
-    return await UserServiceTest.getProfilePicture(uid);
+    return await UserService.getProfilePicture(uid);
   }
 }

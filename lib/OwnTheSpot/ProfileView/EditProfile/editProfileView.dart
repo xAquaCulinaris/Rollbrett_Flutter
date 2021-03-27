@@ -9,7 +9,7 @@ import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/usernameField.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
-import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class EditProfileView extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 
   void _getUser() async {
-    await UserServiceTest.getUser(uid).then((value) {
+    await UserService.getUser(uid).then((value) {
       if (mounted)
         setState(() {
           user = value;
@@ -69,7 +69,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     bool error = false;
     if (_formKey.currentState.validate()) {
       if (username != user.name) {
-        if (await UserServiceTest.userNameExists(username)) {
+        if (await UserService.userNameExists(username)) {
           error = true;
           errorText = "Username already exists!";
         }
@@ -89,7 +89,7 @@ class _EditProfileViewState extends State<EditProfileView> {
         : 'https://firebasestorage.googleapis.com/v0/b/rollbrett-rottweil-flutter.appspot.com/o/thumbnails%2F1a817c2a-0291-4af6-af22-4904fa72c12c?alt=media&token=1dec4a49-b478-4807-94c1-301bcc7f1727';
 
     if (!error) {
-      UserServiceTest.updateUser(uid, changeName, changeProfilePic, changeStance);
+      UserService.updateUser(uid, changeName, changeProfilePic, changeStance);
 
       showDialog(
           context: context,

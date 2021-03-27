@@ -6,7 +6,7 @@ import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/profilePostTile.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/loading.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
-import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class OwnTheSpotProfileView extends StatefulWidget {
   final String uid;
@@ -41,7 +41,7 @@ class _OwnTheSpotProfileViewState extends State<OwnTheSpotProfileView> {
   }
 
   void _getUser(String uid) async {
-    await UserServiceTest.getUser(uid).then((value) {
+    await UserService.getUser(uid).then((value) {
       if (mounted)
         setState(() {
           user = value;

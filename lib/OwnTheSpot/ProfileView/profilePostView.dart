@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/Post/postTile.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/ProfileView/postArguments.dart';
-import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
+import 'package:rollbrett_rottweil/firebase/userService.dart';
 
 class ProfilePostView extends StatefulWidget {
   final PostArguments arguments;
@@ -16,7 +16,7 @@ class _ProfilePostViewState extends State<ProfilePostView> {
   String username = "";
 
   void _getUsername(String uid) async {
-    await UserServiceTest.getUsername(uid).then((value) {
+    await UserService.getUsername(uid).then((value) {
       setState(() {
         username = value;
       });
