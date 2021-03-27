@@ -18,7 +18,7 @@ class PostService {
 
   List<Post> _postListConverter(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Post(doc.data['uid'] ?? '', doc.data['video'] ?? '', doc.documentID, doc.data['thumbnail']);
+      return Post(doc.data['uid'] ?? '', doc.data['video'] ?? '', doc.documentID, doc.data['thumbnail'], doc.data['caption']);
     }).toList();
   }
 
@@ -34,7 +34,7 @@ class PostService {
   }
 
   static Post _convertPost(Map<String, dynamic> map, String postID) {
-    return Post(map['uid'], map['video'], postID, map['thumbnail']);
+    return Post(map['uid'], map['video'], postID, map['thumbnail'], map['caption']);
   }
 
   static Future<Post> getPostFromID(String id) async {
@@ -52,11 +52,11 @@ class PostService {
   }
 
   //create Post OR update data if already exists
-  static Future updatePostData(String thumbnailUrl) async {
+  static Future updatePostData(String thumbnailUrl, String uid, String caption) async {
     var uuid = Uuid();
 
     return await collection.document(uuid.v4()).setData(
-      {'uid': 'Mnza2qZ9hgb35HLVXf8Y3e1QDNu1', 'video': 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4', 'thumbnail': thumbnailUrl},
+      {'uid': uid, 'video': 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4', 'thumbnail': thumbnailUrl, 'caption': caption},
     );
   }
 

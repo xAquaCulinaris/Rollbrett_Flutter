@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/emailField.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/roundedButton.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/video_widget.dart';
+import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
 import 'package:rollbrett_rottweil/fonts/rollbrett__flutter_icons.dart';
 import 'package:video_player/video_player.dart';
@@ -17,6 +19,12 @@ class OwnTheSpotNewPostView extends StatefulWidget {
 
 class _OwnTheSpotNewPostViewState extends State<OwnTheSpotNewPostView> {
   File video;
+  String caption;
+
+
+  void setCaption(String text) {
+    caption= text;
+  }
 
   Future<String> createThumbnail() async {
     final path = await VideoThumbnail.thumbnailFile(
@@ -28,7 +36,7 @@ class _OwnTheSpotNewPostViewState extends State<OwnTheSpotNewPostView> {
     String path = await createThumbnail();
     File file = File(path);
     String url = await PostService.uploadThumbnail(file);
-    PostService.updatePostData(url);
+    PostService.updatePostData(url, AuthService.userID, caption);
   }
 
   Future getVideo() async {
@@ -47,6 +55,7 @@ class _OwnTheSpotNewPostViewState extends State<OwnTheSpotNewPostView> {
       children: [
         video == null ? Icon(Rollbrett_Flutter.video_camera) : VideoWidget(VideoPlayerController.file(video)),
         RoundedButton("Select Video", getVideo, 40, 20),
+        EmailField(text: caption, labelText: "Caption", icon: Icons.edit, keyLayout: TextInputType.text, function: setCaption,),
         RoundedButton("New Post", addPost, 40, 20),
       ],
     );

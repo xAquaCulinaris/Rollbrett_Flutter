@@ -7,7 +7,6 @@ class EmailField extends StatefulWidget {
   String labelText;
   IconData icon;
   TextInputType keyLayout;
-  Function validationFunc;
 
   EmailField({this.text, this.function, this.labelText, this.icon, this.keyLayout});
 

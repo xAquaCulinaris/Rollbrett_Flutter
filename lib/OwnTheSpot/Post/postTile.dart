@@ -18,7 +18,7 @@ class PostTile extends StatelessWidget {
         PostTopBar(post.postID, post.uid),
         // VideoWidget(VideoPlayerController.network(post.video)),
         VideoWidget(VideoPlayerController.asset('videos/270BoardSlide.mp4')),
-        PostBottomBar(post.uid, post.postID),
+        PostBottomBar(post.uid, post.postID, post.caption),
       ],
     ));
   }
