@@ -59,4 +59,8 @@ class PostService {
       {'uid': 'Mnza2qZ9hgb35HLVXf8Y3e1QDNu1', 'video': 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4', 'thumbnail': thumbnailUrl},
     );
   }
+
+  static Future<void> deletePost(String uid) async {
+    return collection.document(uid).delete();
+  }
 }

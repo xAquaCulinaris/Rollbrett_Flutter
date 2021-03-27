@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/OwnTheSpot/Post/postMenu.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
+import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
+import 'package:rollbrett_rottweil/firebase/postService.dart';
 import 'package:rollbrett_rottweil/firebase/userServiceTest.dart';
 
 class PostTopBar extends StatefulWidget {
   final String uid;
+  final String postID;
 
-  PostTopBar(this.uid);
+  PostTopBar(this.postID, this.uid);
 
   @override
   _PostTopBarState createState() => _PostTopBarState();
@@ -82,9 +87,62 @@ class _PostTopBarState extends State<PostTopBar> {
               ),
             ),
             Spacer(flex: 10),
+            PopupMenuButton<String>(
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                if (widget.uid == AuthService.userID) {
+                  return OwnPostOptions.choices.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                } else {
+                  return OtherOptions.choices.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                }
+              },
+            )
           ],
         ),
       ),
     );
+  }
+
+  void choiceAction(String choice) {
+    switch (choice) {
+      case OwnPostOptions.edit:
+        print(OwnPostOptions.edit);
+        break;
+
+      case OwnPostOptions.delete:
+        PostService.deletePost(widget.postID);
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomMessageBox(
+                "Success",
+                "Successfully deleted your post",
+                "Okay",
+              );
+            });
+        break;
+
+      case OtherOptions.reportAccount:
+        print(OtherOptions.reportAccount);
+        break;
+
+      case OtherOptions.reportPost:
+        print(OtherOptions.reportPost);
+        break;
+
+      case OtherOptions.reportScooter:
+        print(OtherOptions.reportScooter);
+        break;
+    }
   }
 }
