@@ -24,7 +24,7 @@ class _PostBottomBarState extends State<PostBottomBar> {
         ),
         SizedBox(
           width: double.infinity,
-          child: Text(widget.caption, textScaleFactor: 1.3,),
+          child: Text(widget.caption == null ? "" : widget.caption, textScaleFactor: 1.3,),
         )
 
       ],

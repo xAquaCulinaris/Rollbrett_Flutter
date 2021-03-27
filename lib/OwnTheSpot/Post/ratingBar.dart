@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/ratingService.dart';
 
@@ -44,7 +45,20 @@ class _RatingBarState extends State<RatingBar> {
           setState(
             () {
               userRating = index + 1;
-              RatingService.setRating(AuthService.userID, widget.postID, userRating);
+              if (userRating > 3 && widget.userID == AuthService.userID) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CustomMessageBox(
+                        "Fuck you",
+                        "Stop rating your own post good!\n Little Fame bitch",
+                        "Okay",
+                      );
+                    });
+              } else {
+                print("set rating");
+                RatingService.setRating(AuthService.userID, widget.postID, userRating);
+              }
             },
           );
         },
