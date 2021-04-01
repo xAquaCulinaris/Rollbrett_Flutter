@@ -7,8 +7,7 @@ class OwnPostOptions {
 
 class OtherOptions {
   static const String reportPost = "Report post";
-  static const String reportAccount = "Report account";
   static const String reportScooter = "Report scooter";
 
-  static const List<String> choices = <String>[reportAccount, reportPost, reportScooter];
+  static const List<String> choices = <String>[reportPost, reportScooter];
 }

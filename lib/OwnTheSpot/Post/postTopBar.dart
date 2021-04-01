@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rollbrett_rottweil/OwnTheSpot/Post/postMenu.dart';
 import 'package:rollbrett_rottweil/Reusable_Widget/customMessageBox.dart';
+import 'package:rollbrett_rottweil/emailSender.dart';
 import 'package:rollbrett_rottweil/firebase/authService.dart';
 import 'package:rollbrett_rottweil/firebase/fireStorageService.dart';
 import 'package:rollbrett_rottweil/firebase/postService.dart';
@@ -132,15 +133,15 @@ class _PostTopBarState extends State<PostTopBar> {
             });
         break;
 
-      case OtherOptions.reportAccount:
-        print(OtherOptions.reportAccount);
-        break;
+        //TODO EMAIL INFORMATION
 
       case OtherOptions.reportPost:
+        EmailSender.send_mail(Email_subject.bad_content, "test", "", "", "", "");
         print(OtherOptions.reportPost);
         break;
 
       case OtherOptions.reportScooter:
+        EmailSender.send_mail(Email_subject.scooter_content, "test", "", "", "", "");
         print(OtherOptions.reportScooter);
         break;
     }

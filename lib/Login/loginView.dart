@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             builder: (BuildContext context) {
               return CustomMessageBox(
                 "Error",
-                'Something went wrong, maybe wrong email or password?',
+                'Something went wrong,t maybe wrong email or password?',
                 "Okay",
               );
             });

@@ -44,6 +44,8 @@ dependencies:
   path_provider: ^1.6.27
   # The following adds the Cupertino Icons font to your application.
   cupertino_icons: ^1.0.0
+  #email sender
+  mailer: ^2.6.1
 
 dev_dependencies:
   flutter_test:
