@@ -151,5 +151,17 @@ class _PostTopBarState extends State<PostTopBar> {
     String userToReport = await UserService.getUsername(widget.uid);
 
     EmailSender.send_mail(subject, "test", currentUser, currentUid, userToReport, widget.uid);
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomMessageBox(
+            "Report sent",
+            "Thanks you for helping out! :)",
+            "Okay",
+          );
+        });
+
+
   }
 }
