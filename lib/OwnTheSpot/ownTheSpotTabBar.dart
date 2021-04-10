@@ -8,6 +8,7 @@ import 'ProfileView/ownTheSpotProfileView.dart';
 class OwnTheSpotTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("uid: " + AuthService.userID);
     return DefaultTabController(
       length: 3,
       child: Scaffold(

@@ -3,8 +3,9 @@ import 'package:mailer/smtp_server.dart';
 
 class EmailSender {
 
-  //TODO EMAIL INFORMATION
   static void send_mail(Email_subject subject, String message, String username1, String uid1, String username2, String uid2) async {
+
+    //TODO add password
     String username = 'zacrubinzac@gmail.com';
     String password = '';
 
@@ -17,7 +18,7 @@ class EmailSender {
       ..recipients.add(new Address('zacrubinzac@gmail.com'))
       ..subject = subjectString
       ..text = 'Marian [0123] reported Dirk [0123]'
-      ..html = "<h1>" + subjectString + "</h1>\n<p>Somone reported some bad content</p>";
+      ..html = "<h1>" + subjectString + "</h1>\n<p> "+ username1 + " [" + uid1 +"]" + " reported " + username2 + " [" + uid2 + "]" + "</p>";
 
 
     try {

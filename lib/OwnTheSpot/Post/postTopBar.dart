@@ -133,17 +133,23 @@ class _PostTopBarState extends State<PostTopBar> {
             });
         break;
 
-        //TODO EMAIL INFORMATION
+      //TODO EMAIL INFORMATION
 
       case OtherOptions.reportPost:
-        EmailSender.send_mail(Email_subject.bad_content, "test", "", "", "", "");
-        print(OtherOptions.reportPost);
+        sendReport(Email_subject.bad_content);
         break;
 
       case OtherOptions.reportScooter:
-        EmailSender.send_mail(Email_subject.scooter_content, "test", "", "", "", "");
-        print(OtherOptions.reportScooter);
+        sendReport(Email_subject.scooter_content);
         break;
     }
+  }
+
+  void sendReport(Email_subject subject) async {
+    String currentUid = AuthService.userID;
+    String currentUser = await UserService.getUsername(currentUid);
+    String userToReport = await UserService.getUsername(widget.uid);
+
+    EmailSender.send_mail(subject, "test", currentUser, currentUid, userToReport, widget.uid);
   }
 }
