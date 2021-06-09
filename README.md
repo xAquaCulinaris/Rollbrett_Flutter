@@ -1,16 +1,13 @@
 # rollbrett_rottweil
 
-Rollbrett Rottweil 
+This a Flutter App for the Skatepark in Rottweil that im currently working on
+It uses Firebase to handle User Authentication and Upload Videos/Images + Data
 
-## Getting Started
+What the App does:
+ - Registration & Login of users
+ - Scanning for BLE Beacons, if it finds some in the Skatepark you can read some information about some obstacle in the park
+ - If you are near a Beacon you can Post Skatevideos that you have recorded in the Skatepark or you can watch Videos of other people
+ - You can Play a Game of Skate against your friends with all the Obstacles that are in the Skatepark Rottweil
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Not finishied yet!
